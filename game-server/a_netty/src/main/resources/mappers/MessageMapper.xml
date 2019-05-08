@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xihe.ji.pet_springboot.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="xihe.ji.pet_springboot.pojo.Message" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="fromId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="toId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="msgTimestamp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="msgContent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="otherMsg" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="msgType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pushType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fromId, toId, msgTimestamp, msgContent, otherMsg, msgType, pushType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xihe.ji.pet_springboot.pojo.Message" >
+    insert into message (id, fromId, toId, 
+      msgTimestamp, msgContent, otherMsg, 
+      msgType, pushType)
+    values (#{id,jdbcType=INTEGER}, #{fromid,jdbcType=VARCHAR}, #{toid,jdbcType=VARCHAR}, 
+      #{msgtimestamp,jdbcType=VARCHAR}, #{msgcontent,jdbcType=VARCHAR}, #{othermsg,jdbcType=VARCHAR}, 
+      #{msgtype,jdbcType=VARCHAR}, #{pushtype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="xihe.ji.pet_springboot.pojo.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fromid != null" >
+        fromId,
+      </if>
+      <if test="toid != null" >
+        toId,
+      </if>
+      <if test="msgtimestamp != null" >
+        msgTimestamp,
+      </if>
+      <if test="msgcontent != null" >
+        msgContent,
+      </if>
+      <if test="othermsg != null" >
+        otherMsg,
+      </if>
+      <if test="msgtype != null" >
+        msgType,
+      </if>
+      <if test="pushtype != null" >
+        pushType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtimestamp != null" >
+        #{msgtimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="msgcontent != null" >
+        #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="othermsg != null" >
+        #{othermsg,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null" >
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pushtype != null" >
+        #{pushtype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xihe.ji.pet_springboot.pojo.Message" >
+    update message
+    <set >
+      <if test="fromid != null" >
+        fromId = #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        toId = #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtimestamp != null" >
+        msgTimestamp = #{msgtimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="msgcontent != null" >
+        msgContent = #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="othermsg != null" >
+        otherMsg = #{othermsg,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null" >
+        msgType = #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pushtype != null" >
+        pushType = #{pushtype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xihe.ji.pet_springboot.pojo.Message" >
+    update message
+    set fromId = #{fromid,jdbcType=VARCHAR},
+      toId = #{toid,jdbcType=VARCHAR},
+      msgTimestamp = #{msgtimestamp,jdbcType=VARCHAR},
+      msgContent = #{msgcontent,jdbcType=VARCHAR},
+      otherMsg = #{othermsg,jdbcType=VARCHAR},
+      msgType = #{msgtype,jdbcType=VARCHAR},
+      pushType = #{pushtype,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

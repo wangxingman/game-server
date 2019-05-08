@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: dev
+server:
+  port: 1111
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+security: #设置注册中心安全验证
+  basic:
+    enabled: true
+  user:
+    name: admin
+    password: 123456
+logging:
+  file: D:/logs/registry-server.log
+  level:
+    root: info
+
+---
+server:
+  port: 8081
+spring:
+  profiles: test

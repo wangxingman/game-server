@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "common.po.NettyParams",
+      "name": "params",
+      "type": "common.po.NettyParams"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "common.po.NettyParams",
+      "name": "params.port",
+      "type": "java.lang.Integer"
+    }
+  ]
+}

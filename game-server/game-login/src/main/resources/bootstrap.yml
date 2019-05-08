@@ -1,0 +1,64 @@
+spring:
+  cloud:                #配置中心
+    config:
+      label: ${spring.application.name}
+      profile: dev
+      uri: http://192.168.0.20:6000
+      name: ${spring.application.name}
+  redis:
+    host: 192.168.0.173
+    database: 11
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.0.173:3306/ljts?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+  application:
+    name: auth-gateway
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.20:6001/eureka/
+  instance:
+    prefer-ip-address: true
+    hostname: 192.168.0.20
+
+server:
+  port: 6002
+api:
+  title: 兽医站后台api
+  desc:  目录
+  version:  0.1
+zuul:
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  routes:
+     auth-service:
+       path: /user/**
+       serviceId: example-auth
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+info:
+  app.name: 守一传
+  author.name: jch
+  author.function: 安全拦截过滤
+  Description:
+    company: 希合游戏科技有限公司
+    url: https://www.youni123.com
+
+#监控管理工具
+management:
+  server:
+    port: 6200
+  endpoints:
+    web:
+      exposure:
+        include: info,shutdown
