@@ -1,8 +1,12 @@
 package com.game.sg.common.netty.manager;
 
 import com.game.common.dto.DataPacket;
+import com.game.common.dto.NettyParams;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
 
 /**
  * @Auther: wx
@@ -12,6 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WebSocketHandler {
 
+    @Autowired
+    private NettyParams nettyParams;
+    
     /**
      * @Author: wx
      * @Desc : 连接成功
@@ -41,11 +48,24 @@ public class WebSocketHandler {
      * @params:
      */
     public void onMessage(WebSocket webSocket, DataPacket request) {
-        Handler handler = Dispatcher.getDispatch(request.getCmd());
+        Map<Integer, String> localMap = nettyParams.getLocalMap();
+        String data = localMap.get(request.getAgreementNo());
+        Handler handler = null;
+        try {
+             handler = (Handler) Class.forName(data).newInstance();
+        } catch (ClassNotFoundException e) {
+            log.error("转换类型失败！");
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            log.error("参数错误！");
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
         if (handler != null) {
             handler.handle(webSocket, request);
         } else {
-            log.info("Cmd error." + request.getCmd());
+            log.info("Cmd error." + request.getAgreementNo());
             webSocket.close();
         }
     }

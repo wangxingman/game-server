@@ -21,17 +21,11 @@ public abstract class Handler {
         String requestData = request.getData();
         JSONObject data = null;
         if (requestData != null && !"".equals(requestData)) {
-            //调试阶段,加密动作先去掉
-//            byte[] bArray = StringUtils.hex2Binary(requestData);
-//            String text = AES256.decode(bArray, StringUtils.getUTFBytes(Wsconfig.getWsAES256Key()));
-//            text = UrlUtils.decode(text);
-//            data = JSON.parseObject(text);
             data = JSON.parseObject(requestData);
         }
-        if (webSocket != null && request.getCmd() != 10000 && request.getCmd() != Command.DELAY_CHECK_REQ) {
-            log.info("Recive msg:cmd="+request.getCmd() +";userId="+webSocket.getUserId()+";data="+ (data != null ?data.toJSONString() :"NULL"));
+        if (webSocket != null && request.getAgreementNo() != 10000 && request.getAgreementNo() != Command.DELAY_CHECK_REQ) {
+            log.info("Recive msg:cmd="+request.getAgreementNo() +";userId="+webSocket.getUserId()+";data="+ (data != null ?data.toJSONString() :"NULL"));
         }
-
         this.handle(webSocket, data);
     }
 }

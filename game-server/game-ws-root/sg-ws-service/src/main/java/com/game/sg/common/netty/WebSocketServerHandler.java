@@ -60,17 +60,17 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
      * @params:
      */
     private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
-        if(!req.getDecoderResult().isSuccess()) {
+        if(!req.decoderResult().isSuccess()) {
             sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
             return;
         }
         //必须是get请求
-        if(req.getMethod() != HttpMethod.GET) {
+        if(req.method() != HttpMethod.GET) {
             sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
             return;
         }
         //发送演示页面和favicon.ico
-        if("/".equals(req.getUri())) {
+        if("/".equals(req.uri())) {
             boolean debug = true;
             if(debug) {
                 ByteBuf content = WebSocketServerIndexPage.getContent(getWebSocketLocation(req));
@@ -80,7 +80,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
                 sendHttpResponse(ctx, req, res);
             }
         }
-        if ("/favicon.ico".equals(req.getUri())) {
+        if ("/favicon.ico".equals(req.uri())) {
             FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, NOT_FOUND);
             sendHttpResponse(ctx, req, res);
             return;
@@ -147,7 +147,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
      * @params: 
      */
     private static void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res) {
-        if(res.getStatus().code() != 200) {
+        if(res.status().code() != 200) {
             ByteBuf buf = Unpooled.copiedBuffer(res.getStatus().toString(), CharsetUtil.UTF_8);
             res.content().writeBytes(buf);
             buf.release(); //释放
@@ -156,7 +156,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         //netty的io操作异步 不能立即返回
         ChannelFuture f = ctx.channel().writeAndFlush(res);
         //连接状态 open 返回 true
-        if(!HttpHeaders.isKeepAlive(req) || res.getStatus().code() != 200) {
+        if(!HttpHeaders.isKeepAlive(req) || res.status().code() != 200) {
             //以便在某个操作完成时（无论是否成功）得到通知。
             f.addListener(ChannelFutureListener.CLOSE);
         }

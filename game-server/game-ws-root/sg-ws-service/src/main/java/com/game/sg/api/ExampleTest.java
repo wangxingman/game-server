@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+import java.util.logging.Handler;
+
 /**
  * @Auther: wx
  * @Desc:
@@ -31,8 +34,10 @@ public class ExampleTest {
      * @Date: 下午 4:54 2019/5/5 0005
      * @params:
      */
-    @GetMapping(name = "/getNettyParams")
+    @GetMapping(value ="/getNettyParams" )
     public Integer getNettyParams() {
+        Map<Integer, String> localMap = nettyParams.getLocalMap();
+
         log.info("获取yml文件下面的端口:"+nettyParams.getPort());
         return  nettyParams.getPort();
     }

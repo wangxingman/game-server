@@ -14,7 +14,7 @@ import java.net.InetSocketAddress;
 
 /**
  * @Auther: wx
- * @Desc :
+ * @Desc :  websocket连接封装
  * @Date : 下午 8:00 2019/5/5 0005
  */
 @AllArgsConstructor

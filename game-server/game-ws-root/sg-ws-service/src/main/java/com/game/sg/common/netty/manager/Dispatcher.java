@@ -11,7 +11,5 @@ public class Dispatcher {
 
     public static HashMap<Integer, Handler> localMap = new HashMap<Integer, Handler>();
     
-    public static Handler getDispatch(Integer command) {
-        return localMap.get(command);
-    }
+    
 }
