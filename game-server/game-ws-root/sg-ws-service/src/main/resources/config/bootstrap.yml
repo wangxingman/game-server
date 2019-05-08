@@ -9,7 +9,6 @@ spring:
     active: test
   application:
     name: sg-ws-service
-    index: 1
 server:
   port: 7901
 

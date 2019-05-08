@@ -22,11 +22,6 @@ public class SgWsServiceApplication {
      */
     public static void main(String[] args) {
         SpringApplication.run(SgWsServiceApplication.class, args);
-        initNettyServer();
-    }
-
-    private static void initNettyServer() {
-
     }
 }
     
