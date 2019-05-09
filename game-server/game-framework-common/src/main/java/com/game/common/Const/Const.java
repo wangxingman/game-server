@@ -20,4 +20,21 @@ public interface Const {
     interface path {
         String PATH = "/conf/wsConfig.properties";
     }
+
+    interface flag {
+        boolean FALSE =  false;
+        boolean TRUE =  true;
+    }
+
+    interface user {
+        String USER_ID = "uid";
+        String START_TIME = "startTime";
+        String END_TIME = "end Time";
+    }
+
+    interface  date {
+        /**半个小时*/
+        int HALF_HOUR = 30 * 60 * 1000 ;
+    }
+    
 }

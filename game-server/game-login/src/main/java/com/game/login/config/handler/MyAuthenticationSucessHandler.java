@@ -1,6 +1,10 @@
 package com.game.login.config.handler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.game.common.Const.Const;
+import com.game.common.entity.user.User;
+import com.game.common.mapper.UserMapper;
+import com.game.core.jwt.JwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +21,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 自定义成功登陆成功逻辑
@@ -26,6 +32,9 @@ import java.util.Date;
 public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+    @Autowired
+    private UserMapper userMapper;
 
 //    @Autowired
 //    private UserMapper userMapper;
@@ -58,7 +67,19 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
 //        response.addHeader("token",token);
 //
 //        HttpHeaders httpHeaders = new HttpHeaders();
-     /*   httpHeaders.add("dsa","fa");*/
-        redirectStrategy.sendRedirect(request, response, "/index");
+     /*   httpHeaders.add("dsa","fa");
+     *    redirectStrategy.sendRedirect(request, response, "/index");
+     * */
+        
+        UserDetails principal = (UserDetails)authentication.getPrincipal();
+        String username = principal.getUsername();
+        User user = userMapper.selectOne(User.builder().vName(username).build());
+        if(user != null) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("uid",user.getVId());
+            map.put("sta",user.getVCreatetime());
+            map.put("end",new Date().getTime()+ Const.date.HALF_HOUR); //半个小时之后
+            JwtToken.creatToken(map);
+        }
     }
 }

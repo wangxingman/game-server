@@ -12,11 +12,6 @@
     <artifactId>game-login</artifactId>
 
     <dependencies>
-        <!--springboot-security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.example</groupId>

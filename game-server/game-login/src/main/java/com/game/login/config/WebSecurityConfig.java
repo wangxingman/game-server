@@ -1,5 +1,6 @@
 package com.game.login.config;
 
+import com.game.common.Const.Const;
 import com.game.common.encode.MD5Util;
 import com.game.login.config.handler.MyAuthenticationFailureHandler;
 import com.game.login.config.handler.MyAuthenticationSucessHandler;
@@ -12,11 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
  * @Auther: wx
- * @Desc :
+ * @Desc :  web 安全性配置
  * @Date : 下午 8:00 2019/5/8 0008
  */
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -36,17 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
          tokenRepository = new JdbcTokenRepositoryImpl();
-        //查询表是否存在
-//        	<select id="doCheckTableIsExists" parameterType="java.util.Map"
-//        resultType="String">
-//                SELECT table_name FROM information_schema.TABLES WHERE
-//        table_name = #{tableName} and table_schema='${dataSourceLogSchema}';
-//	</select>
-        
-        String CREATE_TABLE_SQL = "create table persistent_logins (username varchar(64) not null, series varchar(64) primary key, "
-                + "token varchar(64) not null, last_used timestamp not null)";
-//        tokenRepository.createNewToken(new PersistentRememberMeToken(null,null,null,null));
-        // 如果token表不存在，使用下面语句可以初始化该表；若存在，会报错。
+         tokenRepository.setCreateTableOnStartup(Const.flag.TRUE);
+         tokenRepository.createNewToken(new PersistentRememberMeToken(null,null,null,null));
         return tokenRepository;
     }
 
@@ -94,6 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //在security之前的拦截器，自己定义
         http.addFilterBefore(null, UsernamePasswordAuthenticationFilter.class).authorizeRequests()
                 .and().formLogin()
+                //设定的登录页面 登录的url
                 .loginPage("/login").loginProcessingUrl("/login")
                 .successHandler(authenticationSucessHandler)
                 .failureHandler(authenticationFailureHandler)
