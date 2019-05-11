@@ -13,12 +13,14 @@
         <module>game-gateway</module>
         <module>game-config</module>
         <module>game-register</module>
+        <module>game-service-root</module>
+        <module>game-example</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.0.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -30,40 +32,64 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
         <mybatis-plus.version>2.1.8</mybatis-plus.version>
     </properties>
 
     <dependencies>
+        <!--        &lt;!&ndash; 两个都是页面话的东西 前者类似jsp独立显示效果不好 后者更适合前后端独立分离开发&ndash;&gt;-->
+        <!--        &lt;!&ndash; Freemarker &ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.freemarker</groupId>-->
+        <!--            <artifactId>freemarker</artifactId>-->
+        <!--            <version>2.3.28</version>-->
+        <!--        </dependency>-->
 
+        <!--        &lt;!&ndash;读取文件配置&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
+        <!--            <version>1.5.6.RELEASE</version>-->
+        <!--        </dependency>-->
+
+        <!-- Beetl -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.ibeetl</groupId>-->
+        <!--            <artifactId>beetl</artifactId>-->
+        <!--            <version>3.0.0.M1</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        
+        <!--            <groupId>com.googlecode.protobuf-java-format</groupId>-->
+        <!--            <artifactId>protobuf-java-format</artifactId>-->
+        <!--            <version>1.2</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.protobuf</groupId>-->
+        <!--            <artifactId>protobuf-java</artifactId>-->
+        <!--            <version>3.5.0</version>-->
+        <!--        </dependency>-->
+
+        <!-- lcn分布式的事务-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.6</version>
+            <groupId>com.codingapi</groupId>
+            <artifactId>tx-plugins-db</artifactId>
+            <version>4.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
+        
+        <!-- 定时器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.googlecode.protobuf-java-format</groupId>-->
-<!--            <artifactId>protobuf-java-format</artifactId>-->
-<!--            <version>1.2</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>com.google.protobuf</groupId>-->
-<!--            <artifactId>protobuf-java</artifactId>-->
-<!--            <version>3.5.0</version>-->
-<!--        </dependency>-->
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.21</version>
         </dependency>
 
         <!-- mybatis-plus -->
@@ -72,7 +98,7 @@
             <artifactId>mybatis-plus</artifactId>
             <version>2.1.8</version>
         </dependency>
-
+        
         <!-- Velocity -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
@@ -80,53 +106,11 @@
             <version>2.1</version>
         </dependency>
 
-        <!-- Freemarker -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.28</version>
-        </dependency>
-
-        <!-- Beetl -->
-        <dependency>
-            <groupId>com.ibeetl</groupId>
-            <artifactId>beetl</artifactId>
-            <version>3.0.0.M1</version>
-        </dependency>
-        
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.40</version>
-        </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.baomidou</groupId>-->
-<!--            <artifactId>mybatisplus-spring-boot-starter</artifactId>-->
-<!--            <version>${mybatisplus-spring-boot-starter.version}</version>-->
-<!--        </dependency>-->
-
+        <!-- 进行热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.0.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>
@@ -136,9 +120,82 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 解决'sqlSessionFactory' or 'sqlSessionTemplate'异常-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- mysql driver -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.github.caspar-chen</groupId>
+            <artifactId>swagger-ui-layer</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+
+        <!--页面要用到的框架-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--读取文件配置-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+                <!-- 阿里连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -146,7 +203,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+<!--                <version>${spring-cloud.version}</version>-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

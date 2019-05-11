@@ -13,11 +13,51 @@
 
     <dependencies>
 
+        <!--oauth2,security -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
+        
+        <!-- 短信接口 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>3.2.5</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dysmsapi -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>game-framework-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>game-framework-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
+    <!-- 加载文件page文件 -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>

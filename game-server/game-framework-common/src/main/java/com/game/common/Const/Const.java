@@ -36,5 +36,13 @@ public interface Const {
         /**半个小时*/
         int HALF_HOUR = 30 * 60 * 1000 ;
     }
+
+    interface  login {
+         String LOGIN_PAGE = "/authentication/require";
+
+         String LOGIN_PROCESSING_URL = "/authentication/form";
+
+         String AFTER_LOGING_PAGE = "/oauthLogin";
+    }
     
 }

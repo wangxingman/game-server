@@ -1,0 +1,7 @@
+spring:
+  profiles:
+    active: test
+  application:
+    name: two-service
+server:
+  port: 7904

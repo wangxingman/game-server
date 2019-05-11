@@ -17,25 +17,5 @@
             <artifactId>game-framework-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-        <!-- jwt -->
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <version>6.0</version>
-        </dependency>
-
-        <!--springboot-security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.0.9.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
-
 </project>
