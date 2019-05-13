@@ -1,6 +1,6 @@
 package com.game.common.comman;
 
-import com.alibaba.fastjson.JSONObject;
+//import com.alibaba.fastjson.JSONObject;
 import com.game.common.Const.SWCodeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@NoArgsConstructor
 public class ResultModel<T> implements Serializable {
     private static final int CODE_OK = SWCodeEnum.CODE_OK.getCode();
 
@@ -74,9 +73,9 @@ public class ResultModel<T> implements Serializable {
         return  new ResultModel<>(code,msg);
     }
 
-    @Override
-    public String toString() {
-        return JSONObject.toJSONString(this);
-    }
+//    @Override
+//    public String toString() {
+//        return JSONObject.toJSONString(this);
+//    }
 
 }

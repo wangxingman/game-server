@@ -1,7 +1,9 @@
 package com.game.register;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
@@ -10,7 +12,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  * @Date: 下午 3:56 2019/5/5 0005
  */
 @EnableEurekaServer
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},excludeName = {"DataSourceAutoConfiguration"})//该注解未能排除sql的自动注册
 public class RegisterServerApplication {
     
     /**

@@ -12,23 +12,13 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   application:
-    name: game-auth
+    name: shop-service
   datasource:
     username: root
     password: 123456
     driver-class-name:  com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/game-server?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
 server:
-  port: 6003
+  port: 6004
   tomcat:
     uri-encoding: UTF-8
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 30000 #缺省为1000    
-feign:
-  hystrix:
-    enabled: true

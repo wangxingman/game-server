@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.game.common.comman.Default;
 import com.game.common.comman.HttpCode;
 import com.game.core.utils.web.RequestUtil;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

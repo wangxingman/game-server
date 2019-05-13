@@ -14,7 +14,6 @@
         <module>game-config</module>
         <module>game-register</module>
         <module>game-service-root</module>
-        <module>game-example</module>
     </modules>
 
     <parent>
@@ -61,7 +60,6 @@
         <!--        </dependency>-->
 
         <!--        <dependency>-->
-        
         <!--            <groupId>com.googlecode.protobuf-java-format</groupId>-->
         <!--            <artifactId>protobuf-java-format</artifactId>-->
         <!--            <version>1.2</version>-->
@@ -73,19 +71,24 @@
         <!--            <version>3.5.0</version>-->
         <!--        </dependency>-->
 
-        <!-- lcn分布式的事务-->
         <dependency>
-            <groupId>com.codingapi</groupId>
-            <artifactId>tx-plugins-db</artifactId>
-            <version>4.1.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>2.1.1.RELEASE</version>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--feign服务通信 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+
         <!-- 定时器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -98,7 +101,7 @@
             <artifactId>mybatis-plus</artifactId>
             <version>2.1.8</version>
         </dependency>
-        
+
         <!-- Velocity -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
@@ -107,20 +110,23 @@
         </dependency>
 
         <!-- 进行热部署-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
 
+        <!-- redis的缓存-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
+        <!--web通信 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.0.6.RELEASE</version>
         </dependency>
 
         <!-- 解决'sqlSessionFactory' or 'sqlSessionTemplate'异常-->
@@ -130,25 +136,14 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.21</version>
-        </dependency>
-
+        <!-- 基础运用 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-        </dependency>
-
-        <!-- mysql driver -->
+        <!-- 数据库连接 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -156,15 +151,23 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <!-- -基础方法 -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- redis数据库 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <!--swagger-->
+        <!--swagger 生成api-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -189,7 +192,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
 
-                <!-- 阿里连接池 -->
+        <!-- 阿里连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -203,6 +206,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.SR2</version>
 <!--                <version>${spring-cloud.version}</version>-->
                 <type>pom</type>
                 <scope>import</scope>
