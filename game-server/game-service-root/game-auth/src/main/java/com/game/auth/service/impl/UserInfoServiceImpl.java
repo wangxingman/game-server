@@ -1,5 +1,6 @@
 package com.game.auth.service.impl;
 
+import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.game.auth.feign.FUserInfoService;
 import com.game.auth.mapper.UserInfoMapper;
 import com.game.auth.model.User;
@@ -25,6 +26,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     
     @Override
     @Transactional
+    @LcnTransaction //分布式事务注解
     public String addUserInfo() {
         User user = userInfoMapper.getOne(7);
         user.setMoney(user.getMoney()+100);

@@ -32,3 +32,8 @@ hystrix:
 feign:
   hystrix:
     enabled: true
+logging:
+  file:  D:\logs       #指定输出文件
+  level: info      #debug -> info -> error -> fate   日志输出级别
+  pattern:
+    console:   "%d - %msg%n"

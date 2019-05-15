@@ -19,11 +19,11 @@
         </dependency>
 
         <!-- json转换器 既然和springCloud boot让他注册不上去的坑-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.21</version>
-        </dependency>
-        
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>fastjson</artifactId>-->
+<!--            <version>1.2.21</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 </project>
