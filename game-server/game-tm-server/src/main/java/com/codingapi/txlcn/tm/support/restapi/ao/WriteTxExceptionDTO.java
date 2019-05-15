@@ -32,8 +32,11 @@ public class WriteTxExceptionDTO {
     private String groupId;
     private String unitId;
     private String modId;
+    /**事务的状态*/
     private Integer transactionState;
+    /**改变*/
     private Short registrar;
+    /**备注*/
     private String remark;
 
     public WriteTxExceptionDTO(String groupId, String unitId, String modId, Integer transactionState) {

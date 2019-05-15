@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Description: Manager cache
+ * Description: Manager cache   快速存储
  * Date: 19-1-21 下午2:53
  *
  * @author ujued

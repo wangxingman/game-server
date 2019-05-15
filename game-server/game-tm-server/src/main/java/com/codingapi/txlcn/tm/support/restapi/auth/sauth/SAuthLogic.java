@@ -30,7 +30,7 @@ public interface SAuthLogic {
     
     /**
      * ignore path
-     *
+     * 忽略
      * @return list
      */
     default List<String> ignoreUrls() {
