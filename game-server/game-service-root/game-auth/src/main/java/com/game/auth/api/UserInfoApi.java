@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 /**
  * @Auther : wx
  * @Desc :
@@ -44,5 +46,11 @@ public class UserInfoApi {
     @ApiImplicitParam(name="id",value="查询ID",required=true)
     public String exampleSwagger() {
           return "--------------------------";
+    }
+
+    public static void main(String[] args) {
+          Integer a = 10;
+        if( Objects.isNull(a) ) {
+        };
     }
 }
