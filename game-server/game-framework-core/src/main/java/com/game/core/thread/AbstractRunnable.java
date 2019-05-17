@@ -3,10 +3,7 @@ package com.game.core.thread;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @Auther: wx
@@ -16,11 +13,13 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public abstract class AbstractRunnable implements Runnable {
 
-    public  static ThreadPoolTaskExecutor poolTaskExecutor = new ThreadPoolTaskExecutor();
+    private static ThreadPoolTaskExecutor poolTaskExecutor = new ThreadPoolTaskExecutor();
 
-    public  ScheduledExecutorService threadPool = Executors.newSingleThreadScheduledExecutor();      //延时线程
+    /**延时线程*/
+    private ScheduledExecutorService threadPool = new ScheduledThreadPoolExecutor(1);
 
-    protected ScheduledFuture<?> timeoutFuture;   //延时线程返回值
+    /**延时线程返回值*/
+    private ScheduledFuture<?> timeoutFuture;
 
     //静态代码块紧执行一次
      static {
@@ -38,7 +37,7 @@ public abstract class AbstractRunnable implements Runnable {
 
     /**
      * @Author: wx
-     * @Desc  : 运行spring线程 无返回值
+     * @Desc  : 运行spring线程 无返回值   执行这个的时候才会执行run方法
      * @Date  : 下午 8:16 2019/5/7 0007
      * @params:
      */
@@ -135,6 +134,5 @@ public abstract class AbstractRunnable implements Runnable {
     protected void startTimeoutMilliThread(int start, int interval) {
         this.timeoutFuture = threadPool.scheduleAtFixedRate(this, start, interval, TimeUnit.MILLISECONDS);
     }
-
 
 }

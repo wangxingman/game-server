@@ -1,7 +1,7 @@
-package com.game.gateway.config;
+package com.game.core.ws.clientConfig;
 
 import com.alibaba.fastjson.JSON;
-import com.game.gateway.config.hanlder.WsSyncHandler;
+import com.game.core.ws.clientConfig.hanlder.WsSyncHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -70,11 +70,12 @@ public class WsSyncClient {
             Channel ch = b.connect(uri.getHost(), port).sync().channel();
             handler.handshakeFuture().sync();
             WebSocketFrame frame = new TextWebSocketFrame(JSON.toJSONString(null));
+            //发送消息
             ch.writeAndFlush(frame);
+            
             ch.writeAndFlush(new CloseWebSocketFrame());
             ch.closeFuture().await();
-
-                  
+                   
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -82,7 +83,6 @@ public class WsSyncClient {
         }  finally {
             group.shutdownGracefully();
         }
-
         return null;
     }     
 }

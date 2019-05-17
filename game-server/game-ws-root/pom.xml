@@ -15,6 +15,7 @@
 
     <modules>
         <module>sg-ws-service</module>
+        <module>hall-ws-service</module>
     </modules>
 
     <dependencies>

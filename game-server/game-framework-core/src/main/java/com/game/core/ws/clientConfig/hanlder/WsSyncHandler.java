@@ -1,4 +1,4 @@
-package com.game.gateway.config.hanlder;
+package com.game.core.ws.clientConfig.hanlder;
 
 import io.netty.channel.*;
 import io.netty.handler.codec.http.FullHttpResponse;
@@ -8,7 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class WsSyncHandler extends SimpleChannelInboundHandler<Object> {
-    private final WebSocketClientHandshaker handshaker;
+    /**handShaker 握手*/
+    private final WebSocketClientHandshaker handshaker;     
     private ChannelPromise handshakeFuture;
     private StringBuffer message;
 

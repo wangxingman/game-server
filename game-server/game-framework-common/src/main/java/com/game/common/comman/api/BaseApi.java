@@ -1,9 +1,9 @@
-package com.game.core.utils.api;
+package com.game.common.comman.api;
 
 import com.alibaba.fastjson.JSON;
 import com.game.common.comman.Default;
 import com.game.common.comman.HttpCode;
-import com.game.core.utils.web.RequestUtil;
+//import com.game.core.utils.web.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -460,9 +460,9 @@ public class BaseApi {
      *
      * @return
      */
-    public String getClientIp() {
-        return RequestUtil.getClientIp(getRequest());
-    }
+//    public String getClientIp() {
+//        return RequestUtil.getClientIp(getRequest());
+//    }
 
     /**
      * 打印json

@@ -1,4 +1,4 @@
-package com.game.core.utils.api;
+package com.game.common.comman.api;
 
 import lombok.Data;
 
