@@ -9,13 +9,18 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @Auther : wx
+ * @Desc :
+ * @Date :  下午 4:47 2019/5/17 0017
+ * @explain :创建验证码
+ */
 @Data
 @Component("smsCodeGenerator")
 public class SmsCodeGenerator implements ValidateCodeGenerator{
 
     @Autowired
     private SecurityProperties securityProperties;
-
 
     @Override
     public ValidateCode createImageCode(HttpServletRequest request, HttpServletResponse response) {

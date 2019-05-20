@@ -16,13 +16,13 @@ public interface BaseDispatcher {
 
     default void init(){ }
 
-     Map<MessageType, Handler> localMap_copy = new ConcurrentHashMap<>();
+    Map<MessageType, Handler> localMap = new ConcurrentHashMap<>();
 
     static Handler getDispatch_copy(MessageType messageType) {
-        return localMap_copy.get(messageType);
+        return localMap.get(messageType);
     }
 
     static void register_copy(MessageType messageType, Handler logic) {
-        localMap_copy.put(messageType, logic);
+        localMap.put(messageType, logic);
     }
 }

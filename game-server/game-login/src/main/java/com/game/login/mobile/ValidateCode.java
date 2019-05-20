@@ -5,6 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * @Auther : wx
+ * @Desc :
+ * @Date :  下午 4:47 2019/5/17 0017
+ * @explain :验证码格式
+ */
 @Data
 public class ValidateCode implements Serializable {
 

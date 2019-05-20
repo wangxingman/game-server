@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  * @Auther : wx
  * @Desc :
  * @Date :  下午 5:37 2019/5/17 0017
- * @explain :
+ * @explain : 封装存储的数据
  */
 @Data
 @NoArgsConstructor

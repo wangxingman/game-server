@@ -26,5 +26,4 @@ public class EnterHallApi extends BaseApi {
     public Result enterHall() {
         return success();
     }
-    
 }

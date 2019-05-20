@@ -1,5 +1,6 @@
 package com.game.hall.netty;
 
+import com.game.hall.common.BaseCommand;
 import com.game.hall.hanlder.JoinHallHanlder;
 import com.game.hall.state.NettyRunnable;
 
@@ -13,6 +14,6 @@ public class InitDispatcher implements BaseDispatcher{
 
     @Override
     public void init() {
-        BaseDispatcher.register_copy(new NettyRunnable().getNetMessageHead(),new JoinHallHanlder());
+        BaseDispatcher.register_copy( new NettyRunnable().getMap().get(BaseCommand.hall.JOIN_HALL),new JoinHallHanlder());
     }
 }

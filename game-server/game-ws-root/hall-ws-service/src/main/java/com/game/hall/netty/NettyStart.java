@@ -1,6 +1,7 @@
 package com.game.hall.netty;
 
 import com.game.core.ws.initializer.WsInitializer;
+import com.game.hall.po.HallProperties;
 import com.game.hall.state.NettyRunnable;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -27,11 +28,14 @@ import javax.annotation.PostConstruct;
 @Component
 public class NettyStart implements WsInitializer, DisposableBean {
 
+    @Autowired
+    private HallProperties hallProperties;
+    
     private WebSocketServerInitializer webSocketServerInitializer;
     
-    private  EventLoopGroup bossGroup  ;
+    private  EventLoopGroup bossGroup;
     
-    private EventLoopGroup workerGroup ;
+    private  EventLoopGroup workerGroup;
 
     @Autowired
     public NettyStart(WebSocketServerInitializer webSocketServerInitializer) {
@@ -40,7 +44,7 @@ public class NettyStart implements WsInitializer, DisposableBean {
 
     @Override
     public void init() throws Exception {
-          this.startNetty(null);
+        this.startNetty(hallProperties);
     }
 
     /**
@@ -48,9 +52,9 @@ public class NettyStart implements WsInitializer, DisposableBean {
      * @Desc:   启动netty服务器
      * @Date: 下午 5:47 2019/5/5 0005
      * @params:
-     * @param port
+     * @param hallProperties
      */
-    public void startNetty(Integer port) {
+    public void startNetty(HallProperties hallProperties) {
          bossGroup = new NioEventLoopGroup(1);
          workerGroup = new NioEventLoopGroup();
         try{
@@ -60,8 +64,8 @@ public class NettyStart implements WsInitializer, DisposableBean {
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(webSocketServerInitializer);
 
-            Channel ch = b.bind(port).sync().channel();
-            log.info("服务开启"+"://127.0.0.1:" + port + '/');
+            Channel ch = b.bind(hallProperties.getPort()).sync().channel();
+            log.info("服务开启"+"://127.0.0.1:" + hallProperties.getPort() + '/');
             ch.closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -91,6 +95,7 @@ public class NettyStart implements WsInitializer, DisposableBean {
     @PostConstruct
     public void initNetty() {
         log.info("------------------------------");
+        //在这里可以加载机器人的照片 fastdfs
         new NettyRunnable();
     }
 }

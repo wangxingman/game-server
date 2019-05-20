@@ -10,7 +10,7 @@
   "properties": [
     {
       "sourceType": "com.codingapi.txlcn.tm.config.TxManagerConfig",
-      "defaultValue": "codingapi",
+      "defaultValue": "123456",
       "name": "tx-lcn.manager.admin-key",
       "description": "后台密码",
       "type": "java.lang.String"

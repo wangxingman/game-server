@@ -5,6 +5,12 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+/**
+ * @Auther : wx
+ * @Desc :
+ * @Date :  下午 4:47 2019/5/17 0017
+ * @explain :
+ */
 public class SmsCodeAuthenticationToken  extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = 420L;

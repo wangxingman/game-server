@@ -15,6 +15,6 @@ public interface BaseCommand {
      * @Desc  :  大厅操作
      */
       interface hall{
-          Integer JOIN_HALL = 123;
+          short JOIN_HALL = 123;
       }
 }

@@ -44,5 +44,13 @@ public interface Const {
 
          String AFTER_LOGING_PAGE = "/oauthLogin";
     }
-    
+
+    interface Attr {
+
+        Integer YES = 1;
+
+        Integer NO = 0;
+    }
+
+
 }

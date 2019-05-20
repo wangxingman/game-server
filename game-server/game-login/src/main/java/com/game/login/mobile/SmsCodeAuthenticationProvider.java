@@ -8,6 +8,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * @Auther : wx
+ * @Desc :
+ * @Date :  下午 4:47 2019/5/17 0017
+ * @explain : 供应商
+ */
 @Data
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 

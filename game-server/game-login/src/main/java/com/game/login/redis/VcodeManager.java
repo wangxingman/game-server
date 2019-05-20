@@ -12,8 +12,6 @@ public interface VcodeManager {
      */
     String generateVcode();
 
-
-
     /**
      * 保存验证码
      *

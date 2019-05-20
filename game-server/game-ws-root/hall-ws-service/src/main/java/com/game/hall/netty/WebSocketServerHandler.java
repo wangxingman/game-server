@@ -1,9 +1,9 @@
 package com.game.hall.netty;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.common.dto.DataPacket;
 import com.game.hall.netty.manager.WebSocket;
 import com.game.hall.netty.manager.WebSocketHandler;
+import com.game.hall.po.NetMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -135,7 +135,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         //发送消息过来 根据协议完成操作
         String message = ((TextWebSocketFrame) frame).text();
         webSocket.setUpdateTime(System.currentTimeMillis());
-        DataPacket request = JSONObject.parseObject(message, DataPacket.class);
+        NetMessage request = JSONObject.parseObject(message, NetMessage.class);
         webSocketHandler.onMessage(webSocket, request);
         restartHeartbeat();
     }

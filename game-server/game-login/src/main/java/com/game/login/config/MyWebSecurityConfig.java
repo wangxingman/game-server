@@ -18,22 +18,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * 思路：l
+ * 思路：l 、
+ *  *   MyAuthorizationServerConfig jwt 验证
  *      MyWebSecurityConfig  启动
- *      MyAuthorizationServerConfig jwt 验证
  *      SmsCodeAuthenticationSecurityConfig 验证码验证
  *      SmsCodeAuthenticationFilter 执行过滤器
  *      SmsCodeAuthenticationToken 执行token  放入验证器
  *      SmsCodeAuthenticationProvider  执行AuthenticationProvider 走入 UserDetailsService
  *      MyUserDetailsServiceImpl 验证
  */
+/**
+ * @Auther : wx
+ * @Desc :
+ * @Date :  下午 4:47 2019/5/17 0017
+ * @explain : 安全验证
+ */
 @Configuration
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**基础属性*/
     @Autowired
     private SecurityProperties securityProperties;
+
+    /**验证码*/
     @Autowired
     private VcodeManager vcodeManager;
+
     @Autowired
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
@@ -63,6 +73,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        //添加拦截器
         SmsCodeFilter smsCodeFilter = new SmsCodeFilter(vcodeManager);
         smsCodeFilter.setSecurityProperties(securityProperties);
         smsCodeFilter.afterPropertiesSet();

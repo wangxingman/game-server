@@ -1,9 +1,9 @@
 package com.game.hall.netty.manager;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.game.common.dto.DataPacket;
+import com.game.hall.po.NetMessage;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 /**
  * @Auther: wx
@@ -13,18 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class Handler {
 
-    public abstract void handle(WebSocket webSocket, JSONObject data);
+    public abstract void handle(WebSocket webSocket, byte[] bytes);
 
-    public void handle(WebSocket webSocket, DataPacket request) {
-        String requestData = request.getData();
-        JSONObject data = null;
-        if (requestData != null && !"".equals(requestData)) {
-            data = JSON.parseObject(requestData);
+    public void handle(WebSocket webSocket, NetMessage request) {
+        byte[] bytes = request.getMessageBody().getBytes();
+        if(Objects.isNull(bytes)) {
+            log.info("您传来的东西是null的！");
         }
-        /*&& request.getAgreementNo() != Command.DELAY_CHECK_REQ*/
-        if (webSocket != null && request.getAgreementNo() != 10000 ) {
-            log.info("Recive msg:cmd="+request.getAgreementNo() +";userId="+webSocket.getUserId()+";data="+ (data != null ?data.toJSONString() :"NULL"));
-        }
-        this.handle(webSocket, data);
+        this.handle(webSocket, bytes);
     }
 }

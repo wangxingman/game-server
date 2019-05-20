@@ -13,6 +13,8 @@ import java.util.concurrent.*;
 @Slf4j
 public abstract class AbstractRunnable implements Runnable {
 
+    protected String str;
+    
     private static ThreadPoolTaskExecutor poolTaskExecutor = new ThreadPoolTaskExecutor();
 
     /**延时线程*/
@@ -42,7 +44,6 @@ public abstract class AbstractRunnable implements Runnable {
      * @params:
      */
     public void startThread() {
-        log.info("spring线程池启动！");
         poolTaskExecutor.execute(this);
     }
 

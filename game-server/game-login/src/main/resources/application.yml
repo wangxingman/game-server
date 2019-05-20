@@ -21,3 +21,15 @@ server:
   port: 6002
   tomcat:
     uri-encoding: UTF-8
+system:
+  #客户端配置
+  client:
+    clients[0]:
+      clientId: lvhaibao
+      clientSecret: 123456
+    clients[1]:
+      clientId: lhb
+      clientSecret: 123456
+    clients[2]:
+      clientId: app
+      clientSecret: app

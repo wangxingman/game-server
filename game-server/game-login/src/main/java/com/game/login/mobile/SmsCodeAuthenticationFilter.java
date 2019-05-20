@@ -10,6 +10,12 @@ import org.springframework.util.Assert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @Auther : wx
+ * @Desc :
+ * @Date :  下午 4:47 2019/5/17 0017
+ * @explain : 验证码验证
+ */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     /**

@@ -27,7 +27,12 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * @Auther : wx
+ * @Desc :
+ * @Date :  下午 4:47 2019/5/17 0017
+ * @explain : 
+ */
 @Configuration
 @EnableAuthorizationServer
 public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerAdapter{
@@ -43,8 +48,10 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
 
     @Autowired
     private MyUserDetailsServiceImpl userDetailsService;
+
     @Autowired
     private RedisConnectionFactory connectionFactory;
+
     @Resource
     private ClientLoadProperties clientLoadProperties;
 
@@ -70,7 +77,6 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
         oauthServer.allowFormAuthenticationForClients();
     }
 
-
     /**
      * 用于定义客户端详细信息服务的配置程序。可以初始化客户端详细信息，也可以只引用现有商店。
      *
@@ -81,6 +87,7 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
         if (ArrayUtils.isNotEmpty(clientLoadProperties.getClients())) {
+            //获取设置的客户端的账号
             for (ClientProperties config : clientLoadProperties.getClients()) {
                 builder
                         //设置客户端和密码
