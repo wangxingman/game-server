@@ -52,5 +52,9 @@ public interface Const {
         Integer NO = 0;
     }
 
+    interface  Addr {
+        String GATE_WAY = "127.0.0.1:8084";
+    }
+
 
 }

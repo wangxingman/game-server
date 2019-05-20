@@ -27,7 +27,7 @@ import java.net.URISyntaxException;
  * @explain :连接对应的服务器【可以使用tm的那种方式】
  */
 public class WsSyncClient {
-    public static String sendAndClose(String wsUrl) {
+    public static String sendAndClose(String wsUrl,Object obj) {
         final StringBuffer message = new StringBuffer();
         EventLoopGroup group = new NioEventLoopGroup();
         try {
