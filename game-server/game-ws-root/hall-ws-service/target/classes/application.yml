@@ -1,0 +1,26 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@127.0.0.1:1111/eureka/
+  instance:
+    prefer-ip-address: true
+spring:
+  profiles:
+    active: test
+  application:
+    name: sg-ws-service
+server:
+  port: 7902
+hall:   #设置初始化启动参数
+  host: 127.0.0.1
+  port: 8083
+  checkTime: 123
+
+---
+spring:
+  profiles: test
+params:
+  port: 8093
+  localMap: #用户自定义handler的配置
+    20002: com.game.sg.handler.LoginHandler
+    

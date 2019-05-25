@@ -21,7 +21,7 @@ public class CglibProxy implements MethodInterceptor {
         //设置需要创建子类的类
         enhancer.setSuperclass(clazz);
         enhancer.setCallback(this);
-        //通过字节码技术动态创建子类实例
+        //通过字节码技术动态创建子类实例 创建代理对象
         return enhancer.create();
     }
 
@@ -42,6 +42,4 @@ public class CglibProxy implements MethodInterceptor {
         System.out.println("后置代理");
         return result;
     }
-    
-    
 }

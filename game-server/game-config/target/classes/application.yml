@@ -1,0 +1,53 @@
+server:
+  port: 6000
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.0.173:3306/ljts?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  application:
+    name: config-server
+
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.20:6001/eureka/
+  instance:
+    prefer-ip-address: true
+    hostname: 192.168.0.20
+
+info:
+  app.name: 守一传
+  author.name: jch
+  author.function: 配置中心
+  Description:
+    company: 希合游戏科技有限公司
+    url: https://www.youni123.com
+
+
+management:
+  server:
+    port: 5999  #指定监听端口，不指定则语server端口一直
+  endpoints:  # 结束服务关闭
+    web:
+      exposure:
+        include: info,shutdown
+zuul:
+  routes:
+    users:
+      path: /actuator/**
+      url: http://192.168.0.20:${management.server.port}/**

@@ -1,0 +1,12 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.game.core.druid.DruidConfig",
+      "sourceMethod": "druidDataSource()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

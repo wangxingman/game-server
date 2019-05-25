@@ -1,0 +1,33 @@
+{
+  "groups": [
+    {
+      "name": "system",
+      "type": "com.game.login.properties.SecurityProperties",
+      "sourceType": "com.game.login.properties.SecurityProperties"
+    },
+    {
+      "name": "system.client",
+      "type": "com.game.login.properties.ClientLoadProperties",
+      "sourceType": "com.game.login.properties.ClientLoadProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "system.client.clients",
+      "type": "com.game.login.properties.ClientProperties[]",
+      "sourceType": "com.game.login.properties.ClientLoadProperties",
+      "defaultValue": []
+    },
+    {
+      "name": "system.code",
+      "type": "com.game.login.mobile.ValidateCodeProperties",
+      "sourceType": "com.game.login.properties.SecurityProperties"
+    },
+    {
+      "name": "system.oauth-login",
+      "type": "com.game.login.properties.OauthPageProperties",
+      "sourceType": "com.game.login.properties.SecurityProperties"
+    }
+  ],
+  "hints": []
+}

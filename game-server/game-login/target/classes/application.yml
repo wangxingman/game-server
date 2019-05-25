@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: game-login
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/game-server?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    prefix: classpath:/page/ #添加前缀
+    suffix: .html #添加后缀
+    cache: false
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql
+  refresh: true
+  mapper-locations:
+    - classpath:com/game/login/mapper/xml/*Mapper.xml
+server:
+  port: 6002
+  tomcat:
+    uri-encoding: UTF-8
+system:
+  #客户端配置
+  client:
+    clients[0]:
+      clientId: lvhaibao
+      clientSecret: 123456
+    clients[1]:
+      clientId: lhb
+      clientSecret: 123456
+    clients[2]:
+      clientId: app
+      clientSecret: app
