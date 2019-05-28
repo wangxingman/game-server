@@ -1,7 +1,7 @@
 package com.game.hall.netty;
 
 import com.game.hall.netty.manager.Handler;
-import com.game.hall.po.MessageType;
+import com.game.core.ws.dto.MessageType;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

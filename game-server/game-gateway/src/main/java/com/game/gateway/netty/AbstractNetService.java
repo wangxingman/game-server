@@ -41,6 +41,7 @@ public abstract class AbstractNetService {
      * @Desc  :  初始化管道 ssl验证
      */
     public void initChannlInitializer() {
+        //todo 这个对应的ssl的验证
         ssl = Boolean.valueOf("");
         if(ssl) {
             SelfSignedCertificate ssc = null;
@@ -49,7 +50,7 @@ public abstract class AbstractNetService {
                 ssc = new SelfSignedCertificate();
                 sslContext = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();
                 //初始化
-                webSocketChannelInitialer = new WebSocketServerChannelInitializer();
+                webSocketChannelInitialer = new WebSocketServerChannelInitializer(sslContext);
             } catch (CertificateException | SSLException e) {
                 e.printStackTrace();
             }

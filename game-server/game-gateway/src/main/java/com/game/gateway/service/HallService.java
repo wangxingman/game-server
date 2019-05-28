@@ -17,5 +17,13 @@ public interface HallService {
     default String entherHall(){
         return null;
     }
-    
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 8:24 2019/5/27 0027
+     * @params:  user用户 token登录成功标识
+     * @Desc  :
+     */
+    String loginGateWay(Object user,String token);
+
 }

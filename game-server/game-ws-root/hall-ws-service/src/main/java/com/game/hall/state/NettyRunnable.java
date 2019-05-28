@@ -1,9 +1,9 @@
 package com.game.hall.state;
 
+import com.game.common.Const.Const;
 import com.game.core.thread.AbstractRunnable;
-import com.game.hall.common.BaseCommand;
 import com.game.hall.netty.InitDispatcher;
-import com.game.hall.po.MessageType;
+import com.game.core.ws.dto.MessageType;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,8 +33,8 @@ public class NettyRunnable extends AbstractRunnable {
         /**【这种写法肯定不好】*/
         //todo 后期优化
         MessageType netMessageHead
-                = MessageType.builder().serial(5).version((byte)3).cmd(BaseCommand.hall.JOIN_HALL).build();
-        map.put(BaseCommand.hall.JOIN_HALL,netMessageHead);
+                = MessageType.builder().serial(5).version((byte)3).cmd(Const.hall.JOIN_HALL).build();
+        map.put(Const.hall.JOIN_HALL,netMessageHead);
         this.startThread();
     }
 

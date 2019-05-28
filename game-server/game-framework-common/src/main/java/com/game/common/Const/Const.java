@@ -45,6 +45,16 @@ public interface Const {
          String AFTER_LOGING_PAGE = "/oauthLogin";
     }
 
+    interface gateWay {
+        String TOKEN = "token";
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 5:52 2019/5/28 0028 
+     * @params: 
+     * @Desc  :
+     */
     interface Attr {
 
         Integer YES = 1;
@@ -52,9 +62,42 @@ public interface Const {
         Integer NO = 0;
     }
 
+    /**
+     * @Author: wx
+     * @Date  : 下午 5:53 2019/5/28 0028
+     * @params:
+     * @Desc  : 服务地址
+     */
     interface  Addr {
         String GATE_WAY = "127.0.0.1:8084";
     }
 
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:25 2019/5/17 0017
+     * @params:
+     * @Desc  :  大厅操作
+     */
+    interface hall{
+        short JOIN_HALL = 123;
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:32 2019/5/28 0028 
+     * @params: 
+     * @Desc  : 数值
+     */
+    interface number {
+        int  ONE = 1;
+        int  TWO = 2;
+        int THREE = 3;
+        int FOUR = 4;
+        int FIVE = 5;
+        int SIX = 6;
+        int SENVEN = 7;
+        int EGIHT = 8;
+        int NINGHT = 9;
+    }
 
 }

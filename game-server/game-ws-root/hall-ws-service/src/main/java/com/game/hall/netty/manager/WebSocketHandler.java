@@ -2,8 +2,8 @@ package com.game.hall.netty.manager;
 
 import com.game.common.dto.NettyParams;
 import com.game.hall.netty.InitDispatcher;
-import com.game.hall.po.MessageType;
-import com.game.hall.po.NetMessage;
+import com.game.core.ws.dto.MessageType;
+import com.game.core.ws.dto.NetMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 

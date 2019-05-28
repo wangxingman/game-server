@@ -63,7 +63,8 @@ public class WebSocket {
     public ChannelFuture close() {
         WebSocket websoket = WebSocketManager.getWebSocket(userId);
         if (websoket != null && websoket.getSessionId() == sessionId) {
-            WebSocketManager.remove(this);// 根据SessionId来清除WebSocket
+            // 根据SessionId来清除WebSocket
+            WebSocketManager.remove(this);
         }
         ChannelFuture future = this.ctx.channel().close();
         future.addListener(ChannelFutureListener.CLOSE);

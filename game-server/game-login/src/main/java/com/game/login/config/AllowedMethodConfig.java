@@ -10,6 +10,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @Author: wx
+ * @Date  : 下午 3:40 2019/5/28 0028 
+ * @params: 
+ * @Desc  :  初始化加载
+ */
 @Configuration
 public class AllowedMethodConfig {
 

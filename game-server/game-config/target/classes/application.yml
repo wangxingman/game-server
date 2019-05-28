@@ -10,7 +10,7 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://192.168.0.173:3306/ljts?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   application:
     name: config-server

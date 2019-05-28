@@ -15,6 +15,7 @@ import io.netty.handler.codec.http.HttpClientCodec;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 
 import java.net.URI;
@@ -27,33 +28,58 @@ import java.net.URISyntaxException;
  * @explain :连接对应的服务器【可以使用tm的那种方式】
  */
 public class WsSyncClient {
-    public static String sendAndClose(String wsUrl,Object obj) {
-        final StringBuffer message = new StringBuffer();
-        EventLoopGroup group = new NioEventLoopGroup();
+    public static String sendMsgToGame(Object obj,String addrs) {
+        String s = "";
         try {
-            URI uri = new URI(wsUrl);
-            String scheme = uri.getScheme() == null ? "http" : uri.getScheme();
-            final String host = uri.getHost() == null ? "127.0.0.1" : uri.getHost();
-            final int port;
-            if (uri.getPort() == -1) {
-                if ("http".equalsIgnoreCase(scheme)) {
-                    port = 80;
-                } else if ("https".equalsIgnoreCase(scheme)) {
-                    port = 443;
-                } else {
-                    port = -1;
-                }
+            addrs = new String(addrs.getBytes(), "UTF-8");
+            System.out.println("addrs:" + addrs);
+            if (false) {
+                s = sendAndClose("wss://" + addrs+"/websocket", obj);
             } else {
-                port = uri.getPort();
-            }
-            if (!"ws".equalsIgnoreCase(scheme) && !"wss".equalsIgnoreCase(scheme)) {
-                throw new RuntimeException("Only WS(S) is supported.");
+                s = sendAndClose("ws://" + addrs+"/websocket", obj);
             }
 
-            final SslContext sslCtx = null;
-            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+    public static String sendAndClose(String wsUrl, Object obj) throws Exception {
+        final StringBuffer message = new StringBuffer();
+
+        URI uri = new URI(wsUrl);
+        String scheme = uri.getScheme() == null ? "http" : uri.getScheme();
+        final String host = uri.getHost() == null ? "127.0.0.1" : uri.getHost();
+        final int port;
+        if (uri.getPort() == -1) {
+            if ("http".equalsIgnoreCase(scheme)) {
+                port = 80;
+            } else if ("https".equalsIgnoreCase(scheme)) {
+                port = 443;
+            } else {
+                port = -1;
+            }
+        } else {
+            port = uri.getPort();
+        }
+        if (!"ws".equalsIgnoreCase(scheme) && !"wss".equalsIgnoreCase(scheme)) {
+            throw new RuntimeException("Only WS(S) is supported.");
+        }
+
+        final boolean ssl = "wss".equalsIgnoreCase(scheme);
+        final SslContext sslCtx;
+        if (ssl) {
+            sslCtx = SslContext.newClientContext(InsecureTrustManagerFactory.INSTANCE);
+        } else {
+            sslCtx = null;
+        }
+
+        EventLoopGroup group = new NioEventLoopGroup();
+        try {
             final WsSyncHandler handler = new WsSyncHandler(message, WebSocketClientHandshakerFactory.newHandshaker(uri, WebSocketVersion.V13, null, false, new DefaultHttpHeaders()));
-                  Bootstrap b = new Bootstrap();
+
+            Bootstrap b = new Bootstrap();
             b.group(group).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) {
@@ -67,22 +93,17 @@ public class WsSyncClient {
                     p.addLast(new HttpClientCodec(), new HttpObjectAggregator(8192), handler);
                 }
             });
+
             Channel ch = b.connect(uri.getHost(), port).sync().channel();
             handler.handshakeFuture().sync();
-            WebSocketFrame frame = new TextWebSocketFrame(JSON.toJSONString(null));
-            //发送消息
+            WebSocketFrame frame = new TextWebSocketFrame(JSON.toJSONString(obj));
             ch.writeAndFlush(frame);
-            
             ch.writeAndFlush(new CloseWebSocketFrame());
             ch.closeFuture().await();
-                   
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }  finally {
+        } finally {
             group.shutdownGracefully();
         }
-        return null;
-    }     
+        System.out.println("2---------------"+message.toString());
+        return message.toString();
+    }
 }

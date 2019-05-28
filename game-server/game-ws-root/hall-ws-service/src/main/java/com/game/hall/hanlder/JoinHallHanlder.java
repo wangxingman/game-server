@@ -12,14 +12,14 @@ import java.util.Objects;
  * @Auther : wx
  * @Desc :
  * @Date :  下午 4:47 2019/5/17 0017
- * @explain :
+ * @explain : gateway进来初始化数据
  */
 @Slf4j
 @Identifying
 public class JoinHallHanlder extends Handler {
 
     @Override
-    @LogMessage(type = LogMessage.LogType.HALL_JOIN ,value = "加入房间")
+    @LogMessage(type = LogMessage.LogType.HALL_JOIN ,value = "gateway加入房间")
     public void handle(WebSocket webSocket, byte[] bytes) {
         //初始化 一些基本数据
         String s = new String(bytes);

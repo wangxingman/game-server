@@ -13,7 +13,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
  */
 @SpringBootApplication
 @EnableDiscoveryClient // 注解能激活Eureka中的DiscoveryClient实现
-@EnableConfigServer // 注解，开启Config Server dsa
+//@EnableConfigServer // 注解，开启Config Server dsa
 public class ConfigServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(ConfigServerApplication.class);

@@ -1,6 +1,5 @@
 package com.game.hall.netty;
 
-import com.game.hall.common.BaseCommand;
 import com.game.hall.hanlder.JoinHallHanlder;
 import com.game.hall.state.NettyRunnable;
 

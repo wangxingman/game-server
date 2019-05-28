@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * @Auther: wx
- * @Desc :
- * @Date : 下午 5:37 2019/5/6 0006
+ * @Author: wx
+ * @Date  : 下午 5:46 2019/5/28 0028 
+ * @params: 
+ * @Desc  :  redis里面的操作
  */
 @Component
 public class RedisUtil {
