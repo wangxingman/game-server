@@ -1,9 +1,12 @@
-package com.game.hall.netty.manager;
+package com.game.core.ws.server.Manager;
 
+import com.game.common.Const.Const;
+import com.game.common.Const.Errors;
 import com.game.common.dto.NettyParams;
-import com.game.hall.netty.InitDispatcher;
+import com.game.core.ws.dto.AbsMessageType;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.dto.NetMessage;
+import com.game.core.ws.server.BaseDispatcher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -52,10 +55,14 @@ public class WebSocketHandler {
     public void onMessage(WebSocket webSocket, NetMessage request) {
         MessageType messageType = request.getMessageType();
         if(Objects.isNull(messageType)) {
-             //todo 判断消息 前缀 不合适 不允许
-            
+            webSocket.send(String.valueOf(Errors.no_false_error));
         }
-        Map<MessageType, Handler> localMap = InitDispatcher.localMap;
+        //todo 这里数据类型可以放在yml文件里面
+        AbsMessageType absMessageType = messageType.getAbsMessageType();
+        if(absMessageType.getSerial()!= Const.number.FIVE && absMessageType.getLength()!=(short)Const.number.THREE ) {
+            webSocket.send(String.valueOf(Errors.no_false_error));
+        }
+        Map<MessageType, Handler> localMap = BaseDispatcher.localMap;
         Handler handler = localMap.get(messageType);
         if (handler != null) {
             handler.handle(webSocket, request);

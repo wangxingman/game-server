@@ -1,15 +1,22 @@
-package com.game.hall.netty.manager;
+package com.game.core.ws.server.Manager;
 
+import com.alibaba.fastjson.JSON;
+import com.game.core.ws.dto.NetMessage;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
+import java.util.Objects;
 
 /**
  * @Auther: wx
@@ -74,4 +81,59 @@ public class WebSocket {
         return future;
     }
 
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:46 2019/5/29 0029 
+     * @params: 
+     * @Desc  :发送消息  
+     */
+    public ChannelFuture send(String message) {
+        if(Objects.isNull(message)) {
+             log.info("数据错误！");
+        }
+        ChannelFuture channelFuture = this.ctx.channel().writeAndFlush(new TextWebSocketFrame(message));
+        return channelFuture;
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:50 2019/5/29 0029 
+     * @params: 
+     * @Desc  :  发送消息体
+     */
+    public ChannelFuture sendAndFlush(NetMessage response) {
+        if(Objects.isNull(response)) {
+            log.info("数据错误！");
+        }
+        ChannelFuture future = this.ctx.channel().writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(response)));
+        return future;
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 5:18 2019/5/29 0029 
+     * @params: 
+     * @Desc  :发送二进制的消息
+     */
+    public boolean send(byte[] byteMsg) {
+        if(Objects.isNull(byteMsg)) {
+            log.info("数据错误！");
+        }
+        ByteBuf buffer = Unpooled.buffer(byteMsg.length);
+        buffer.writeBytes(byteMsg);
+        ChannelFuture future = ctx.channel().writeAndFlush(new BinaryWebSocketFrame(buffer));
+        return true;
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:48 2019/5/29 0029 
+     * @params: 
+     * @Desc  :刷新管道
+     */
+    public void flush() {
+        this.ctx.channel().flush();
+    }
+
+    
 }

@@ -1,4 +1,4 @@
-package com.game.hall.netty.manager;
+package com.game.core.ws.server.Manager;
 
 import java.util.concurrent.ConcurrentHashMap;
 

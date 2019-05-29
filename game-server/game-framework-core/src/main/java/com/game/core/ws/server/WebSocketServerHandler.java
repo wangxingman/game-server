@@ -1,8 +1,8 @@
-package com.game.hall.netty;
+package com.game.core.ws.server;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.hall.netty.manager.WebSocket;
-import com.game.hall.netty.manager.WebSocketHandler;
+import com.game.core.ws.server.Manager.WebSocket;
+import com.game.core.ws.server.Manager.WebSocketHandler;
 import com.game.core.ws.dto.NetMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

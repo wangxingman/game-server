@@ -1,2 +1,4 @@
 swagger:
   enabled: true
+configuration:
+  enabled: false

@@ -16,7 +16,11 @@ public enum Errors {
      * @Date  : 下午 8:09 2019/5/8 0008 
      * @params: 
      */
-    no_charge_error(3091,"请充值后游戏");
+    no_charge_error(3091,"请充值后游戏1"),
+
+    no_false_error(3092,"您发送的数据不正确！");
+
+    
     
     private int code;
     private String msg;

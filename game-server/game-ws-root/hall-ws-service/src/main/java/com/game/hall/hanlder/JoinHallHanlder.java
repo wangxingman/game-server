@@ -1,9 +1,11 @@
 package com.game.hall.hanlder;
 
+import com.alibaba.fastjson.JSONObject;
 import com.game.core.annotation.Identifying;
 import com.game.core.annotation.LogMessage;
-import com.game.hall.netty.manager.Handler;
-import com.game.hall.netty.manager.WebSocket;
+import com.game.core.ws.server.Manager.Handler;
+import com.game.core.ws.server.Manager.WebSocket;
+import com.game.hall.config.LocalSpringServiceManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -22,12 +24,12 @@ public class JoinHallHanlder extends Handler {
     @LogMessage(type = LogMessage.LogType.HALL_JOIN ,value = "gateway加入房间")
     public void handle(WebSocket webSocket, byte[] bytes) {
         //初始化 一些基本数据
-        String s = new String(bytes);
-        if(Objects.isNull(s)) {
+        JSONObject jsonObject = JSONObject.parseObject(new String(bytes));
+        if(Objects.isNull(jsonObject)) {
             log.info("传输的值为null");
         }else {
-            
+            LocalSpringServiceManager.getInstance().getGameService()
+                    .gateWayJoin(webSocket,jsonObject);
         }
     }
-    
 }

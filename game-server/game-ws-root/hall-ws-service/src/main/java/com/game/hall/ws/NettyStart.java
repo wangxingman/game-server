@@ -1,6 +1,7 @@
-package com.game.hall.netty;
+package com.game.hall.ws;
 
 import com.game.core.ws.initializer.WsInitializer;
+import com.game.core.ws.server.WebSocketServerInitializer;
 import com.game.hall.po.HallProperties;
 import com.game.hall.state.NettyRunnable;
 import io.netty.bootstrap.ServerBootstrap;
@@ -30,16 +31,15 @@ public class NettyStart implements WsInitializer, DisposableBean {
 
     @Autowired
     private HallProperties hallProperties;
-    
+
     private WebSocketServerInitializer webSocketServerInitializer;
-    
+
     private  EventLoopGroup bossGroup;
     
     private  EventLoopGroup workerGroup;
 
-    @Autowired
-    public NettyStart(WebSocketServerInitializer webSocketServerInitializer) {
-        this.webSocketServerInitializer = webSocketServerInitializer;
+    public NettyStart() {
+        this.webSocketServerInitializer = new WebSocketServerInitializer();
     }
 
     @Override

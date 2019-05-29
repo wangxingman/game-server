@@ -1,6 +1,6 @@
-package com.game.hall.netty;
+package com.game.core.ws.server;
 
-import com.game.hall.netty.manager.Handler;
+import com.game.core.ws.server.Manager.Handler;
 import com.game.core.ws.dto.MessageType;
 
 import java.util.Map;

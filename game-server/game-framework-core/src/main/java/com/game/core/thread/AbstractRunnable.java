@@ -1,8 +1,10 @@
 package com.game.core.thread;
 
+import com.game.core.ws.dto.MessageType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -12,6 +14,10 @@ import java.util.concurrent.*;
  */
 @Slf4j
 public abstract class AbstractRunnable implements Runnable {
+
+    protected static Map<Long, MessageType> map = new ConcurrentHashMap();
+
+    protected static Long identification;
 
     protected String str;
     
@@ -36,6 +42,11 @@ public abstract class AbstractRunnable implements Runnable {
         poolTaskExecutor.setKeepAliveSeconds(30000);
         poolTaskExecutor.initialize();
     }
+
+    public static MessageType getMessageType() {
+        return map.get(identification);
+    }
+
 
     /**
      * @Author: wx

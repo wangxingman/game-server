@@ -1,4 +1,7 @@
-package com.game.hall.Service;
+package com.game.hall.service;
+
+import com.alibaba.fastjson.JSONObject;
+import com.game.core.ws.server.Manager.WebSocket;
 
 /**
  * @Auther : wx
@@ -14,5 +17,13 @@ public interface GameService {
      * @params: 
      * @Desc  :  gateWay登录初始化数据
      */
-     String  gateWayJoin();
+     String  gateWayJoin(WebSocket webSocket, JSONObject jsonObject);
+
+     /**
+      * @Author: wx
+      * @Date  : 上午 9:40 2019/5/29 0029 
+      * @params: 
+      * @Desc  :  客户端的加入
+      */
+     String clientJoin();
 }

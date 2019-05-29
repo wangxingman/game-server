@@ -1,4 +1,4 @@
-package com.game.hall.netty.manager;
+package com.game.core.ws.server.Manager;
 
 import com.game.core.ws.dto.NetMessage;
 import lombok.extern.slf4j.Slf4j;
