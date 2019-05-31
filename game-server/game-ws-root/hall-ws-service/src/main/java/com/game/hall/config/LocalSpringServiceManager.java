@@ -1,10 +1,13 @@
 package com.game.hall.config;
 
 import com.game.hall.service.GameService;
+import com.game.hall.service.impl.GameServiceImpl;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Auther : wx
@@ -13,8 +16,8 @@ import org.springframework.stereotype.Repository;
  * @explain :  所有的注入spring容器的类
  */
 @Slf4j
-@Repository
 @Data
+@Component
 public class LocalSpringServiceManager {
     
     static LocalSpringServiceManager localSpringServiceManager = new  LocalSpringServiceManager();
@@ -23,7 +26,5 @@ public class LocalSpringServiceManager {
         return localSpringServiceManager;
     }
 
-    @Autowired
-    private GameService gameService;
-    
+    GameService gameService = new GameServiceImpl();
 }

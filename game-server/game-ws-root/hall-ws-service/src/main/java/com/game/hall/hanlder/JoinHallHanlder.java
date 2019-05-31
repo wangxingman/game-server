@@ -6,7 +6,10 @@ import com.game.core.annotation.LogMessage;
 import com.game.core.ws.server.Manager.Handler;
 import com.game.core.ws.server.Manager.WebSocket;
 import com.game.hall.config.LocalSpringServiceManager;
+import com.game.hall.service.GameService;
+import com.game.hall.service.impl.GameServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
