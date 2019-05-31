@@ -1,15 +1,17 @@
 package com.game.hall.state;
 
 import com.game.common.Const.Const;
+import com.game.core.redis.RedisUtil;
 import com.game.core.thread.AbstractRunnable;
 import com.game.core.ws.dto.AbsMessageType;
 import com.game.hall.ws.InitDispatcher;
 import com.game.core.ws.dto.MessageType;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @auther : wx
