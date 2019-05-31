@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.game.common.Const.Const;
 import com.game.core.redis.RedisUtil;
 import com.game.core.ws.clientConfig.WsSyncClient;
+import com.game.core.ws.dto.AbsMessageType;
 import com.game.core.ws.dto.MessageBody;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.dto.NetMessage;
@@ -31,8 +32,10 @@ public class HallServiceImpl implements HallService {
             String strToken = RedisUtil.get(token);
             //todo 判断各种token的格式
             if(Objects.nonNull(strToken) && strToken.startsWith(Const.gateWay.TOKEN)) {
-                MessageType messageType
-                        = MessageType.builder().serial(Const.number.FIVE).version((byte) Const.number.THREE).cmd(Const.hall.JOIN_HALL).build();
+
+                MessageType messageType = MessageType.builder()
+                                .absMessageType(AbsMessageType.builder().serial(Const.number.FIVE).version((byte) Const.number.THREE).build())
+                                .cmd(Const.hall.JOIN_HALL).build();
                 NetMessage netMessage = NetMessage.builder()
                         .messageType(messageType)
                         .messageBody(MessageBody.builder().bytes(JSONObject.toJSONString(user).getBytes()).build())

@@ -20,6 +20,5 @@ public class InitDispatcher implements BaseDispatcher {
     public void init() {
         messageType.setCmd(Const.hall.JOIN_HALL);
         BaseDispatcher.register_copy(messageType ,new JoinHallHanlder());
-        
     }
 }

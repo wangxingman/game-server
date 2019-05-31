@@ -16,6 +16,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>game-framework-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

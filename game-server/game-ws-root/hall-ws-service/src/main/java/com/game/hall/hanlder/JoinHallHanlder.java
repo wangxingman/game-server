@@ -25,11 +25,11 @@ public class JoinHallHanlder extends Handler {
     public void handle(WebSocket webSocket, byte[] bytes) {
         //初始化 一些基本数据
         JSONObject jsonObject = JSONObject.parseObject(new String(bytes));
-        if(Objects.isNull(jsonObject)) {
-            log.info("传输的值为null");
-        }else {
+        if(Objects.nonNull(jsonObject)) {
             LocalSpringServiceManager.getInstance().getGameService()
                     .gateWayJoin(webSocket,jsonObject);
+        }else {
+            log.info("传输的值为null");
         }
     }
 }

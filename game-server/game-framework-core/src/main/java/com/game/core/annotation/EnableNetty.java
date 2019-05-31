@@ -1,6 +1,6 @@
 package com.game.core.annotation;
 
-import com.game.core.config.HallConfig;
+import com.game.core.ws.initializer.HallConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

@@ -5,6 +5,8 @@ import com.game.common.comman.Default;
 import com.game.common.comman.HttpCode;
 //import com.game.core.utils.web.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.context.request.RequestContextHolder;

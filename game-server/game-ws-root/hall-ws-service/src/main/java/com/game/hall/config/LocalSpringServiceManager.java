@@ -25,4 +25,5 @@ public class LocalSpringServiceManager {
 
     @Autowired
     private GameService gameService;
+    
 }

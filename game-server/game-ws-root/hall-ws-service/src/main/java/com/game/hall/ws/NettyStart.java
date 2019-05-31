@@ -1,7 +1,9 @@
 package com.game.hall.ws;
 
+import com.game.common.mapper.UserMapper;
 import com.game.core.ws.initializer.WsInitializer;
 import com.game.core.ws.server.WebSocketServerInitializer;
+import com.game.hall.config.name.NameServer;
 import com.game.hall.po.HallProperties;
 import com.game.hall.state.NettyRunnable;
 import io.netty.bootstrap.ServerBootstrap;
@@ -28,6 +30,9 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Component
 public class NettyStart implements WsInitializer, DisposableBean {
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private HallProperties hallProperties;
@@ -58,6 +63,7 @@ public class NettyStart implements WsInitializer, DisposableBean {
          bossGroup = new NioEventLoopGroup(1);
          workerGroup = new NioEventLoopGroup();
         try{
+
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup,workerGroup)
                     .channel(NioServerSocketChannel.class)
@@ -65,6 +71,7 @@ public class NettyStart implements WsInitializer, DisposableBean {
                     .childHandler(webSocketServerInitializer);
 
             Channel ch = b.bind(hallProperties.getPort()).sync().channel();
+            new NameServer(userMapper);
             log.info("服务开启"+"://127.0.0.1:" + hallProperties.getPort() + '/');
             ch.closeFuture().sync();
         } catch (InterruptedException e) {

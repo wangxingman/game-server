@@ -1,6 +1,5 @@
 package com.game.core.ws.initializer;
 
-import com.codingapi.txlcn.common.runner.TxLcnInitializer;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
  * @Auther : wx
  * @Desc :
  * @Date :  下午 12:21 2019/5/17 0017
- * @explain :
+ * @explain : 初始化 走run
  */
 public class WsApplicationRunner implements ApplicationRunner, DisposableBean {
 

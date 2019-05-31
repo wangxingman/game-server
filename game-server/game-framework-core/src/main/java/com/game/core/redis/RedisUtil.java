@@ -20,11 +20,11 @@ import java.util.stream.Stream;
  */
 @Component
 public class RedisUtil {
+    
     private static StringRedisTemplate stringRedisTemplate;
 
     private static RedisTemplate redisTemplate;
 
-    @Autowired
     public RedisUtil(StringRedisTemplate stringRedisTemplate) {
         RedisUtil.stringRedisTemplate=stringRedisTemplate;
     }

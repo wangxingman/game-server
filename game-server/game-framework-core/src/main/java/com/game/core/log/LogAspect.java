@@ -84,7 +84,7 @@ public class LogAspect {
             log.debug("===============记录日志开始===============");
             //todo 具体添加参数
             log(Log.builder()
-                    .tCreateTime(new Date())
+                    .createtime(new Date())
                     .tType(logMessage.type().getKey())
                     .tUserId(null)
                     .tUserName(null)

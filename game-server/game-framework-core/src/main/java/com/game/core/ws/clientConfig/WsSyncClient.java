@@ -103,7 +103,7 @@ public class WsSyncClient {
         } finally {
             group.shutdownGracefully();
         }
-        System.out.println("2---------------"+message.toString());
+        System.out.println("执行结束----------->>"+message.toString());
         return message.toString();
     }
 }
