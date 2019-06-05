@@ -14,6 +14,7 @@
         <module>game-config</module>
         <module>game-register</module>
         <module>game-service-root</module>
+        <module>game-tm-server</module>
     </modules>
 
     <parent>

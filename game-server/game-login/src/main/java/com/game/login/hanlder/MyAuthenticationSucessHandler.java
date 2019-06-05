@@ -1,8 +1,5 @@
 package com.game.login.hanlder;
 
-import com.alibaba.fastjson.JSONObject;
-import com.game.common.Const.Const;
-import com.game.core.ws.clientConfig.WsSyncClient;
 import com.game.login.feign.FHallService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

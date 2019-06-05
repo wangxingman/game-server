@@ -1,4 +1,4 @@
-package com.game.core.ws.clientConfig.hanlder;
+package com.game.core.ws.clientconfig.hanlder;
 
 import io.netty.channel.*;
 import io.netty.handler.codec.http.FullHttpResponse;

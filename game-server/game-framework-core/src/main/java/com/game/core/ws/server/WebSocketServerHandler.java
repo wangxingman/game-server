@@ -1,8 +1,8 @@
 package com.game.core.ws.server;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.core.ws.server.Manager.WebSocket;
-import com.game.core.ws.server.Manager.WebSocketHandler;
+import com.game.core.ws.server.manager.WebSocket;
+import com.game.core.ws.server.manager.WebSocketHandler;
 import com.game.core.ws.dto.NetMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -122,13 +122,27 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         if(frame instanceof CloseWebSocketFrame) {
             //关闭握手器
             handShaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
+            ctx.channel().close();
             webSocketHandler.onClose(webSocket);
         }
         if(frame instanceof PingWebSocketFrame) {
             ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
             return;
         }
+        if (frame instanceof BinaryWebSocketFrame) {
+            BinaryWebSocketFrame binaryWebSocketFrame = (BinaryWebSocketFrame) frame;
+            byte[] by = new byte[binaryWebSocketFrame.content().readableBytes()];
+            binaryWebSocketFrame.content().readBytes(by);
+            try {
+                webSocketHandler.onMessage(webSocket,  by);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            restartHeartbeat();
+            return;
+        }
         if(!(frame instanceof TextWebSocketFrame)) {
+            System.out.println("本例程仅支持文本消息，不支持二进制消息");
             throw new UnsupportedOperationException(String.format("%s frame types not supported", frame.getClass()
                     .getName()));
         }

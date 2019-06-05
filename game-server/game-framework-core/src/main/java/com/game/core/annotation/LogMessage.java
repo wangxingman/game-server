@@ -24,7 +24,8 @@ public @interface LogMessage {
 
     enum LogType {
         //加入房间
-        HALL_JOIN("加入房间");
+        HALL_JOIN("加入房间"),
+        HALL_NAME("名字操作");
 
         @Getter
         private final  String key;

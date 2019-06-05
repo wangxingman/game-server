@@ -1,4 +1,4 @@
-package com.game.core.ws.server.Manager;
+package com.game.core.ws.server.manager;
 
 import com.game.core.ws.dto.NetMessage;
 import lombok.extern.slf4j.Slf4j;

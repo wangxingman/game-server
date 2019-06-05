@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
  * @explain : 用户所有名字的操作
  */
 @Slf4j
-public class NameServer extends AbsNameServer implements InitName<String> {
-
+public class NameServer extends AbsServer implements InitName<String> {
 
     public NameServer(UserMapper userMapper) {
         initName(userMapper);
@@ -27,9 +26,8 @@ public class NameServer extends AbsNameServer implements InitName<String> {
     public Set<String> initName(UserMapper userMapper) {
         try {
             //todo 这里查询应该单个
-            linkedHash
-                    = userMapper.findAll()
-                    .stream().map(a -> a.getUAccount()).collect(Collectors.toSet());
+          concurrentHashMap = userMapper.findAll()
+                    .stream().collect(Collectors.toConcurrentMap(a -> a.getUId(), a -> a.getUAccount()));
             if (Objects.isNull(linkedHash)) {
                 log.info("当前的还没有用户!");
             }

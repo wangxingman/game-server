@@ -2,6 +2,7 @@ package com.game.hall.config.name;
 
 
 import com.game.common.entity.user.User;
+import com.game.hall.dto.UserDto;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date :  上午 11:42 2019/5/30 0030
  * @explain :
  */
-public class AbsNameServer  {
+public class AbsServer {
 
     /**数据结构*/
     /*https://www.cnblogs.com/jingmoxukong/p/4329079.html*/
@@ -64,7 +65,17 @@ public class AbsNameServer  {
     Map<String,String> treeMap = new TreeMap<>();
 
     /**并发*/
-    Map<String,String> concurrentHashMap = new ConcurrentHashMap<>();
+     static  Map<Integer,String> concurrentHashMap = new ConcurrentHashMap<>();
+
+    public static Map<Integer,String> getConcurrentHashMap() {
+           return concurrentHashMap;
+     }
+
+    static  Map<Integer, UserDto> concurrentHashMapUserDto = new ConcurrentHashMap<>();
+
+    public static Map<Integer,UserDto> getConcurrentHashMapUserDto() {
+        return concurrentHashMapUserDto;
+    }
 
     /**它支持在两端插入和删除元素 先进先出
      *

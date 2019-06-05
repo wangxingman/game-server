@@ -1,4 +1,4 @@
-package com.game.hall.Service.abs;
+package com.game.hall.service.abs;
 
 /**
  * @Auther : wx

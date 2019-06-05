@@ -1,5 +1,6 @@
 package com.game.core.ws.dto;
 
+import com.game.common.Const.Const;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,13 +12,14 @@ import lombok.NoArgsConstructor;
  * @Date :  下午 5:38 2019/5/17 0017
  * @explain :
  */
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class NetMessage {
-    
-   private  MessageBody messageBody;
+
+
+   private byte[] bytes;
 
    private  MessageType messageType;
 }

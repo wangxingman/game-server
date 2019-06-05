@@ -3,13 +3,10 @@ package com.game.hall.hanlder;
 import com.alibaba.fastjson.JSONObject;
 import com.game.core.annotation.Identifying;
 import com.game.core.annotation.LogMessage;
-import com.game.core.ws.server.Manager.Handler;
-import com.game.core.ws.server.Manager.WebSocket;
+import com.game.core.ws.server.manager.Handler;
+import com.game.core.ws.server.manager.WebSocket;
 import com.game.hall.config.LocalSpringServiceManager;
-import com.game.hall.service.GameService;
-import com.game.hall.service.impl.GameServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 

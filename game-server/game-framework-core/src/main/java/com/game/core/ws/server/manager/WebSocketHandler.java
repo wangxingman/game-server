@@ -1,4 +1,4 @@
-package com.game.core.ws.server.Manager;
+package com.game.core.ws.server.manager;
 
 import com.game.common.Const.Const;
 import com.game.common.Const.Errors;
@@ -10,6 +10,7 @@ import com.game.core.ws.server.BaseDispatcher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Objects;
 
@@ -70,4 +71,39 @@ public class WebSocketHandler {
             webSocket.close();
         }
     }
+
+  /**
+   * @Author: wx
+   * @Date  : 上午 10:28 2019/6/3 0003 
+   * @params: 
+   * @Desc  :  pd 协议接收
+   */
+    public void onMessage(WebSocket webSocket, byte[] message) {
+
+        try {
+            Class<?> c = Class.forName("com.beiyou.ws.PBMsgManager");
+            for (Method m : c.getDeclaredMethods()) {
+                if (m.getName().equals("onMessage")) {
+                    m.invoke(null, webSocket, message);
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            webSocket.close();
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * @Author: wx
+     * @Date  : 上午 10:27 2019/6/3 0003
+     * @params:
+     * @Desc  :管道关闭  连接关闭
+     */
+    public void onError(WebSocket webSocket, Throwable cause) {
+        log.info("onError:sessionId=" + webSocket.getSessionId() + ";cause=" + cause.getMessage());
+        webSocket.close();
+        WebSocketManager.remove(webSocket);
+    }
+
 }

@@ -1,7 +1,7 @@
-package com.game.core.ws.clientConfig;
+package com.game.core.ws.clientconfig;
 
 import com.alibaba.fastjson.JSON;
-import com.game.core.ws.clientConfig.hanlder.WsSyncHandler;
+import com.game.core.ws.clientconfig.hanlder.WsSyncHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -13,13 +13,15 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.DefaultHttpHeaders;
 import io.netty.handler.codec.http.HttpClientCodec;
 import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.websocketx.*;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketClientHandshakerFactory;
+import io.netty.handler.codec.http.websocketx.WebSocketVersion;
 import io.netty.handler.ssl.SslContext;
+import io.netty.handler.codec.http.websocketx.CloseWebSocketFrame;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * @Auther : wx
@@ -96,9 +98,11 @@ public class WsSyncClient {
 
             Channel ch = b.connect(uri.getHost(), port).sync().channel();
             handler.handshakeFuture().sync();
-            WebSocketFrame frame = new TextWebSocketFrame(JSON.toJSONString(obj));
+            TextWebSocketFrame frame = new TextWebSocketFrame(JSON.toJSONString(obj));
             ch.writeAndFlush(frame);
-            ch.writeAndFlush(new CloseWebSocketFrame());
+            //传输关闭消息
+            CloseWebSocketFrame closeWebSocketFrame = new CloseWebSocketFrame();
+            ch.writeAndFlush(closeWebSocketFrame);
             ch.closeFuture().await();
         } finally {
             group.shutdownGracefully();

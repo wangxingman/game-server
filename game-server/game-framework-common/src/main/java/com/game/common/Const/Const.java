@@ -79,7 +79,9 @@ public interface Const {
      * @Desc  :  大厅操作
      */
     interface hall{
-        short JOIN_HALL = 123;
+        int   JOIN_HALL = 123;
+        int   NAME_HALL = 111;
+        int   NAME_HALL_REP = 222;
     }
 
     /**

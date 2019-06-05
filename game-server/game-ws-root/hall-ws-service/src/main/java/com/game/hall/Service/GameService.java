@@ -1,7 +1,7 @@
 package com.game.hall.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.core.ws.server.Manager.WebSocket;
+import com.game.core.ws.server.manager.WebSocket;
 
 /**
  * @Auther : wx
@@ -26,4 +26,12 @@ public interface GameService {
       * @Desc  :  客户端的加入
       */
      String clientJoin();
+
+     /**
+      * @Author: wx
+      * @Date  : 下午 7:51 2019/6/5 0005 
+      * @params: 
+      * @Desc  : 验证游戏名
+      */
+     void addauAccount();
 }

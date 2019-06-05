@@ -1,4 +1,4 @@
-package com.game.core.ws.server.Manager;
+package com.game.core.ws.server.manager;
 
 import com.alibaba.fastjson.JSON;
 import com.game.core.ws.dto.NetMessage;
@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Data
 @Slf4j
-public class WebSocket {
+public class WebSocket implements Serializable {
 
     /**
      * @Author: wx
@@ -36,6 +37,8 @@ public class WebSocket {
      *           ChannelPipeline实际维护的是ChannelHandlerContext 的关系
      * @Date  : 下午 8:05 2019/5/5 0005
      */
+    private Integer userId;
+    
     private ChannelHandlerContext ctx;
 
     private HttpRequest request;
@@ -47,8 +50,6 @@ public class WebSocket {
     private long updateTime;
 
     private String remoteAddr;
-
-    private Integer userId;
 
     public WebSocket(ChannelHandlerContext ctx, HttpRequest request, long sessionId) {
         this.setRequest(request);
@@ -68,11 +69,11 @@ public class WebSocket {
      * @params:
      */
     public ChannelFuture close() {
-        WebSocket websoket = WebSocketManager.getWebSocket(userId);
-        if (websoket != null && websoket.getSessionId() == sessionId) {
-            // 根据SessionId来清除WebSocket
-            WebSocketManager.remove(this);
-        }
+//        WebSocket websoket = WebSocketManager.getWebSocket(userId);
+//        if (websoket != null && websoket.getSessionId() == sessionId) {
+//            // 根据SessionId来清除WebSocket
+//            WebSocketManager.remove(this);
+//        }
         ChannelFuture future = this.ctx.channel().close();
         future.addListener(ChannelFutureListener.CLOSE);
         if (log.isDebugEnabled()) {
@@ -93,6 +94,17 @@ public class WebSocket {
         }
         ChannelFuture channelFuture = this.ctx.channel().writeAndFlush(new TextWebSocketFrame(message));
         return channelFuture;
+    }
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 5:06 2019/6/3 0003 
+     * @params: 
+     * @Desc  : 发送消息
+     */
+    public boolean send(final NetMessage response) {
+        ChannelFuture future = sendAndFlush(response);
+        return true;
     }
 
     /**
