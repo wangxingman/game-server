@@ -79,9 +79,11 @@ public interface Const {
      * @Desc  :  大厅操作
      */
     interface hall{
-        int   JOIN_HALL = 123;
-        int   NAME_HALL = 111;
-        int   NAME_HALL_REP = 222;
+        Integer   INIT_HALL = 000;
+        Integer   JOIN_HALL = 123;
+        Integer   JOIN_HALL_REP = 124;
+        Integer   NAME_HALL = 111;
+        Integer   NAME_HALL_REP = 222;
     }
 
     /**

@@ -76,6 +76,7 @@ public class User implements Serializable {
     @Column(name = "u_account", nullable = true,columnDefinition="varchar(255) COMMENT '用户游戏账号'")
     private String uAccount;
 
+    
     /**
      * 用户的密码
      *   @Pattern(regexp = "^.{6,20}|\\s*$", message = "密码的长度只能在6-20之内", groups = {})

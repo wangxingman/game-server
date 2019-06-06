@@ -12,17 +12,20 @@ import lombok.experimental.Accessors;
  * @explain :
  */
 @Data
-@Builder
 @Accessors
 public class MessageType{
 
     /**命令*/
-    private int cmd;
+    private Integer cmd;
 
     /**基础类型*/
     private  AbsMessageType absMessageType;
 
-    public MessageType(int cmd) {
+    public MessageType() {
+    }
+
+    public MessageType(Integer cmd) {
+        //想办法初始化  就在加载 每次都 加载一个对象 浪费内存
         AbsMessageType absMessageType = AbsMessageType.builder()
                 .version((byte) Const.number.THREE)
                 .serial(Const.number.FOUR)

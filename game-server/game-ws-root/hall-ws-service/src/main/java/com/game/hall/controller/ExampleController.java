@@ -2,13 +2,13 @@ package com.game.hall.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.game.common.Const.Const;
+import com.game.common.Const.Errors;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.entity.user.User;
 import com.game.common.mapper.UserMapper;
-import com.game.core.redis.RedisUtil;
+import com.game.common.redis.RedisUtil;
 import com.game.core.ws.clientconfig.WsSyncClient;
-import com.game.core.ws.dto.AbsMessageType;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.dto.NetMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +28,7 @@ import java.util.Objects;
  * @Desc :
  * @Date :  上午 11:24 2019/5/31 0031
  * @explain :   快速操作的方法【目前只做测试用】
+ *              GM调试
  */
 @Slf4j
 @RestController
@@ -50,7 +51,6 @@ public class ExampleController extends BaseApi {
     @GetMapping("/fastRegister")
     @Transactional
     public Result fastRegister() {
-        new RedisUtil(stringRedisTemplate);
         User rep_user = User.builder()
                 .uName("张三").uAccount("凤舞九天")
                 .uEmail("wangxing@163.com").uNumber(1231231)
@@ -73,18 +73,44 @@ public class ExampleController extends BaseApi {
      */
     @PostMapping("/fastLogin")
     public Result fastLogin(@RequestBody User user) {
+        new RedisUtil(stringRedisTemplate);
         User rep_user = userMapper.findByUEmailOrUPhoneAndUPass(user.getUEmail(), user.getUPhone(), user.getUPass());
         NetMessage netMessage = NetMessage.builder()
-                .messageBody(MessageBody.builder().bytes(JSONObject.toJSONString(rep_user).getBytes()).build())
-                .messageType(MessageType.builder().cmd(Const.hall.JOIN_HALL)
-                        .absMessageType(AbsMessageType.builder().serial(Const.number.FIVE).version((byte) Const.number.THREE).build())
-                        .build())
+                .bytes(JSONObject.toJSONString(rep_user).getBytes())
+                .messageType(new MessageType(Const.hall.JOIN_HALL))
                 .build();
+        try {
+            RedisUtil.save(String.valueOf(rep_user.getUId()),JSONObject.toJSONString(rep_user),5L);
+        } catch (Exception e) {
+            log.info("加入缓存失败！");
+            e.printStackTrace();
+        }
         if (Objects.nonNull(rep_user)) {
             WsSyncClient.sendMsgToGame(netMessage, addr);
             return success(rep_user);
         }
         return error("用户登陆失败！");
+    }
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 3:52 2019/6/6 0006 
+     * @params: 
+     * @Desc  :  验证客户选择 名字
+     */
+    @PostMapping("/verifyName")
+    public Result verifyName(@RequestBody User user) {
+        NetMessage netMessage = NetMessage.builder()
+                .bytes(JSONObject.toJSONString(user).getBytes())
+                .messageType(new MessageType(Const.hall.NAME_HALL))
+                .build();
+        try {
+            WsSyncClient.sendMsgToGame(netMessage, addr);
+        } catch (Exception e) {
+            log.info("客户验证名字失败！");
+            e.printStackTrace();
+        }
+        return success("客户验证名字");
     }
 
 }

@@ -1,4 +1,4 @@
-package com.game.core.redis;
+package com.game.common.redis;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ public class RedisUtil {
 
     private static RedisTemplate redisTemplate;
 
+    @Autowired
     public RedisUtil(StringRedisTemplate stringRedisTemplate) {
         RedisUtil.stringRedisTemplate=stringRedisTemplate;
     }

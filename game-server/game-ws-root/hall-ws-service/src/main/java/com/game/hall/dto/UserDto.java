@@ -36,13 +36,6 @@ public class UserDto  {
 
     private String uPhone;
 
-    private String uToken;
-
     private String uAccount;
 
-    private String uPass;
-
-    private Date createtime;
-
-    private Date updatetime;
 }

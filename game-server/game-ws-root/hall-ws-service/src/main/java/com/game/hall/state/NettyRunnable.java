@@ -1,16 +1,9 @@
 package com.game.hall.state;
 
-import com.game.common.Const.Const;
-import com.game.core.redis.RedisUtil;
 import com.game.core.thread.AbstractRunnable;
-import com.game.core.ws.dto.AbsMessageType;
 import com.game.hall.ws.InitDispatcher;
-import com.game.core.ws.dto.MessageType;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -30,13 +23,6 @@ public class NettyRunnable extends AbstractRunnable {
      * @Desc  : 构造方法执行线程方法
      */
     public NettyRunnable() {
-        identification = System.nanoTime();
-        //初始化消息类型 【怎么样才能 把对应的标识放进去】
-        /**【这种写法肯定不好】*/
-        AbsMessageType absMessageType
-                = AbsMessageType.builder().serial(Const.number.FIVE).version((byte)Const.number.THREE).build();
-
-        map.put(identification,MessageType.builder().absMessageType(absMessageType).build());
         this.startThread();
     }
 

@@ -16,7 +16,7 @@ public interface BaseDispatcher {
 
     default void init(){ }
 
-    Map<MessageType, Handler> localMap = new ConcurrentHashMap<>();
+    static  Map<MessageType, Handler> localMap = new ConcurrentHashMap<>();
 
     static Handler getDispatch_copy(MessageType messageType) {
         return localMap.get(messageType);

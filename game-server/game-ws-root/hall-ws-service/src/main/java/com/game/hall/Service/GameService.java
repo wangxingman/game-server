@@ -17,7 +17,7 @@ public interface GameService {
      * @params: 
      * @Desc  :  gateWay登录初始化数据
      */
-     String  gateWayJoin(WebSocket webSocket, JSONObject jsonObject);
+     void  gateWayJoin(WebSocket webSocket, JSONObject jsonObject);
 
      /**
       * @Author: wx

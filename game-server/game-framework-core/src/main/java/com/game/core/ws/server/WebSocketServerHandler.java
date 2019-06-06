@@ -13,6 +13,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -26,6 +27,7 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  * @Desc:
  * @Date: 下午 6:53 2019/5/5 0005
  */
+@Slf4j
 public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> {
 
     private static final String WEBSOCKET_PATH = "/websocket";
@@ -119,11 +121,16 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
      * @params: 
      */
     private void handleWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
+        //也可以在这里 直接判断标识好 switch 判断 做不同的操作【总是标识号】
         if(frame instanceof CloseWebSocketFrame) {
             //关闭握手器
             handShaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
-            ctx.channel().close();
-            webSocketHandler.onClose(webSocket);
+            ChannelFuture future = ctx.channel().close();
+            future.addListener(ChannelFutureListener.CLOSE);
+            if (log.isDebugEnabled()) {
+                log.debug("执行关闭！");
+            }
+            return;
         }
         if(frame instanceof PingWebSocketFrame) {
             ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
@@ -148,12 +155,13 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         }
         //发送消息过来 根据协议完成操作
         String message = ((TextWebSocketFrame) frame).text();
+        System.out.println("解析的消息："+message);
         webSocket.setUpdateTime(System.currentTimeMillis());
         NetMessage request = JSONObject.parseObject(message, NetMessage.class);
         webSocketHandler.onMessage(webSocket, request);
         restartHeartbeat();
     }
-    
+
     /**
      * @Author: wx
      * @Desc  :
@@ -186,6 +194,8 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 //            return "ws://" + location;
 //        }
     }
+
+
 
 
 }

@@ -2,6 +2,7 @@ package com.game.core.ws.clientconfig;
 
 import com.alibaba.fastjson.JSON;
 import com.game.core.ws.clientconfig.hanlder.WsSyncHandler;
+import com.game.core.ws.dto.NetMessage;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -30,7 +31,7 @@ import java.net.URI;
  * @explain :连接对应的服务器【可以使用tm的那种方式】
  */
 public class WsSyncClient {
-    public static String sendMsgToGame(Object obj,String addrs) {
+    public static String sendMsgToGame(NetMessage obj,String addrs) {
         String s = "";
         try {
             addrs = new String(addrs.getBytes(), "UTF-8");
@@ -47,7 +48,7 @@ public class WsSyncClient {
         return s;
     }
 
-    public static String sendAndClose(String wsUrl, Object obj) throws Exception {
+    public static String sendAndClose(String wsUrl, NetMessage obj) throws Exception {
         final StringBuffer message = new StringBuffer();
 
         URI uri = new URI(wsUrl);
@@ -101,13 +102,12 @@ public class WsSyncClient {
             TextWebSocketFrame frame = new TextWebSocketFrame(JSON.toJSONString(obj));
             ch.writeAndFlush(frame);
             //传输关闭消息
-            CloseWebSocketFrame closeWebSocketFrame = new CloseWebSocketFrame();
+            CloseWebSocketFrame closeWebSocketFrame =  new CloseWebSocketFrame();
             ch.writeAndFlush(closeWebSocketFrame);
             ch.closeFuture().await();
         } finally {
             group.shutdownGracefully();
         }
-        System.out.println("执行结束----------->>"+message.toString());
         return message.toString();
     }
 }

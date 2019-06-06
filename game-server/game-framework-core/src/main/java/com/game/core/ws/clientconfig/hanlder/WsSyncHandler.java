@@ -6,10 +6,10 @@ import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 public class WsSyncHandler extends SimpleChannelInboundHandler<Object> {
-    /**handShaker 握手*/
-    private final WebSocketClientHandshaker handshaker;     
+    private final WebSocketClientHandshaker handshaker;
     private ChannelPromise handshakeFuture;
     private StringBuffer message;
 
@@ -32,6 +32,12 @@ public class WsSyncHandler extends SimpleChannelInboundHandler<Object> {
         handshaker.handshake(ctx.channel());
     }
 
+    /**
+     * @Author: wx
+     * @Date  : 下午 12:26 2019/6/6 0006 
+     * @params: 
+     * @Desc  :  没有活动
+     */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
         System.out.println("WebSocket Client disconnected!");
@@ -60,6 +66,12 @@ public class WsSyncHandler extends SimpleChannelInboundHandler<Object> {
             String message = textFrame.text();
             log.info("WebSocket Client received message: " + message);
             this.message.append(message);
+//            RequestPacket request = JSONObject.parseObject(message, RequestPacket.class);
+//            ClientLogicHandler logicHandler = ClientDispatcher.getDispatch(request.getCmd());
+//            if (logicHandler != null) {
+//                logicHandler.handle(request);
+//            }
+            
         } else if (frame instanceof PongWebSocketFrame) {
             log.info("WebSocket Client received pong");
         } else if (frame instanceof CloseWebSocketFrame) {

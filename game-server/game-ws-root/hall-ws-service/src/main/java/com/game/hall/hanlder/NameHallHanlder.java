@@ -14,6 +14,7 @@ import com.game.hall.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Author : wx
@@ -32,18 +33,26 @@ public class NameHallHanlder extends Handler {
         //todo 好像 多个服务器 之间的名字 也不能重复 所以怎么获取数据 各种
        //判断用户是否
         JSONObject jsonObject = JSONObject.parseObject(new String(bytes));
-        String UAccount = jsonObject.getString("UAccount");
+        String UAccount = jsonObject.getString("uAccount");
+        int uId = jsonObject.getIntValue("uId");
         Map<Integer, String> map = AbsServer.getConcurrentHashMap();
-        if(map.containsKey(webSocket.getUserId()) && map.containsValue(UAccount)) {
+        if(map.containsKey(uId) && map.containsValue(UAccount)) {
+            log.info("用户的名字出现重复！");
             webSocket.send(
                     NetMessage.builder()
                             .messageType(new MessageType(Const.hall.NAME_HALL_REP))
                             .bytes(Errors.name_three_are.getMsg().getBytes())
                             .build());
         } else {
-
-            UserDto userDto = AbsServer.getConcurrentHashMapUserDto().get(webSocket.getUserId());
+            log.info("用户添加名字！");
+            //todo 用户游戏的判断  游戏结束的时候 将数据统一保存 或者说 在一定情况 异步保存
+            if(UAccount.length()>100) {
+                log.info("客户端输入的名字 不允许");
+            }
+            System.out.println("-------start------"+AbsServer.getConcurrentHashMapUserDto());
+            UserDto userDto = AbsServer.getConcurrentHashMapUserDto().get(uId);
             userDto.setUAccount(UAccount);
+            System.out.println("--------end-----"+AbsServer.getConcurrentHashMapUserDto());
             webSocket.send(
                     NetMessage.builder()
                             .messageType(new MessageType(Const.hall.NAME_HALL_REP))

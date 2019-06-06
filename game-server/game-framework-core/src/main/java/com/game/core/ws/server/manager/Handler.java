@@ -16,7 +16,7 @@ public abstract class Handler {
     public abstract void handle(WebSocket webSocket, byte[] bytes);
 
     public void handle(WebSocket webSocket, NetMessage request) {
-        byte[] bytes = request.getMessageBody().getBytes();
+        byte[] bytes = request.getBytes();
         if(Objects.isNull(bytes)) {
             log.info("您传来的东西是null的！");
         }

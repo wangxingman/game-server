@@ -58,7 +58,6 @@ public class WebSocketHandler {
         if(Objects.isNull(messageType)) {
             webSocket.send(String.valueOf(Errors.no_false_error));
         }
-        //todo 这里数据类型可以放在yml文件里面
         AbsMessageType absMessageType = messageType.getAbsMessageType();
         if(absMessageType.getSerial()!= Const.number.FIVE && absMessageType.getLength()!=(short)Const.number.THREE ) {
             webSocket.send(String.valueOf(Errors.no_false_error));
