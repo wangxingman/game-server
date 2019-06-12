@@ -1,6 +1,5 @@
 package com.game.core.ws.dto;
 
-import com.game.common.Const.Const;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

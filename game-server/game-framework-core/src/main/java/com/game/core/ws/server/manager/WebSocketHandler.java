@@ -1,7 +1,7 @@
 package com.game.core.ws.server.manager;
 
-import com.game.common.Const.Const;
-import com.game.common.Const.Errors;
+import com.game.common.constant.Const;
+import com.game.common.constant.Errors;
 import com.game.common.dto.NettyParams;
 import com.game.core.ws.dto.AbsMessageType;
 import com.game.core.ws.dto.MessageType;
@@ -59,7 +59,7 @@ public class WebSocketHandler {
             webSocket.send(String.valueOf(Errors.no_false_error));
         }
         AbsMessageType absMessageType = messageType.getAbsMessageType();
-        if(absMessageType.getSerial()!= Const.number.FIVE && absMessageType.getLength()!=(short)Const.number.THREE ) {
+        if(absMessageType.getSerial()!= Const.number.FIVE && absMessageType.getLength()!=(short) Const.number.THREE ) {
             webSocket.send(String.valueOf(Errors.no_false_error));
         }
         Map<MessageType, Handler> localMap = BaseDispatcher.localMap;

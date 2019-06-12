@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
 
 /**
  * @Auther : wx
@@ -45,9 +44,9 @@ public class UserInfoApi extends BaseApi {
      * @Desc  :
      */
     @GetMapping("/addUserInfo")
-    public String addUserInfo() {
+    public Result addUserInfo() {
         String userInfo = userInfoService.addUserInfo();
-        return  "12313";
+        return success(userInfo);
     }
 
     /**
@@ -63,9 +62,4 @@ public class UserInfoApi extends BaseApi {
           return "--------------------------";
     }
 
-    public static void main(String[] args) {
-          Integer a = 10;
-        if( Objects.isNull(a) ) {
-        };
-    }
 }

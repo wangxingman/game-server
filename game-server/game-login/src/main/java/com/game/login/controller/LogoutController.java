@@ -1,7 +1,7 @@
 package com.game.login.controller;
 
-import com.game.common.Const.SWCodeEnum;
 import com.game.common.comman.ResultModel;
+import com.game.common.constant.SWCodeEnum;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,9 +1,9 @@
 package com.game.gateway.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.common.Const.Const;
+import com.game.common.con.Const;
+import com.game.common.redis.RedisUtil;
 import com.game.core.ws.clientconfig.WsSyncClient;
-import com.game.core.ws.dto.AbsMessageType;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.dto.NetMessage;
 import com.game.gateway.service.HallService;
@@ -31,12 +31,10 @@ public class HallServiceImpl implements HallService {
             //todo 判断各种token的格式
             if(Objects.nonNull(strToken) && strToken.startsWith(Const.gateWay.TOKEN)) {
 
-                MessageType messageType = MessageType.builder()
-                                .absMessageType(AbsMessageType.builder().serial(Const.number.FIVE).version((byte) Const.number.THREE).build())
-                                .cmd(Const.hall.JOIN_HALL).build();
+                MessageType messageType = new MessageType(Const.number.THREE);
                 NetMessage netMessage = NetMessage.builder()
                         .messageType(messageType)
-                        .messageBody(MessageBody.builder().bytes(JSONObject.toJSONString(user).getBytes()).build())
+                        .bytes((JSONObject.toJSONString(user).getBytes()))
                         .build();
 
                 //接收消息的时候 我去初始化的客户的数据

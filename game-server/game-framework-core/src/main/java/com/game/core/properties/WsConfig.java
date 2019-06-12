@@ -1,6 +1,5 @@
 package com.game.core.properties;
 
-import com.game.common.Const.Const;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;

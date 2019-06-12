@@ -20,6 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @EnableFeignClients
 @SpringBootApplication
+/**开启lcn分布式事务*/
 @EnableDistributedTransaction
 public class AuthServerApplication {
     public static void main(String[] args) {

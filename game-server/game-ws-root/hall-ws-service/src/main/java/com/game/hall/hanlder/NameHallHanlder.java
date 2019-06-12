@@ -1,8 +1,8 @@
 package com.game.hall.hanlder;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.common.Const.Const;
-import com.game.common.Const.Errors;
+import com.game.common.constant.Const;
+import com.game.common.constant.Errors;
 import com.game.core.annotation.Identifying;
 import com.game.core.annotation.LogMessage;
 import com.game.core.ws.dto.MessageType;
@@ -14,7 +14,6 @@ import com.game.hall.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @Author : wx

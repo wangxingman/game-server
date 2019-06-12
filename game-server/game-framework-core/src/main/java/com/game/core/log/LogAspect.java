@@ -1,6 +1,6 @@
 package com.game.core.log;
 
-import com.game.common.Const.Const;
+import com.game.common.constant.Const;
 import com.game.common.entity.log.Log;
 import com.game.common.mapper.LogMapper;
 import com.game.core.mq.AbstractLogConvert;

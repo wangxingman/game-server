@@ -1,8 +1,8 @@
 package com.game.hall.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.common.Const.Const;
-import com.game.common.Const.Errors;
+import com.game.common.constant.Const;
+import com.game.common.constant.Errors;
 import com.game.common.entity.user.User;
 import com.game.common.mapper.UserMapper;
 import com.game.common.redis.RedisUtil;

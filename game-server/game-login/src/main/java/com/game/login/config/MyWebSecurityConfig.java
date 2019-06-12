@@ -1,6 +1,6 @@
 package com.game.login.config;
 
-import com.game.common.Const.Const;
+import com.game.common.constant.Const;
 import com.game.login.hanlder.MyAuthenticationFailureHandler;
 import com.game.login.hanlder.MyAuthenticationSucessHandler;
 import com.game.login.mobile.SmsCodeAuthenticationSecurityConfig;
@@ -16,22 +16,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.social.security.SpringSocialConfigurer;
 
-/**
- * 思路：l 、
- *  *   MyAuthorizationServerConfig jwt 验证
- *      MyWebSecurityConfig  启动
- *      SmsCodeAuthenticationSecurityConfig 验证码验证
- *      SmsCodeAuthenticationFilter 执行过滤器
- *      SmsCodeAuthenticationToken 执行token  放入验证器
- *      SmsCodeAuthenticationProvider  执行AuthenticationProvider 走入 UserDetailsService
- *      MyUserDetailsServiceImpl 验证
- */
 /**
  * @Auther : wx
  * @Desc :
  * @Date :  下午 4:47 2019/5/17 0017
- * @explain : 安全验证
+ * @explain : 浏览器配置
  */
 @Configuration
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -65,6 +56,9 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 
     @Autowired
+    private SpringSocialConfigurer mySocialSecurityConfig;
+
+    @Autowired
     private MyAuthenticationFailureHandler authenticationFailureHandler;
 
     @Autowired
@@ -96,6 +90,8 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //禁用跨站伪造
                 .and().csrf().disable()
                 //短信验证码配置
-                .apply(smsCodeAuthenticationSecurityConfig);
+                .apply(smsCodeAuthenticationSecurityConfig)
+                //qq登录
+                .and().apply(mySocialSecurityConfig)      ;
     }
 }

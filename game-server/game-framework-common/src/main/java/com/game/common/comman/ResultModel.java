@@ -1,9 +1,8 @@
 package com.game.common.comman;
 
 //import com.alibaba.fastjson.JSONObject;
-import com.game.common.Const.SWCodeEnum;
+import com.game.common.constant.SWCodeEnum;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 

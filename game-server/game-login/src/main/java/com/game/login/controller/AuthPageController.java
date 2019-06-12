@@ -1,7 +1,7 @@
 package com.game.login.controller;
 
-import com.game.common.Const.Const;
 import com.game.common.comman.ResultModel;
+import com.game.common.constant.Const;
 import com.game.login.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

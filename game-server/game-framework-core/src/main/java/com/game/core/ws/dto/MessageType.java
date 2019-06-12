@@ -1,7 +1,6 @@
 package com.game.core.ws.dto;
 
-import com.game.common.Const.Const;
-import lombok.Builder;
+import com.game.common.constant.Const;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

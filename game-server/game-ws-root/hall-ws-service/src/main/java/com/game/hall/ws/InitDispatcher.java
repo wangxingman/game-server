@@ -1,11 +1,10 @@
 package com.game.hall.ws;
 
-import com.game.common.Const.Const;
+import com.game.common.constant.Const;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.server.BaseDispatcher;
 import com.game.hall.hanlder.JoinHallHanlder;
 import com.game.hall.hanlder.NameHallHanlder;
-import com.game.hall.state.NettyRunnable;
 import lombok.extern.slf4j.Slf4j;
 
 /**

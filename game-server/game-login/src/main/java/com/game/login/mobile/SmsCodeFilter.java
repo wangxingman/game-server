@@ -1,6 +1,6 @@
 package com.game.login.mobile;
 
-import com.game.common.Const.Const;
+import com.game.common.constant.Const;
 import com.game.login.properties.SecurityProperties;
 import com.game.login.redis.VcodeManager;
 import lombok.Data;

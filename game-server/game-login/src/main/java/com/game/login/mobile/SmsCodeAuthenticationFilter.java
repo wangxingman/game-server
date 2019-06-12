@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
  * @Auther : wx
  * @Desc :
  * @Date :  下午 4:47 2019/5/17 0017
- * @explain : 验证码验证
+ * @explain : 验证时候执行的过滤器
+ *              基于浏览器的基于http的身份验证请求的处理器
  */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

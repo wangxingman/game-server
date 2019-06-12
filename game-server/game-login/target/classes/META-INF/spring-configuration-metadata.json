@@ -27,6 +27,11 @@
       "name": "system.oauth-login",
       "type": "com.game.login.properties.OauthPageProperties",
       "sourceType": "com.game.login.properties.SecurityProperties"
+    },
+    {
+      "name": "system.social",
+      "type": "com.game.login.social.SocialProperties",
+      "sourceType": "com.game.login.properties.SecurityProperties"
     }
   ],
   "hints": []

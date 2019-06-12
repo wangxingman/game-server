@@ -16,6 +16,7 @@
 package com.codingapi.txlcn.tm;
 
 import com.codingapi.txlcn.tm.support.TxLcnManagerBanner;
+import com.game.core.utils.ManagerBanaderUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -31,7 +32,8 @@ public class TMApplication {
 
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(TMApplication.class);
-        springApplication.setBanner(new TxLcnManagerBanner());
+        //TxLcnManagerBanner 官方用的banader
+        springApplication.setBanner(new ManagerBanaderUtil());
         springApplication.run(args);
     }
 }

@@ -1,7 +1,7 @@
 package com.game.login.hanlder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.game.common.Const.Const;
+import com.game.common.constant.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
