@@ -1,0 +1,10 @@
+server:
+  port: 2722
+  tomcat:
+    uri-encoding: UTF-8
+zuul:
+  ignored-services: '*'   #表示禁用默认路由，只认配置的路由
+  routes:  #配置路由
+    hall-ws-service:
+      path: /hall/**
+      service-id: hall-ws-service

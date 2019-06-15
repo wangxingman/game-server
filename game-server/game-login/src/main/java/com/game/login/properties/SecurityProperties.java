@@ -3,9 +3,7 @@ package com.game.login.properties;
 
 import com.game.login.authentication.mobile.ValidateCodeProperties;
 import com.game.login.authentication.social.SocialProperties;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -15,9 +13,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "system")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class SecurityProperties {
+
 
     private OauthPageProperties oauthLogin = new OauthPageProperties();
 

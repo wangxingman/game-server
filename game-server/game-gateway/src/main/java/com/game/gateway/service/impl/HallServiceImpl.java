@@ -1,7 +1,7 @@
 package com.game.gateway.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.game.common.con.Const;
+import com.game.common.constant.Const;
 import com.game.common.redis.RedisUtil;
 import com.game.core.ws.clientconfig.WsSyncClient;
 import com.game.core.ws.dto.MessageType;

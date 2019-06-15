@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @Auther : wx
+ * @Author : wx
  * @Desc :
  * @Date :  下午 8:30 2019/5/27 0027
  * @explain :

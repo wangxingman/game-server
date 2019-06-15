@@ -17,12 +17,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
             <version>2.1.1.RELEASE</version>
         </dependency>
-
-        <!-- 安全管理 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
     </dependencies>
 
 </project>

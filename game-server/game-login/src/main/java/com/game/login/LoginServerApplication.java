@@ -25,4 +25,8 @@ public class LoginServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(LoginServerApplication.class);
     }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

@@ -1,9 +1,9 @@
 package com.game.login.config;
 
-import com.game.common.constant.Const;
 import com.game.login.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.game.login.authentication.mobile.SmsCodeFilter;
-import com.game.login.hanlder.MyAuthenticationSucessHandler;
+import com.game.login.authentication.openid.OpenIdAuthenticationConfig;
+import com.game.login.constants.FromLoginConstant;
 import com.game.login.properties.SecurityProperties;
 import com.game.login.redis.VcodeManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,76 +12,78 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.social.security.SpringSocialConfigurer;
 
+import javax.sql.DataSource;
+
 /**
- * 思路：l 、
- *  *   MyAuthorizationServerConfig jwt 验证
- *      MyWebSecurityConfig  启动
- *      SmsCodeAuthenticationSecurityConfig 验证码验证
- *      SmsCodeAuthenticationFilter 执行过滤器
- *      SmsCodeAuthenticationToken 执行token  放入验证器
- *      SmsCodeAuthenticationProvider  执行AuthenticationProvider 走入 UserDetailsService
- *      MyUserDetailsServiceImpl 验证
- */
-/**
- * @Auther : wx
- * @Desc :
- * @Date :  下午 4:47 2019/5/17 0017
- * @explain : 安全验证
- * @explain : 浏览器配置
+ * @author lvhaibao
+ * @description 浏览器配置
+ * @date 2018/12/25 0025 10:53
  */
 @Configuration
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**基础属性*/
     @Autowired
     private SecurityProperties securityProperties;
-
-    /**验证码*/
     @Autowired
     private VcodeManager vcodeManager;
-
     @Autowired
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+    @Autowired
+    private OpenIdAuthenticationConfig openIdAuthenticationConfig;
+    @Autowired
+    private SpringSocialConfigurer mySocialSecurityConfig;
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
-    @Bean
+
     @Override
+    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+
+    /**
+     * 生成记得我的token
+     *
+     * @return
+     */
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public PersistentTokenRepository persistentTokenRepository() {
+        //使用jdbc来存储
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        //设置数据源
+        tokenRepository.setDataSource(dataSource);
+        //当为true的时候就会自动创建表
+        //tokenRepository.setCreateTableOnStartup(true);
+        return tokenRepository;
     }
-
-    @Autowired
-    private SpringSocialConfigurer mySocialSecurityConfig;
-
-
-    @Autowired
-    private MyAuthenticationSucessHandler myAuthenticationSucessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //添加拦截器
+        /**初始化 赋值 拦截的url*/
         SmsCodeFilter smsCodeFilter = new SmsCodeFilter(vcodeManager);
         smsCodeFilter.setSecurityProperties(securityProperties);
         smsCodeFilter.afterPropertiesSet();
 
         http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 //表单登录,loginPage为登录请求的url,loginProcessingUrl为表单登录处理的URL
-                .formLogin().loginPage(Const.login.LOGIN_PAGE).loginProcessingUrl(Const.login.LOGIN_PROCESSING_URL)
-                .successHandler(myAuthenticationSucessHandler)
+                .formLogin().loginPage(FromLoginConstant.LOGIN_PAGE).loginProcessingUrl(FromLoginConstant.LOGIN_PROCESSING_URL)
+                //登录成功之后的处理
+                .successHandler(myAuthenticationSuccessHandler)
                 //允许访问
                 .and().authorizeRequests().antMatchers(
-                Const.login.LOGIN_PROCESSING_URL,
-                Const.login.LOGIN_PAGE,
+                FromLoginConstant.LOGIN_PROCESSING_URL,
+                FromLoginConstant.LOGIN_PAGE,
                 securityProperties.getOauthLogin().getOauthLogin(),
                 securityProperties.getOauthLogin().getOauthGrant(),
                 "/myLogout",
@@ -92,8 +94,11 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 //短信验证码配置
                 .apply(smsCodeAuthenticationSecurityConfig)
-                //qq登录
-                .and().apply(mySocialSecurityConfig)      ;
-    }
-}
+                //社交登录
+                .and().apply(mySocialSecurityConfig)
+                //openID登录
+                .and().apply(openIdAuthenticationConfig);
 
+    }
+
+}

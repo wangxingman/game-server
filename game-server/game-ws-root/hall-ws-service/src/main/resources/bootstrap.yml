@@ -1,0 +1,48 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@127.0.0.1:1111/eureka/
+  instance:
+    prefer-ip-address: true
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/game-server?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  profiles:
+    active: test
+  application:
+    name: hall-server
+  redis:
+    host: 127.0.0.1
+    database: 0
+  cloud:                #配置中心
+    config:
+      label: ${spring.application.name}
+      profile: dev
+      uri:  http://10.254.1.10:7001
+      name: ${spring.application.name}
+      discovery:
+        service-id: config-server
+server:
+  port: 7904
+hall:   #设置初始化启动参数
+  host: 127.0.0.1
+  port: 8083
+  checkTime: 123
+
+---
+spring:
+  profiles: test
+params:
+  port: 8093
+  localMap: #用户自定义handler的配置
+    20002: com.game.sg.handler.LoginHandler
+    
