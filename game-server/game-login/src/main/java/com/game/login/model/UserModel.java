@@ -14,8 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Collection;
 
+/**
+ * @author lvhaibao
+ * @description
+ * @date 2018/12/25 0025 14:51
+ */
 @Data
-@Entity(name = "user")
+@Entity
 @Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,8 +33,6 @@ public class UserModel implements UserDetails {
     private String username;
     private String password;
     private String mobile;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

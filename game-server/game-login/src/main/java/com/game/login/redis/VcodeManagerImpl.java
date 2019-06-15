@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author lvhaibao
+ * @description
+ * @date 2018/12/17 0017 17:16
+ */
 @Service
 public class VcodeManagerImpl implements VcodeManager {
 

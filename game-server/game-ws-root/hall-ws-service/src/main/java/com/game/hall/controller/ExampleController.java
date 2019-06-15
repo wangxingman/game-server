@@ -73,6 +73,9 @@ public class ExampleController extends BaseApi {
     @PostMapping("/fastLogin")
     public Result fastLogin(@RequestBody User user) {
         new RedisUtil(stringRedisTemplate);
+        if(Objects.isNull(user)) {
+             user = User.builder().uPhone("123131").uPass("123456").uEmail("wangxing@163.com").build();
+        }
         User rep_user = userMapper.findByUEmailOrUPhoneAndUPass(user.getUEmail(), user.getUPhone(), user.getUPass());
         NetMessage netMessage = NetMessage.builder()
                 .bytes(JSONObject.toJSONString(rep_user).getBytes())
@@ -110,6 +113,19 @@ public class ExampleController extends BaseApi {
             e.printStackTrace();
         }
         return success("客户验证名字");
+    }
+
+   /**
+    * @Author: wx
+    * @Date  : 下午 2:49 2019/6/13 0013 
+    * @params: 
+    * @Desc  :  测试vue的请求
+    */
+    @PostMapping("/exampleVue")
+    public Result exampleVue(@RequestBody User user) {
+        String name = user.getUName();
+        System.out.println("----------------"+name);
+        return success("测试vue的请求","----");
     }
 
 }

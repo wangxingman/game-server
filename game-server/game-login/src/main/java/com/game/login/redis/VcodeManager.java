@@ -2,6 +2,11 @@ package com.game.login.redis;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author lvhaibao
+ * @description
+ * @date 2018/12/17 0017 17:15
+ */
 public interface VcodeManager {
 
 
@@ -11,6 +16,8 @@ public interface VcodeManager {
      * @return 验证码
      */
     String generateVcode();
+
+
 
     /**
      * 保存验证码

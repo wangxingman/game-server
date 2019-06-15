@@ -17,14 +17,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @Auther : wx
- * @Desc :
- * @Date :  下午 4:47 2019/5/17 0017
- * @explain : 安全验证
+ * @author lvhaibao
+ * @description
+ * @date 2018/11/21 0021 20:52
  */
 @Service
 @Slf4j
-public class MyUserDetailsServiceImpl implements UserDetailsService, SocialUserDetailsService {
+public class MyUserDetailsServiceImpl implements UserDetailsService,SocialUserDetailsService {
 
     @Resource
     private UserDao userDao;
@@ -46,26 +45,23 @@ public class MyUserDetailsServiceImpl implements UserDetailsService, SocialUserD
         }
 
         //数据库取到的密码，后面返回的是用户用户哪些权限
-       /* String password = passwordEncoder.encode(userModel.getPassword());*/
+        String password = passwordEncoder.encode(userModel.getPassword());
 
-        log.info("该用户数据库密码为==" + userModel.getPassword());
-        return new UserModel(userModel.getUin(), userModel.getUsername(), userModel.getPassword(), userModel.getMobile());
+        log.info("该用户数据库密码为==" + password);
+        return new UserModel(userModel.getUin(), userModel.getUsername(), password, userModel.getMobile());
+
     }
 
     @Override
     public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-        log.info("登录用户名:{}", userId);
-        return getUserDetails(userId);
+        log.info("登录用户名----->"+userId);
+
+        //数据库取到的密码，后面返回的是用户用户哪些权限
+        //return new User(username, "123456", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        String password = passwordEncoder.encode("123456");
+        log.info("数据库得到的密码为=="+password);
+        return new SocialUser(userId ,password,true,true,true,true, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
+
     }
 
-    private SocialUser getUserDetails(String username) {
-        String password = passwordEncoder.encode("123456");
-        log.info("数据库密码{}", password);
-        SocialUser admin = new SocialUser(username,
-//                              "{noop}123456",
-                password,
-                true, true, true, true,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-        return admin;
-    }
 }

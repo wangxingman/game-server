@@ -1,9 +1,13 @@
 package com.game.login.dao;
 
-
 import com.game.login.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+/**
+ * @author lvhaibao
+ * @description
+ * @date 2018/12/25 0025 14:51
+ */
 public interface UserDao extends JpaRepository<UserModel, Long> {
 
     /**
@@ -21,4 +25,6 @@ public interface UserDao extends JpaRepository<UserModel, Long> {
      * @return UserModel
      */
     UserModel findByUsername(String username);
+
+
 }

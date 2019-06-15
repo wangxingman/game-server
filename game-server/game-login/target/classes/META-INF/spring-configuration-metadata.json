@@ -20,7 +20,7 @@
     },
     {
       "name": "system.code",
-      "type": "com.game.login.mobile.ValidateCodeProperties",
+      "type": "com.game.login.authentication.mobile.ValidateCodeProperties",
       "sourceType": "com.game.login.properties.SecurityProperties"
     },
     {
@@ -30,7 +30,7 @@
     },
     {
       "name": "system.social",
-      "type": "com.game.login.social.SocialProperties",
+      "type": "com.game.login.authentication.social.SocialProperties",
       "sourceType": "com.game.login.properties.SecurityProperties"
     }
   ],

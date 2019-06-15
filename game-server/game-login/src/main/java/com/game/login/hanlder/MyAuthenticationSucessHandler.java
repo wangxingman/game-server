@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @Author: wx
@@ -71,22 +72,31 @@ public class MyAuthenticationSucessHandler  extends SavedRequestAwareAuthenticat
 
             OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
 
-            OAuth2AccessToken token = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
+            OAuth2AccessToken token = authorizationServerTokenServices.getAccessToken(oAuth2Authentication);
+//            OAuth2AccessToken token = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
+
+            response.setContentType("application/json;charset=UTF-8");
+            if(Objects.nonNull(token)) {
+                response.getWriter().write(objectMapper.writeValueAsString(token));
+            }  else {
+                response.getWriter().write(objectMapper.writeValueAsString("numberData"));
+            }
 
             System.out.println("这是生成的token"+token);
 
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(token));
+
+
 
             /**
              * 用户登录成功 和网关服建立连接
              * 网关服的地址 是固定的 但是分发的信息 肯定是需要的
              */
             log.info("---登陆成功-----");
-            hallService.loginGateWay(null,"1231");
+//            hallService.loginGateWay(null,"1231");
             log.info("---转发到gateWay服务-----");
 
-            redirectStrategy.sendRedirect(request, response, "/success");
+            response.getWriter().write("12313131313");
+//            redirectStrategy.sendRedirect(request, response, null);
         }else {
             super.onAuthenticationSuccess(request, response, authentication);
         }

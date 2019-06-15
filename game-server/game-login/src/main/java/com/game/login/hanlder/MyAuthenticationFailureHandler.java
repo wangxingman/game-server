@@ -19,20 +19,20 @@ import java.io.IOException;
  * @params: 
  * @Desc  :  自定义失败
  */
-@Component
-public class MyAuthenticationFailureHandler implements AuthenticationFailureHandler {
-
-    @Autowired
-    private ObjectMapper mapper;
-
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-
-        System.out.println("----登陆失败----");
-        //状态码定义500
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(mapper.writeValueAsString(exception.getMessage()));
-        response.sendRedirect(Const.login.LOGIN_PAGE);
-    }
-}
+//@Component
+//public class MyAuthenticationFailureHandler implements AuthenticationFailureHandler {
+//
+//    @Autowired
+//    private ObjectMapper mapper;
+//
+//    @Override
+//    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+//
+//        System.out.println("----登陆失败----");
+//        //状态码定义500
+//        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+//        response.setContentType("application/json;charset=utf-8");
+//        response.getWriter().write(mapper.writeValueAsString(exception.getMessage()));
+//        response.sendRedirect(Const.login.LOGIN_PAGE);
+//    }
+//}

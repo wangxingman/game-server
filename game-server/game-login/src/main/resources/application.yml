@@ -5,6 +5,9 @@ eureka:
   instance:
     prefer-ip-address: true
 spring:
+  redis:
+    host: 127.0.0.1
+    database: 1
   application:
     name: game-login
   datasource:

@@ -4,6 +4,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author lvhaibao
+ * @description
+ * @date 2018/12/25 0025 14:35
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {

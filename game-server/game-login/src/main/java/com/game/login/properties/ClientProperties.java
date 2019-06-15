@@ -2,6 +2,9 @@ package com.game.login.properties;
 
 import lombok.Data;
 
+/**
+ * Created by ksm on 2018/4/27.
+ */
 @Data
 public class ClientProperties {
     /** 授权客户端ID */

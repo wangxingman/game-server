@@ -27,36 +27,23 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * @Auther : wx
- * @Desc :
- * @Date :  下午 4:47 2019/5/17 0017
- * @explain : 认证服务器
- *                用户访问客户端 账号密码登录 成功
- *               客户端将用户推向认证服务器
- *               用户选择 是否授权
- *               允许 重定向对应的页面斌附上 授权码
- *               客户端拿到授权码 像认证服务器 获取令牌
+ * @Author: wx
+ * @Date  : 上午 11:14 2019/6/10 0010 
+ * @params: 
+ * @Desc  :  该类中 token的生成方式 不是很明白
  */
 @Configuration
 @EnableAuthorizationServer
-public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerAdapter{
+public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerAdapter {
 
-    /**
-     * @Author: wx
-     * @Date  : 下午 2:24 2019/5/11 0011 
-     * @params: 
-     * @Desc  :   AuthenticationManager注入不了，可以重写准入
-     */
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private MyUserDetailsServiceImpl userDetailsService;
-
     @Autowired
     private RedisConnectionFactory connectionFactory;
-
     @Resource
     private ClientLoadProperties clientLoadProperties;
 
@@ -80,7 +67,9 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
     public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
         oauthServer.allowFormAuthenticationForClients();
+
     }
+
 
     /**
      * 用于定义客户端详细信息服务的配置程序。可以初始化客户端详细信息，也可以只引用现有商店。
@@ -92,11 +81,9 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
         if (ArrayUtils.isNotEmpty(clientLoadProperties.getClients())) {
-            //获取设置的客户端的账号
             for (ClientProperties config : clientLoadProperties.getClients()) {
                 builder
-                        //设置客户端和密码 【授权码模式】
-                        //http://127.0.0.1:80/oauth/authorize?response_type=code&client_id=lvhaibao&redirect_uri=http://baidu.com&state=test&scope=app
+                        //设置客户端和密码
                         .withClient(config.getClientId()).secret(config.getClientSecret())
                         //设置token有效期
                         .accessTokenValiditySeconds(7 * 24 * 3600)
@@ -108,6 +95,7 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
                         .scopes("app","write");
             }
         }
+
     }
 
     /**
@@ -158,6 +146,5 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
         converter.setSigningKey("123");
         return converter;
     }
-
 
 }
