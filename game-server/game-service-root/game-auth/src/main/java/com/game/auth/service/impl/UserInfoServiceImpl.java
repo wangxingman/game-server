@@ -3,7 +3,7 @@ package com.game.auth.service.impl;
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.game.auth.feign.FUserInfoService;
 import com.game.auth.mapper.UserInfoMapper;
-import com.game.auth.model.User;
+import com.game.common.entity.example.UserInfo;
 import com.game.auth.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +28,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Transactional
     @LcnTransaction //分布式事务注解
     public String addUserInfo() {
-        User user = userInfoMapper.getOne(7);
-        user.setMoney(user.getMoney()+100);
-        User save = userInfoMapper.saveAndFlush(user);
+        UserInfo userInfo = userInfoMapper.getOne(7);
+        userInfo.setMoney(userInfo.getMoney()+100);
+        UserInfo save = userInfoMapper.saveAndFlush(userInfo);
         fUserInfoService.removeUserInfo();
         throw new NullPointerException();
     }

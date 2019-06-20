@@ -1,6 +1,5 @@
 package com.game.core.utils.web;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;

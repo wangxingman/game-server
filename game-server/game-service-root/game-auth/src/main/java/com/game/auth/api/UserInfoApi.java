@@ -1,8 +1,10 @@
 package com.game.auth.api;
 
+import com.game.auth.service.MenuService;
 import com.game.auth.service.UserInfoService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
+import com.game.common.entity.user.Menu;
 import com.game.core.example.cglib.Random.ExampleRandom;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -11,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 /**
  * @Auther : wx
  * @Desc :
  * @Date :  下午 2:26 2019/5/13 0013
- * @explain :
+ * @explain :   测试api
  */
 @RestController
 @Api(tags="auth_API")
@@ -24,6 +28,9 @@ public class UserInfoApi extends BaseApi {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private MenuService menuService;
 
     /**
      * @Author: wx
@@ -62,4 +69,15 @@ public class UserInfoApi extends BaseApi {
           return "--------------------------";
     }
 
+    /**
+     * @Author: wx
+     * @Date  : 上午 9:50 2019/6/20 0020 
+     * @params: 
+     * @Desc  :  用户获取菜单
+     */
+    @GetMapping("/menus")
+    public List<Menu> menus() {
+        return menuService.findCheckPermission();
+    }
+    
 }

@@ -5,13 +5,24 @@ eureka:
 server:
   port: 7001
 spring:
+  rabbitmq:           #rabbitmq配置
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   application:
     name: config-server
   profiles:
     active: native
-#  cloud:
-#    bus:
-#      enabled: true
+management:     # 消息总线
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+  cloud:    #使用之后 配置 未能刷新 【可能我这是本地配置 】
+    bus:
+      trace:     #开启消息跟踪
+        enabled: true
 logging:
   file: D:/logs/config-center.log
   level:

@@ -15,8 +15,7 @@
  */
 package com.codingapi.txlcn.tm;
 
-import com.codingapi.txlcn.tm.support.TxLcnManagerBanner;
-import com.game.core.utils.ManagerBanaderUtil;
+import com.game.common.comman.ManagerBanaderUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -27,7 +26,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author lorne
  */
-@SpringBootApplication
+@SpringBootApplication ()
 public class TMApplication {
 
     public static void main(String[] args) {

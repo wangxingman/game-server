@@ -15,7 +15,7 @@ import java.util.Date;
  * @Author : wx
  * @Desc :
  * @Date :  上午 11:52 2019/5/30 0030
- * @explain :
+ * @explain :用户
  */
 @Entity
 @Table(name = "g_user")

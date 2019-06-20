@@ -5,6 +5,11 @@ eureka:
   instance:
     prefer-ip-address: true
 spring:
+  rabbitmq:           #rabbitmq配置
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   jpa:
     show-sql: true
     hibernate:
@@ -19,7 +24,7 @@ spring:
   profiles:
     active: test
   application:
-    name: hall-server
+    name: hall-service
   redis:
     host: 127.0.0.1
     database: 0
@@ -31,12 +36,14 @@ spring:
       name: ${spring.application.name}
       discovery:
         service-id: config-server
+    bus:
+      trace:
+        enabled: true
 server:
   port: 7904
 hall:   #设置初始化启动参数
   host: 127.0.0.1
   port: 8083
-  checkTime: 123
 
 ---
 spring:

@@ -13,7 +13,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@EnableDistributedTransaction
+@EnableDistributedTransaction //开启lcn
 public class ShopServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(ShopServerApplication.class);

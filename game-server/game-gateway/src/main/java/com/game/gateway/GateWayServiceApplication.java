@@ -1,6 +1,5 @@
 package com.game.gateway;
 
-import com.game.core.utils.ManagerBanaderUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;

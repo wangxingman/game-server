@@ -78,6 +78,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 //表单登录,loginPage为登录请求的url,loginProcessingUrl为表单登录处理的URL
                 .formLogin().loginPage(FromLoginConstant.LOGIN_PAGE).loginProcessingUrl(FromLoginConstant.LOGIN_PROCESSING_URL)
+                .usernameParameter("uAccount")
                 //登录成功之后的处理
                 .successHandler(myAuthenticationSuccessHandler)
                 //允许访问

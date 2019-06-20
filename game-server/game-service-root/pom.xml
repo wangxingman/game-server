@@ -16,6 +16,7 @@
         <module>game-auth</module>
         <module>game-shop</module>
         <module>game-hall</module>
+        <module>game-sleuth</module>
     </modules>
 
     <dependencies>
