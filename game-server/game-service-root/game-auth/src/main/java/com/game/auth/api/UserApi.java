@@ -32,6 +32,7 @@ public class UserApi extends BaseApi {
     @PostMapping("/fastLogin")
     public Result  fastLogin(@RequestParam(name = "uAccount") String uAccount,@RequestParam(name = "password") String passWord) {
         User user = userService.fastLogin(uAccount, passWord);
-        return success(user);
+        return success("返回的用户信息",user);
     }
+    
 }

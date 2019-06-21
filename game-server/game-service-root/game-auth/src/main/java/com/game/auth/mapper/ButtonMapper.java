@@ -1,13 +1,8 @@
 package com.game.auth.mapper;
 
-import com.game.common.entity.user.Button;
-import com.game.common.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @Author : wx

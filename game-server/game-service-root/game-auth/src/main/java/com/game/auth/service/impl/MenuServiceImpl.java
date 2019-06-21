@@ -1,6 +1,6 @@
 package com.game.auth.service.impl;
 
-import com.game.auth.MapperConfig.AuthMapperConfig;
+import com.game.auth.mapper.MenuMapper;
 import com.game.auth.service.MenuService;
 import com.game.common.entity.user.Menu;
 import com.game.common.entity.user.Permission;
@@ -19,9 +19,12 @@ import java.util.Objects;
 @Service
 public class MenuServiceImpl implements MenuService {
 
+    @Autowired
+    private MenuMapper menuMapper;
+    
     @Override
     public List<Menu> findCheckPermission() {
-        List<Menu> menuList = AuthMapperConfig.getInstance().getMenuMapper().findAll();
+        List<Menu> menuList = menuMapper.findAll();
         checkMenu(menuList);
         return menuList;
     }

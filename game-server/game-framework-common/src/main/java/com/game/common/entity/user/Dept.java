@@ -1,17 +1,14 @@
 package com.game.common.entity.user;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.sf.jsqlparser.statement.update.Update;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -19,39 +16,54 @@ import java.util.Set;
 /**
  * @Author : wx
  * @Desc :
- * @Date :  上午 9:36 2019/6/20 0020
- * @explain :权限
+ * @Date :  下午 3:04 2019/6/21 0021
+ * @explain : 部门
  */
 @Entity
-@Table(name = "g_permission")
 @Data
+@Table(name="g_dept")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Permission implements Serializable {
+public class Dept implements Serializable {
 
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(groups = {Update.class})
+    @Column(name = "id")
+    @NotNull(groups = Update.class)
     private Long id;
 
+    /**
+     * 名称
+     */
+    @Column(name = "name",nullable = false)
     @NotBlank
     private String name;
 
-    /**
-     * 上级类目
-     */
     @NotNull
+    private Boolean enabled;
+
+    /**
+     * 上级部门
+     */
     @Column(name = "pid",nullable = false)
+    @NotNull
     private Long pid;
 
-    @NotBlank
-    private String alias;
-
+    /**
+     * 部门 《- 》角色
+     */
     @JsonIgnore
-    @ManyToMany(mappedBy = "permissions")
+    @ManyToMany(mappedBy = "depts")
     private Set<Role> roles;
 
     @Column(name = "create_time")
     private Date createTime;
+
+    public @interface Update {}
+
+    
 }

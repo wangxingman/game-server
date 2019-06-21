@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @Author : wx
@@ -83,6 +84,27 @@ public class User implements Serializable {
      */
     @Column(name = "u_pass", nullable = true,columnDefinition="varchar(255) COMMENT '用户的密码'")
     private String uPass;
+
+    /**
+     * 多个角色
+     */
+    @ManyToMany
+    @JoinTable(name = "users_roles",joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
+    private Set<Role> roles;
+
+    /**
+     * 一个部门
+     */
+    @OneToOne
+    @JoinColumn(name="dept_id")
+    private Dept dept;
+
+    /**
+     * 一个职业
+     */
+    @OneToOne
+    @JoinColumn(name="job_id")
+    private Job job;
 
     /**
      * 创建时间
