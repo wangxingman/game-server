@@ -1,7 +1,6 @@
 package com.game.hall.config.name;
 
 
-import com.game.common.entity.user.User;
 import com.game.hall.dto.UserDto;
 
 import java.util.*;

@@ -1,14 +1,15 @@
 package com.game.auth.service.impl;
 
-import com.game.auth.mapper.MenuMapper;
+import com.game.auth.repository.MenuRepository;
 import com.game.auth.service.MenuService;
 import com.game.common.entity.user.Menu;
-import com.game.common.entity.user.Permission;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
 
 /**
  * @Author : wx
@@ -16,42 +17,57 @@ import java.util.Objects;
  * @Date :  上午 9:53 2019/6/20 0020
  * @explain :
  */
+@Slf4j
 @Service
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
-    private MenuMapper menuMapper;
-    
+    private MenuRepository menuRepository;
+
     @Override
     public List<Menu> findCheckPermission() {
-        List<Menu> menuList = menuMapper.findAll();
-        checkMenu(menuList);
-        return menuList;
+        return null;
     }
 
     /**
-     * @Author: wx
-     * @Date  : 上午 10:18 2019/6/20 0020 
-     * @params: 
-     * @Desc  :
+     * 查询所有菜单
+     *
+     * @return 所有菜单
      */
-    private void checkMenu(List<Menu> menuList) {
-        if(Objects.nonNull(menuList)) {
-            for (int i = 0; i < menuList.size(); i++) {
-                Menu menu = menuList.get(i);
-                if(Objects.nonNull(menu)) {
-                    Permission permission = menu.getPermission();
-                    String permissionName = permission.getPermissionName();
-                    if(Objects.nonNull(permissionName)) {
-                        menuList.remove(i);
-                        i--;
-                        continue;
-                    }
-                    List<Menu> children = menu.getChildren();
-                    checkMenu(children);
-                }
-            }
+    @Override
+    @Cacheable
+    public List<Menu> findAll() {
+        List<Menu> menus = menuRepository.findAll();
+        if(Objects.isNull(menus)) {
+            log.info("菜单是null的！");
         }
+        return menus;
     }
 
+    @Override
+    public List<Menu> findByPid(long pid) {
+        return menuRepository.findByPid(pid);
+    }
+
+    @Override
+    public Object getMenuTree(List<Menu> menus) {
+        List<Map<String,Object>> list = new LinkedList<>();
+        menus.forEach(menu -> {
+                    if (menu!=null){
+                        List<Menu> menuList = menuRepository.findByPid(menu.getId());
+                        Map<String,Object> map = new HashMap<>();
+                        map.put("id",menu.getId());
+                        map.put("label",menu.getName());
+                        map.put("path",menu.getComponent());
+                        if(menuList!=null && menuList.size()!=0){
+                            map.put("children",getMenuTree(menuList));
+                        }
+                        list.add(map);
+                    }
+                }
+        );
+        return list;
+    }
+
+    
 }

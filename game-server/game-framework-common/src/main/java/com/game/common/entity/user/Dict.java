@@ -1,29 +1,22 @@
 package com.game.common.entity.user;
-import	java.io.Serializable;
-import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * @Author : wx
- * @Desc :
- * @Date :  下午 3:24 2019/6/21 0021
- * @explain : 字典
- */
+* @author Zheng Jie
+* @date 2019-04-10
+*/
 @Entity
 @Data
-@Table(name="g_dict")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Dict implements Serializable{
+@Table(name="dict")
+public class Dict implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

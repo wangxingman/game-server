@@ -1,17 +1,21 @@
 package com.game.login.config;
 
+import com.game.common.encode.MD5Util;
 import com.game.login.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.game.login.authentication.mobile.SmsCodeFilter;
 import com.game.login.authentication.openid.OpenIdAuthenticationConfig;
 import com.game.login.constants.FromLoginConstant;
 import com.game.login.properties.SecurityProperties;
 import com.game.login.redis.VcodeManager;
+import com.game.login.service.MyUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -65,6 +69,36 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
         //当为true的时候就会自动创建表
         //tokenRepository.setCreateTableOnStartup(true);
         return tokenRepository;
+    }
+
+    @Bean
+    MyUserDetailsServiceImpl getUserSecurity() {
+        return new MyUserDetailsServiceImpl();
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 3:37 2019/6/28 0028 
+     * @params: 
+     * @Desc  : 密码验证
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.userDetailsService(getUserSecurity()).passwordEncoder(new PasswordEncoder() {
+            //编码
+            @Override
+            public String encode(CharSequence rawPassword) {
+                String encode = MD5Util.encode((String) rawPassword);
+                return encode;
+            }
+            // 匹配
+            @Override
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                String encode = MD5Util.encode((String) rawPassword);
+                return encodedPassword.equals(encode);
+            }
+        });
     }
 
     @Override

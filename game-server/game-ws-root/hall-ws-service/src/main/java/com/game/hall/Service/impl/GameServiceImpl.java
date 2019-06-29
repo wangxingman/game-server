@@ -3,8 +3,6 @@ package com.game.hall.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.game.common.constant.Const;
 import com.game.common.constant.Errors;
-import com.game.common.entity.user.User;
-import com.game.common.mapper.UserMapper;
 import com.game.common.redis.RedisUtil;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.dto.NetMessage;
@@ -68,10 +66,10 @@ public class GameServiceImpl extends GameServiceImplAbrstarct implements GameSer
             log.info("网关验证成功！");
             //数据加载进入集合
             Map<Integer, UserDto> concurrentHashMapUserDto = AbsServer.getConcurrentHashMapUserDto();
-            concurrentHashMapUserDto.put(s_user.getUId(),UserDto.builder()
+            concurrentHashMapUserDto.put(s_user.getId(),UserDto.builder()
                     .uAccount(s_user.getUAccount())
                     .uEmail(s_user.getUEmail())
-                    .uId(s_user.getUId())
+                    .uId(s_user.getId())
                     .uName(s_user.getUName())
                     .uPhone(s_user.getUPhone())
                     .build());

@@ -1,28 +1,21 @@
 package com.game.common.entity.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
- * @Author : wx
- * @Desc :
- * @Date :  下午 3:19 2019/6/21 0021
- * @explain :  职业
- */
+* @author Zheng Jie
+* @date 2019-03-29
+*/
 @Entity
 @Data
-@Table(name="g_job")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name="job")
 public class Job implements Serializable {
 
     /**
@@ -52,9 +45,6 @@ public class Job implements Serializable {
     @NotNull
     private Boolean enabled;
 
-    /**
-     * 职业 对应一个部门
-     */
     @OneToOne
     @JoinColumn(name = "dept_id")
     private Dept dept;
@@ -63,8 +53,8 @@ public class Job implements Serializable {
      * 创建日期
      */
     @Column(name = "create_time")
-    private Date createTime;
+    @CreationTimestamp
+    private Timestamp createTime;
 
     public @interface Update {}
-
 }

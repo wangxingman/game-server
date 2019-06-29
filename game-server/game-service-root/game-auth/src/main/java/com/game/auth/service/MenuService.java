@@ -11,11 +11,13 @@ import java.util.List;
  * @explain :
  */
 public interface MenuService {
-   /**
-    * @Author: wx
-    * @Date  : 上午 9:54 2019/6/20 0020 
-    * @params: 
-    * @Desc  :  有权限的所有菜单
-    */
+
     List<Menu> findCheckPermission();
+
+    List<Menu> findAll();
+
+    List<Menu> findByPid(long pid);
+
+    Object getMenuTree(List<Menu> menus);
+
 }

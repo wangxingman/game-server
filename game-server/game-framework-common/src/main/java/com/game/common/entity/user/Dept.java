@@ -1,30 +1,23 @@
 package com.game.common.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 /**
- * @Author : wx
- * @Desc :
- * @Date :  下午 3:04 2019/6/21 0021
- * @explain : 部门
- */
+* @author Zheng Jie
+* @date 2019-03-25
+*/
 @Entity
 @Data
-@Table(name="g_dept")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name="dept")
 public class Dept implements Serializable {
 
     /**
@@ -53,17 +46,13 @@ public class Dept implements Serializable {
     @NotNull
     private Long pid;
 
-    /**
-     * 部门 《- 》角色
-     */
     @JsonIgnore
     @ManyToMany(mappedBy = "depts")
     private Set<Role> roles;
 
     @Column(name = "create_time")
-    private Date createTime;
+    @CreationTimestamp
+    private Timestamp createTime;
 
     public @interface Update {}
-
-    
 }

@@ -1,28 +1,25 @@
 package com.game.common.entity.user;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import	java.io.Serializable;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Set;
 
 /**
- * @Author : wx
- * @Desc :
- * @Date :  上午 9:32 2019/6/20 0020
- * @explain :  菜单
+ * @author Zheng Jie
+ * @date 2018-12-17
  */
 @Entity
-@Table(name = "g_menu")
-@Setter
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Setter
+@Table(name = "menu")
 public class Menu implements Serializable {
 
     @Id
@@ -30,33 +27,18 @@ public class Menu implements Serializable {
     @NotNull(groups = {Update.class})
     private Long id;
 
-    /**
-     * 菜单名称
-     */
     @NotBlank
     private String name;
 
-    /**
-     * 排序
-     */
     @Column(unique = true)
     @NotNull
     private Long sort;
 
-    /**
-     * 路径
-     */
     @Column(name = "path")
     private String path;
 
-    /**
-     * 组件
-     */
     private String component;
 
-    /**
-     * 图标
-     */
     private String icon;
 
     /**
@@ -75,9 +57,6 @@ public class Menu implements Serializable {
     @JsonIgnore
     private Set<Role> roles;
 
-    /**
-     * 创建时间
-     */
     @CreationTimestamp
     @Column(name = "create_time")
     private Timestamp createTime;

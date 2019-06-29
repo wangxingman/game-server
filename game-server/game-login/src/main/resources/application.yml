@@ -24,8 +24,8 @@ spring:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql
 #  refresh: true
-#  mapper-locations:
-#    - classpath:com/game/login/mapper/xml/*Mapper.xml
+#  repository-locations:
+#    - classpath:com/game/login/repository/xml/*Mapper.xml
 server:
   port: 6002
   tomcat:

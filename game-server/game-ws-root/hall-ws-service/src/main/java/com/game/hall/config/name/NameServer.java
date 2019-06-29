@@ -1,6 +1,5 @@
 package com.game.hall.config.name;
 
-import com.game.common.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -27,7 +26,7 @@ public class NameServer extends AbsServer implements InitName<String> {
         try {
             //todo 这里查询应该单个
           concurrentHashMap = userMapper.findAll()
-                    .stream().collect(Collectors.toConcurrentMap(a -> a.getUId(), a -> a.getUAccount()));
+                    .stream().collect(Collectors.toConcurrentMap(a -> a.getId(), a -> a.getUAccount()));
             if (Objects.isNull(linkedHash)) {
                 log.info("当前的还没有用户!");
             }

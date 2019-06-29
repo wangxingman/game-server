@@ -1,26 +1,18 @@
 package com.game.common.entity.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * @Author : wx
- * @Desc :
- * @Date :  下午 3:26 2019/6/21 0021
- * @explain :
- */
+* @author Zheng Jie
+* @date 2019-04-10
+*/
 @Entity
 @Data
-@Table(name="g_dict_detail")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name="dict_detail")
 public class DictDetail implements Serializable {
 
     @Id

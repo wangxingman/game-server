@@ -51,8 +51,8 @@
 //                //包配置
 //                .setPackageInfo(new PackageConfig()
 //                        .setController(path+"api")
-//                        .setMapper(path+"mapper")
-//                        .setXml(path+"mapper.xml")
+//                        .setMapper(path+"repository")
+//                        .setXml(path+"repository.xml")
 //                        .setService(path+"service")
 //                        .setServiceImpl(path+"service.impl")
 //                        .setEntity(path+"entity.user")
@@ -69,7 +69,7 @@
 //        // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
 //        // 自定义实体，公共字段
 //        // strategy.setSuperEntityColumns(new String[] { "test_id", "age" });
-//        // 自定义 mapper 父类
+//        // 自定义 repository 父类
 //        // strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
 //        // 自定义 service 父类
 //        // strategy.setSuperServiceClass("com.baomidou.demo.TestService");

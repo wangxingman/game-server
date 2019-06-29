@@ -1,57 +1,63 @@
 package com.game.common.entity.user;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import net.sf.jsqlparser.statement.update.Update;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 /**
- * @Author : wx
- * @Desc :
- * @Date :  上午 9:36 2019/6/20 0020
- * @explain :权限
+ * @author Zheng Jie
+ * @date 2018-12-03
  */
 @Entity
-@Table(name = "g_permission")
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Permission implements Serializable {
+@Getter
+@Setter
+@Table(name = "permission")
+public class Permission implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(groups = {Update.class})
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull(groups = {Update.class})
+	private Long id;
 
-    @NotBlank
-    private String name;
+	@NotBlank
+	private String name;
 
-    /**
-     * 上级类目
-     */
-    @NotNull
-    @Column(name = "pid",nullable = false)
-    private Long pid;
+	/**
+	 * 上级类目
+	 */
+	@NotNull
+	@Column(name = "pid",nullable = false)
+	private Long pid;
 
-    @NotBlank
-    private String alias;
+	@NotBlank
+	private String alias;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "permissions")
-    private Set<Role> roles;
+	@JsonIgnore
+	@ManyToMany(mappedBy = "permissions")
+	private Set<Role> roles;
 
-    @Column(name = "create_time")
-    private Date createTime;
+	@CreationTimestamp
+	@Column(name = "create_time")
+	private Timestamp createTime;
+
+	@Override
+	public String toString() {
+		return "Permission{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", pid=" + pid +
+				", alias='" + alias + '\'' +
+				", createTime=" + createTime +
+				'}';
+	}
+
+	public interface Update{}
 }

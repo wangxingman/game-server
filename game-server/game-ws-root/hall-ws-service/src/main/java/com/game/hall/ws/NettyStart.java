@@ -1,6 +1,5 @@
 package com.game.hall.ws;
 
-import com.game.common.mapper.UserMapper;
 import com.game.core.ws.initializer.WsInitializer;
 import com.game.core.ws.server.WebSocketServerInitializer;
 import com.game.hall.config.name.NameServer;

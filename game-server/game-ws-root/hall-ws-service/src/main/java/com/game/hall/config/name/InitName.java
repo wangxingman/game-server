@@ -1,7 +1,5 @@
 package com.game.hall.config.name;
 
-import com.game.common.mapper.UserMapper;
-
 import java.util.Set;
 
 /**

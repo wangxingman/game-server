@@ -1,4 +1,5 @@
-swagger:
-  enabled: true
-configuration:
-  enabled: false
+logging:
+  pattern:
+    console: "%d - %msg%n"
+  file: E:\logs  #日志输出到指定文件
+  level: debug   #指定级别

@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.constant.Const;
-import com.game.common.entity.user.User;
-import com.game.common.mapper.UserMapper;
 import com.game.common.redis.RedisUtil;
 import com.game.core.ws.clientconfig.WsSyncClient;
 import com.game.core.ws.dto.MessageType;
@@ -100,7 +98,7 @@ public class ExampleController extends BaseApi {
                 .uPass("123456").uPhone("123131")
                 .createtime(new Date()).updatetime(new Date())
                 .build();
-        log.info("用户注册成功" + rep_user.getUId());
+        log.info("用户注册成功" + rep_user.getId());
         long l = System.nanoTime();
         rep_user.setUToken(String.valueOf(l));
         userMapper.save(rep_user);
@@ -126,7 +124,7 @@ public class ExampleController extends BaseApi {
                 .messageType(new MessageType(Const.hall.JOIN_HALL))
                 .build();
         try {
-            RedisUtil.save(String.valueOf(rep_user.getUId()),JSONObject.toJSONString(rep_user),5L);
+            RedisUtil.save(String.valueOf(rep_user.getId()),JSONObject.toJSONString(rep_user),5L);
         } catch (Exception e) {
             log.info("加入缓存失败！");
             e.printStackTrace();
