@@ -3,9 +3,10 @@ package com.game.login.authentication.social.wexin.model;
 import lombok.Data;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/4 0004 9:46
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 public class WeixinUserInfo {

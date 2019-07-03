@@ -5,9 +5,10 @@ import com.game.login.authentication.social.wexin.WeixinProperties;
 import lombok.Data;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/3 0003 10:57
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 public class SocialProperties {

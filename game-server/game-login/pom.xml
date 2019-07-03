@@ -13,6 +13,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
         <!--三方登录-->
         <dependency>
             <groupId>org.springframework.social</groupId>

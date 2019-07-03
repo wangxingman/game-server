@@ -7,9 +7,10 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/11/22 0022 11:54
+ * @Author: wx
+ * @Date  : 下午 8:50 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @ConfigurationProperties(prefix = "system")
 @Data

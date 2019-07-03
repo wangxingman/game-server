@@ -20,9 +20,10 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import javax.sql.DataSource;
 
 /**
- * @author lvhaibao
- * @description 关于社交的的配置
- * @date 2019/1/3 0003 10:21
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003
+ * @params:
+ * @Desc  :  关于社交的的配置
  */
 @Configuration
 @EnableSocial

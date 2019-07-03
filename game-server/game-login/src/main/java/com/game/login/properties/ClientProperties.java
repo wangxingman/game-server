@@ -3,7 +3,10 @@ package com.game.login.properties;
 import lombok.Data;
 
 /**
- * Created by ksm on 2018/4/27.
+ * @Author: wx
+ * @Date  : 下午 8:50 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 public class ClientProperties {

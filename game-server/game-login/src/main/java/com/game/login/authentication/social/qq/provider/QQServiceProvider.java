@@ -6,9 +6,10 @@ import com.game.login.authentication.social.qq.template.QQOAuth2Template;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/3 0003 10:10
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQService> {
 

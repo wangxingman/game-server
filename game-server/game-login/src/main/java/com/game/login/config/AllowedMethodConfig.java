@@ -11,9 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author lvhaibao
- * @description 支持get和post
- * @date 2018/10/12 0012 13:15
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003
+ * @params:
+ * @Desc  : 支持get和post
  */
 @Configuration
 public class AllowedMethodConfig {

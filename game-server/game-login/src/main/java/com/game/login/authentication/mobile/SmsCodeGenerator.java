@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author lvhaibao
- * @description
- * @date  创建验证码
+ * @Author: wx
+ * @Date  : 下午 8:45 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 @Component("smsCodeGenerator")

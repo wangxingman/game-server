@@ -14,9 +14,10 @@ import org.springframework.web.context.request.ServletWebRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/18 0018 11:34
+ * @Author: wx
+ * @Date  : 下午 8:48 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @RestController
 public class AppSecurityController {

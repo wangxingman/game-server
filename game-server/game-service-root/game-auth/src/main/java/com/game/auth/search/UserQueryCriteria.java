@@ -1,6 +1,5 @@
 package com.game.auth.search;
 
-import com.game.core.annotation.Query;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -22,9 +22,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author lvhaibao
- * @description 处理登录和授权的控制器
- * @date 2018/12/26 0026 17:31
+ * @Author: wx
+ * @Date  : 下午 8:50 2019/7/3 0003
+ * @params:
+ * @Desc  : 处理登录和授权的控制器
  */
 @Slf4j
 @Controller

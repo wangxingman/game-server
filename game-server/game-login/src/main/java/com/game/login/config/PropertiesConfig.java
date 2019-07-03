@@ -7,9 +7,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author lvhaibao
- * @descriptions
- * @date 2018/11/22 0022 11:54
+ * @Author: wx
+ * @Date  : 下午 5:26 2019/7/3 0003 
+ * @params: 
+ * @Desc  :  读取配置文件
  */
 @Configuration
 @EnableConfigurationProperties(SecurityProperties.class)

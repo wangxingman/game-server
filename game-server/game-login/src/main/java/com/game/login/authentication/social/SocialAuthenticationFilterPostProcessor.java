@@ -3,9 +3,10 @@ package com.game.login.authentication.social;
 import org.springframework.social.security.SocialAuthenticationFilter;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/8 0008 15:15
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public interface SocialAuthenticationFilterPostProcessor {
 

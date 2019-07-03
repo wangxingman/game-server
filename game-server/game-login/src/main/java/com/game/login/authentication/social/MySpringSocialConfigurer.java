@@ -5,9 +5,10 @@ import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
- * @author lvhaibao
- * @description 自定义生成自己的处理的URL
- * @date 2019/1/3 0003 10:27
+ * @Author: wx
+ * @Date  : 下午 8:48 2019/7/3 0003
+ * @params:
+ * @Desc  : 自定义生成自己的处理的URL
  */
 @Data
 public class MySpringSocialConfigurer  extends SpringSocialConfigurer {

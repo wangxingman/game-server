@@ -11,9 +11,10 @@ import org.springframework.social.oauth2.TokenStrategy;
 import java.io.IOException;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/3 0003 9:59
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Slf4j
 public class QQServiceImpl extends AbstractOAuth2ApiBinding implements QQService {

@@ -1,5 +1,6 @@
 package com.game.login.service;
 
+import com.game.common.encode.MD5Util;
 import com.game.login.dao.UserDao;
 import com.game.login.model.UserModel;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +18,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/11/21 0021 20:52
+ * @Author: wx
+ * @Date  : 下午 8:51 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Service
 @Slf4j
@@ -44,11 +46,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService,SocialUserDe
             throw new UsernameNotFoundException("帐号未找到=" + s);
         }
 
-        //数据库取到的密码，后面返回的是用户用户哪些权限
-        String password = passwordEncoder.encode(userModel.getPassword());
-
-        log.info("该用户数据库密码为==" + password);
-        return new UserModel(userModel.getUin(), userModel.getUsername(), password, userModel.getMobile());
+        return new UserModel(userModel.getUin(), userModel.getUsername(), userModel.getPassword(), userModel.getMobile());
 
     }
 

@@ -6,9 +6,10 @@ import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/8 0008 15:15
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Component
 public class SocialAuthenticationFilterPostProcessorImpl implements SocialAuthenticationFilterPostProcessor {

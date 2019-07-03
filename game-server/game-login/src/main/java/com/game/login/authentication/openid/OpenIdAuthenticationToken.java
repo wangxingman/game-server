@@ -6,9 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/8 0008 14:40
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public class OpenIdAuthenticationToken  extends AbstractAuthenticationToken {
 

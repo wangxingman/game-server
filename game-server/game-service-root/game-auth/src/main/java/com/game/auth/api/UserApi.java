@@ -18,7 +18,7 @@ import java.util.Set;
 
 /**
  * @Author : wx
- * @Desc :
+ * @Desc :   crud 模糊分页查询
  * @Date :  上午 10:25 2019/6/20 0020
  * @explain :  用户的api
  */

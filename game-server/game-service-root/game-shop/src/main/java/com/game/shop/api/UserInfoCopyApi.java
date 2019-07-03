@@ -1,5 +1,6 @@
 package com.game.shop.api;
 
+import com.game.common.encode.MD5Util;
 import com.game.shop.impl.service.UserInfoCopyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +30,8 @@ public class UserInfoCopyApi  {
         String userInfo = userInfoService.removeUserInfo();
         return  "2313123";
     }
+
+
+
     
 }

@@ -15,9 +15,10 @@ import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/8 0008 14:54
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Component
 public class OpenIdAuthenticationConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

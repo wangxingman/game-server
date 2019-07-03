@@ -13,10 +13,10 @@ import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/3 0003 11:01
- *
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Configuration
 @ConditionalOnProperty(prefix = "system.social.qq", name = "app-id")

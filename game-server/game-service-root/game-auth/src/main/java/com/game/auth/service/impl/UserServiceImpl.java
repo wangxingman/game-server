@@ -113,6 +113,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Object findByAllSearch(UserQueryCriteria criteria, Pageable pageable) {
+        
         return null;
     }
 

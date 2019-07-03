@@ -7,9 +7,11 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
+ * @Author: wx
+ * @Date  : 下午 2:33 2019/7/2 0002 
+ * @params: 
+ * @Desc  :
+ */
 @Entity
 @Data
 @Table(name="dict_detail")

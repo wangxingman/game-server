@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/8 0008 14:52
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

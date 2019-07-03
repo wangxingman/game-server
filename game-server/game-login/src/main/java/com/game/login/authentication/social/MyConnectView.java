@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
- * @author lvhaibao
- * @description 绑定解绑页面提示
- * @date 2019/1/7 0007 15:05
+ * @Author: wx
+ * @Date  : 下午 8:48 2019/7/3 0003
+ * @params:
+ * @Desc  : 绑定解绑页面提示
  */
 @Slf4j
 public class MyConnectView extends AbstractView {

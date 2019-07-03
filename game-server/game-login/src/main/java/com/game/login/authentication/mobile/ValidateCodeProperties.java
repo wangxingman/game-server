@@ -3,9 +3,10 @@ package com.game.login.authentication.mobile;
 import lombok.Data;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/2 0002 10:48
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 public class ValidateCodeProperties {

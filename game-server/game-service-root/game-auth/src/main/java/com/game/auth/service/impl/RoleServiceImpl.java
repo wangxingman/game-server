@@ -110,7 +110,6 @@ public class RoleServiceImpl implements RoleService {
         currentRole.setPermissions(role.getPermissions());
         Role role1 = roleRepository.saveAndFlush(role);
         return  roleMapper.toDto(role1);
-
     }
 
 }

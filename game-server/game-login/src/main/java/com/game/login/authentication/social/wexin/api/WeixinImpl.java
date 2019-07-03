@@ -12,9 +12,10 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/4 0004 9:50
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public class WeixinImpl  extends AbstractOAuth2ApiBinding implements Weixin  {
 

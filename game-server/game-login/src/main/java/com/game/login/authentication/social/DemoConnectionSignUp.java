@@ -9,9 +9,10 @@ import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Component;
 
 /**
- * @author lvhaibao
- * @description 自定义注册处理【也就是客户使用 微信 qq登录 的时候 给用户 添加注册信息】
- * @date 2019/1/3 0003 11:24
+ * @Author: wx
+ * @Date  : 下午 8:48 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Component
 public class DemoConnectionSignUp implements ConnectionSignUp {

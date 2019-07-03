@@ -14,9 +14,10 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author lvhaibao
- * @description 查看某个账号绑定了哪些社交账号
- * @date 2019/1/7 0007 14:39
+ * @Author: wx
+ * @Date  : 下午 8:48 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Component("connect/status")
 public class MyConnectionStatusView extends AbstractView {

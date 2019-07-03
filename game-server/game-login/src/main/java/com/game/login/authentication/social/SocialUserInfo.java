@@ -3,9 +3,10 @@ package com.game.login.authentication.social;
 import lombok.Data;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/12 0012 16:45
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 public class SocialUserInfo {

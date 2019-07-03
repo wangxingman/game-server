@@ -50,14 +50,13 @@ public class SmsController {
     public String createSmsCode(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletRequestBindingException {
         //生成随机验证码
         ValidateCode smsCode = smsCodeGenerator.createImageCode(request, response);
-
         //保存验证码，可以考虑用手机号保存
-
         String mobile = ServletRequestUtils.getRequiredStringParameter(request, "mobile");
-
         // 保存验证码
         vcodeManager.saveVcode(mobile, smsCode.getCode(), 5, TimeUnit.MINUTES);
-
+        //验证码发送
+        //SmsUtils.sendSms(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+        /* SendSmsResponse sendSmsResponse = SmsUtils.sendSms(smsCode.getCode(), mobile);*/
         //模拟手机发送，此时调用短信服务商接口
         smsCodeSender.send(mobile,smsCode.getCode());
         return  smsCode.getCode();

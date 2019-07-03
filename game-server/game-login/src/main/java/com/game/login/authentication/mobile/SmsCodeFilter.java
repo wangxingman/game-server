@@ -104,10 +104,6 @@ public class SmsCodeFilter extends OncePerRequestFilter implements InitializingB
         if (!codeInRedis.equals(codeInRequest)) {
             throw new ValidateCodeException("验证码不匹配");
         }
-
-
         vcodeManager.removeVcode(mobile);
-
-
     }
 }

@@ -4,9 +4,10 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/25 0025 10:23
+ * @Author: wx
+ * @Date  : 下午 8:39 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public class RandomUtil {
 

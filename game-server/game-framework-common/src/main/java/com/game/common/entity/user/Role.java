@@ -14,9 +14,10 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * 角色
- * @author Zheng Jie
- * @date 2018-11-22
+ * @Author: wx
+ * @Date  : 下午 2:33 2019/7/2 0002
+ * @params:
+ * @Desc  :
  */
 @Entity
 @Table(name = "role")

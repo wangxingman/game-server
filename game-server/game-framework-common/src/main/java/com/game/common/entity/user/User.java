@@ -14,8 +14,10 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * @author Zheng Jie
- * @date 2018-11-22
+ * @Author: wx
+ * @Date  : 下午 2:34 2019/7/2 0002 
+ * @params: 
+ * @Desc  :
  */
 @Entity
 @Getter

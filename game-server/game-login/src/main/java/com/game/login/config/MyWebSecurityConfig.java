@@ -25,9 +25,10 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import javax.sql.DataSource;
 
 /**
- * @author lvhaibao
- * @description 浏览器配置
- * @date 2018/12/25 0025 10:53
+ * @Author: wx
+ * @Date  : 下午 5:25 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Configuration
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -47,50 +48,28 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
-
+    @Autowired
+    private MyUserDetailsServiceImpl myUserDetailsService;
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
-
-    /**
-     * 生成记得我的token
-     *
-     * @return
-     */
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        //使用jdbc来存储
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        //设置数据源
-        tokenRepository.setDataSource(dataSource);
-        //当为true的时候就会自动创建表
-        //tokenRepository.setCreateTableOnStartup(true);
-        return tokenRepository;
-    }
-
-    @Bean
-    MyUserDetailsServiceImpl getUserSecurity() {
-        return new MyUserDetailsServiceImpl();
-    }
-
     /**
      * @Author: wx
      * @Date  : 下午 3:37 2019/6/28 0028 
      * @params: 
-     * @Desc  : 密码验证
+     * @Desc  : 密码验证 ->在验证完之前
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.userDetailsService(getUserSecurity()).passwordEncoder(new PasswordEncoder() {
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(new PasswordEncoder() {
             //编码
             @Override
             public String encode(CharSequence rawPassword) {
-                String encode = MD5Util.encode((String) rawPassword);
-                return encode;
+                return null;
             }
             // 匹配
             @Override
@@ -112,7 +91,6 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 //表单登录,loginPage为登录请求的url,loginProcessingUrl为表单登录处理的URL
                 .formLogin().loginPage(FromLoginConstant.LOGIN_PAGE).loginProcessingUrl(FromLoginConstant.LOGIN_PROCESSING_URL)
-                .usernameParameter("uAccount")
                 //登录成功之后的处理
                 .successHandler(myAuthenticationSuccessHandler)
                 //允许访问
@@ -123,7 +101,6 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 securityProperties.getOauthLogin().getOauthGrant(),
                 "/myLogout",
                 "/code/sms")
-//                "/oauth/**")
                 .permitAll().anyRequest().authenticated()
                 //禁用跨站伪造
                 .and().csrf().disable()
@@ -133,7 +110,6 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().apply(mySocialSecurityConfig)
                 //openID登录
                 .and().apply(openIdAuthenticationConfig);
-
     }
 
 }

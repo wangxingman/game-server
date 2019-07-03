@@ -3,9 +3,10 @@ package com.game.login.constants;
 import org.springframework.stereotype.Component;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/26 0026 18:19
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Component
 public class FromLoginConstant {

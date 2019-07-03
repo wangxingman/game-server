@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @Author : wx
  * @Desc :
@@ -12,6 +14,22 @@ import org.springframework.stereotype.Repository;
  * @explain :
  */
 @Repository
-public interface PermisssionRepository extends JpaRepository<Permission,Integer>,JpaSpecificationExecutor {
+public interface PermisssionRepository extends JpaRepository<Permission,Long>,JpaSpecificationExecutor {
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 7:33 2019/7/1 0001 
+     * @params: 
+     * @Desc  :
+     */
+    List<Permission> findByPid(long pid);
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 8:03 2019/7/2 0002
+     * @params: 
+     * @Desc  :
+     */
+    Permission findByName(String name);
 
 }

@@ -6,6 +6,7 @@ import com.game.common.mapper.inter.EntityMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: wx
@@ -13,6 +14,7 @@ import org.mapstruct.ReportingPolicy;
  * @params:
  * @Desc  :
  */
+@Component
 @Mapper(componentModel = "spring",uses = {DeptMapper.class},unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface JobMapper extends EntityMapper<JobDto, Job> {
 

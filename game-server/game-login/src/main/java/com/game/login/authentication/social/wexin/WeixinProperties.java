@@ -3,9 +3,10 @@ package com.game.login.authentication.social.wexin;
 import lombok.Data;
 
 /**
- * @author lvhaibao
- * @description 自定义微信的服务提供商ID
- * @date 2019/1/4 0004 9:47
+ * @Author: wx
+ * @Date  : 下午 8:48 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 public class WeixinProperties  {

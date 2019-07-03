@@ -7,11 +7,10 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 
 /**
- * 微信 api适配器，将微信 api的数据模型转为spring social的标准模型。
- *
- * @author lvhaibao
- * @description
- * @date 2019/1/4 0004 9:56
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003
+ * @params:
+ * @Desc  : 微信 api适配器，将微信 api的数据模型转为spring social的标准模型。
  */
 public class WeixinAdapter implements ApiAdapter<Weixin> {
 

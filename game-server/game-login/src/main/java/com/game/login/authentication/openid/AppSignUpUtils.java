@@ -14,9 +14,10 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/18 0018 10:46
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 @NoArgsConstructor

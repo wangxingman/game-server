@@ -7,9 +7,10 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/3 0003 10:21
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public class QQAdapter implements ApiAdapter<QQService> {
     @Override

@@ -5,6 +5,11 @@ eureka:
   instance:
     prefer-ip-address: true
 spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   redis:
     host: 127.0.0.1
     database: 1
@@ -20,12 +25,6 @@ spring:
     prefix: classpath:/page/ #添加前缀
     suffix: .html #添加后缀
     cache: false
-#mybatis-plus:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql
-#  refresh: true
-#  repository-locations:
-#    - classpath:com/game/login/repository/xml/*Mapper.xml
 server:
   port: 6002
   tomcat:

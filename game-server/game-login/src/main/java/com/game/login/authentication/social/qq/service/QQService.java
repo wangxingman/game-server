@@ -3,9 +3,10 @@ package com.game.login.authentication.social.qq.service;
 import com.game.login.authentication.social.qq.model.QQUserInfo;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/3 0003 9:57
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public interface QQService {
 

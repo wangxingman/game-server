@@ -3,9 +3,10 @@ package com.game.login.authentication.mobile;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/2 0002 10:45
+ * @Author: wx
+ * @Date  : 下午 8:46 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public class ValidateCodeException extends AuthenticationException {
     public ValidateCodeException(String msg) {

@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/17 0017 17:16
+ * @Author: wx
+ * @Date  : 下午 8:51 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Service
 public class VcodeManagerImpl implements VcodeManager {

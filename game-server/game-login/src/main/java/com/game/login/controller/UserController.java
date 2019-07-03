@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/25 0025 14:35
+ * @Author: wx
+ * @Date  : 下午 8:50 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @RestController
 @RequestMapping("/user")

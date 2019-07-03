@@ -17,11 +17,10 @@ import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.web.servlet.View;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/4 0004 9:58
- *
- *      
+ * @Author: wx
+ * @Date  : 下午 8:48 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Configuration
 @ConditionalOnProperty(prefix = "system.social.weixin", name = "app-id")

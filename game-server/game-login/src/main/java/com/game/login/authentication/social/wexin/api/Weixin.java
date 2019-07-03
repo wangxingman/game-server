@@ -3,9 +3,10 @@ package com.game.login.authentication.social.wexin.api;
 import com.game.login.authentication.social.wexin.model.WeixinUserInfo;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2019/1/4 0004 9:49
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public interface Weixin {
 

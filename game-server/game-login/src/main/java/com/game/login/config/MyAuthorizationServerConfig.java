@@ -141,7 +141,7 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
 //        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("kevin_key.jks"), "123456".toCharArray())
 //                .getKeyPair("kevin_key");
 //        converter.setKeyPair(keyPair);
-//        return converter;
+//        returnter; conver
         //对称加密
         converter.setSigningKey("123");
         return converter;

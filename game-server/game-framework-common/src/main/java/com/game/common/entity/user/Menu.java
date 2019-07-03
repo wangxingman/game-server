@@ -13,8 +13,10 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 /**
- * @author Zheng Jie
- * @date 2018-12-17
+ * @Author: wx
+ * @Date  : 下午 2:33 2019/7/2 0002 
+ * @params: 
+ * @Desc  :
  */
 @Entity
 @Getter

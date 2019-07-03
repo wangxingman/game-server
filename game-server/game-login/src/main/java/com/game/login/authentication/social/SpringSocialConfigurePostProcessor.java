@@ -6,9 +6,10 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 /**
- * @author lvhaibao
- * @description bean初始化之前和初始化之后都会经过这个
- * @date 2018/12/18 0018 11:07
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003
+ * @params:
+ * @Desc  : bean初始化之前和初始化之后都会经过这个
  */
 @Component
 public class SpringSocialConfigurePostProcessor implements BeanPostProcessor {

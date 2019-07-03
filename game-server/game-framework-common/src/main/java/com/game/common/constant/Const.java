@@ -9,9 +9,9 @@ public interface Const {
 
     /**
      * @Author: wx
-     * @Desc  : ws的各种常量
-     * @Date  : 下午 2:33 2019/5/8 0008 
-     * @params: 
+     * @Desc : ws的各种常量
+     * @Date : 下午 2:33 2019/5/8 0008
+     * @params:
      */
     interface ws {
         String PORT = "gamePort";
@@ -22,8 +22,8 @@ public interface Const {
     }
 
     interface flag {
-        boolean FALSE =  false;
-        boolean TRUE =  true;
+        boolean FALSE = false;
+        boolean TRUE = true;
     }
 
     interface user {
@@ -32,17 +32,19 @@ public interface Const {
         String END_TIME = "end Time";
     }
 
-    interface  date {
-        /**半个小时*/
-        int HALF_HOUR = 30 * 60 * 1000 ;
+    interface date {
+        /**
+         * 半个小时
+         */
+        int HALF_HOUR = 30 * 60 * 1000;
     }
 
-    interface  login {
-         String LOGIN_PAGE = "/authentication/require";
+    interface login {
+        String LOGIN_PAGE = "/authentication/require";
 
-         String LOGIN_PROCESSING_URL = "/authentication/form";
+        String LOGIN_PROCESSING_URL = "/authentication/form";
 
-         String AFTER_LOGING_PAGE = "/oauthLogin";
+        String AFTER_LOGING_PAGE = "/oauthLogin";
     }
 
     interface gateWay {
@@ -51,9 +53,9 @@ public interface Const {
 
     /**
      * @Author: wx
-     * @Date  : 下午 5:52 2019/5/28 0028 
-     * @params: 
-     * @Desc  :
+     * @Date : 下午 5:52 2019/5/28 0028
+     * @params:
+     * @Desc :
      */
     interface Attr {
 
@@ -64,37 +66,38 @@ public interface Const {
 
     /**
      * @Author: wx
-     * @Date  : 下午 5:53 2019/5/28 0028
+     * @Date : 下午 5:53 2019/5/28 0028
      * @params:
-     * @Desc  : 服务地址
+     * @Desc : 服务地址
      */
-    interface  Addr {
+    interface Addr {
         String GATE_WAY = "127.0.0.1:8084";
     }
 
     /**
      * @Author: wx
-     * @Date  : 下午 4:25 2019/5/17 0017
+     * @Date : 下午 4:25 2019/5/17 0017
      * @params:
-     * @Desc  :  大厅操作
+     * @Desc :  大厅操作
      */
-    interface hall{
-        Integer   INIT_HALL = 000;
-        Integer   JOIN_HALL = 123;
-        Integer   JOIN_HALL_REP = 124;
-        Integer   NAME_HALL = 111;
-        Integer   NAME_HALL_REP = 222;
+    interface hall {
+        Integer INIT_HALL = 000;
+        Integer JOIN_HALL = 123;
+        Integer JOIN_HALL_REP = 124;
+        Integer NAME_HALL = 111;
+        Integer NAME_HALL_REP = 222;
     }
 
     /**
      * @Author: wx
-     * @Date  : 下午 4:32 2019/5/28 0028 
-     * @params: 
-     * @Desc  : 数值
+     * @Date : 下午 4:32 2019/5/28 0028
+     * @params:
+     * @Desc : 数值
      */
     interface number {
-        int  ONE = 1;
-        int  TWO = 2;
+        int ZERO = 0;
+        int ONE = 1;
+        int TWO = 2;
         int THREE = 3;
         int FOUR = 4;
         int FIVE = 5;

@@ -3,9 +3,10 @@ package com.game.login.properties;
 import lombok.Data;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/26 0026 18:27
+ * @Author: wx
+ * @Date  : 下午 8:50 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 public class OauthPageProperties {

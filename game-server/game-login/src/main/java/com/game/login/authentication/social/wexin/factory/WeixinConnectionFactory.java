@@ -13,9 +13,10 @@ import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2ServiceProvider;
 
 /**
- * @author lvhaibao
- * @description 创建连接工厂
- * @date 2019/1/4 0004 9:59
+ * @Author: wx
+ * @Date  : 下午 8:47 2019/7/3 0003
+ * @params:
+ * @Desc  : 创建连接工厂
  */
 public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {
 

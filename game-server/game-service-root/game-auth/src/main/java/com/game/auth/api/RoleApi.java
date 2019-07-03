@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author : wx
- * @Desc :
+ * @Desc :  crud   修改角色 的对应菜单  对应权限
  * @Date :  上午 10:23 2019/6/29 0029
  * @explain :
  */

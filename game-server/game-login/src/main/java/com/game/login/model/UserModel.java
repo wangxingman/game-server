@@ -15,13 +15,14 @@ import javax.persistence.Table;
 import java.util.Collection;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/25 0025 14:51
+ * @Author: wx
+ * @Date  : 下午 6:58 2019/7/3 0003 
+ * @params: 
+ * @Desc  : 定义登录
  */
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "user_model")
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j

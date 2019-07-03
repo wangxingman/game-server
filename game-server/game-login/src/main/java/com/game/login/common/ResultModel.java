@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @Author lvhaibao
- * @Date 2018/11/20 23:10
+ * @Author: wx
+ * @Date  : 下午 8:49 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 @NoArgsConstructor

@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/11/27 0027 10:30
+ * @Author: wx
+ * @Date  : 下午 8:45 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 @NoArgsConstructor

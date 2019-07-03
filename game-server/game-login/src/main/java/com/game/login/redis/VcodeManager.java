@@ -3,9 +3,10 @@ package com.game.login.redis;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/17 0017 17:15
+ * @Author: wx
+ * @Date  : 下午 8:50 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 public interface VcodeManager {
 

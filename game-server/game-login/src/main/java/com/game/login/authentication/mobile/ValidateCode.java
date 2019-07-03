@@ -8,9 +8,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/3 0003 19:24
+ * @Author: wx
+ * @Date  : 下午 8:45 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @Data
 @NoArgsConstructor

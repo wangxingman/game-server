@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @author lvhaibao
- * @description
- * @date 2018/12/27 0027 11:09
+ * @Author: wx
+ * @Date  : 下午 8:50 2019/7/3 0003 
+ * @params: 
+ * @Desc  :
  */
 @RestController
 public class LogoutController {
