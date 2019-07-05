@@ -30,13 +30,13 @@ import java.util.Map;
 
 /**
  * @Author: wx
- * @Date  : 上午 11:14 2019/6/10 0010 
- * @params: 
- * @Desc  :  该类中 token的生成方式 不是很明白
+ * @Date : 上午 11:14 2019/6/10 0010
+ * @params:
+ * @Desc :  该类中 token的生成方式 不是很明白
  */
 @Configuration
 @EnableAuthorizationServer
-public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerAdapter{
+public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -46,6 +46,8 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
     private RedisConnectionFactory connectionFactory;
     @Resource
     private ClientLoadProperties clientLoadProperties;
+
+    public static final String ENCRYPT = "a3caed36f0fe5a01e5f144db8927235e";
 
     /**
      * 定义token的存储方式
@@ -73,6 +75,7 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
 
     /**
      * 用于定义客户端详细信息服务的配置程序。可以初始化客户端详细信息，也可以只引用现有商店。
+     * 通过 refresh_token 可以刷新token
      *
      * @param clients a configurer that defines the client details service. Client details can be initialized, or you can just refer to an existing store.
      * @throws Exception exception
@@ -92,10 +95,9 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
                         //支持的认证方式
                         .authorizedGrantTypes("refresh_token", "authorization_code", "password").autoApprove(false)
                         //授权域
-                        .scopes("app","write");
+                        .scopes("app", "write");
             }
         }
-
     }
 
     /**
@@ -120,8 +122,7 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
     }
 
     /**
-     * 定义jwt的生成方式
-     *
+     * 定义jwt的生成方式  【可以放入对应我们需要的数据】
      * @return JwtAccessTokenConverter
      */
     @Bean
@@ -131,20 +132,13 @@ public class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerA
             public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
                 final Map<String, Object> additionalInformation = new HashMap<>();
                 UserModel userModel = (UserModel) authentication.getUserAuthentication().getPrincipal();
-                //把用户的主键uin放进去
-                additionalInformation.put("uin", userModel.getUin());
+                additionalInformation.put("userModel", userModel);
                 ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
                 return super.enhance(accessToken, authentication);
             }
         };
-        //非对称加密，但jwt长度过长
-//        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("kevin_key.jks"), "123456".toCharArray())
-//                .getKeyPair("kevin_key");
-//        converter.setKeyPair(keyPair);
-//        returnter; conver
         //对称加密
-        converter.setSigningKey("123");
+        converter.setSigningKey(ENCRYPT);
         return converter;
     }
-
 }

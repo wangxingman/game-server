@@ -16,17 +16,12 @@ import java.util.stream.Collectors;
 @Slf4j
 public class NameServer extends AbsServer implements InitName<String> {
 
-    public NameServer(UserMapper userMapper) {
-        initName(userMapper);
-    }
-
-
     @Override
-    public Set<String> initName(UserMapper userMapper) {
+    public Set<String> initName( ) {
         try {
             //todo 这里查询应该单个
-          concurrentHashMap = userMapper.findAll()
-                    .stream().collect(Collectors.toConcurrentMap(a -> a.getId(), a -> a.getUAccount()));
+//          concurrentHashMap =
+//                    .stream().collect(Collectors.toConcurrentMap(a -> a.getId(), a -> a.getUAccount()));
             if (Objects.isNull(linkedHash)) {
                 log.info("当前的还没有用户!");
             }

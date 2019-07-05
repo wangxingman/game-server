@@ -1,21 +1,28 @@
 package com.game.gateway;
 
+import com.game.common.redis.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @Author: wx
  * @Desc:
  * @Date: 下午 5:25 2019/5/20 0005
  */
-
 @EnableDiscoveryClient
 @EnableZuulProxy
 @SpringBootApplication(exclude = { RabbitAutoConfiguration.class})
 public class GateWayServiceApplication {
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    
     /**
      * @Author: wx
      * @Desc:
@@ -23,9 +30,12 @@ public class GateWayServiceApplication {
      * @params: 
      */
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(GateWayServiceApplication.class);
-        springApplication.setBanner(new ManagerBanaderUtil());
-        springApplication.run( args);
+        SpringApplication.run(GateWayServiceApplication.class);
+    }
+
+    @Bean
+    public void redisUtil() {
+        new RedisUtil(stringRedisTemplate);
     }
 }
     

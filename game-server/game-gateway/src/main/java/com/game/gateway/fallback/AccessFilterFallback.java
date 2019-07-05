@@ -20,7 +20,7 @@ import java.io.InputStream;
  * @Author : wx
  * @Desc :
  * @Date :  下午 2:28 2019/6/15 0015
- * @explain :
+ * @explain :路由熔断
  */
 @EqualsAndHashCode
 @Component
@@ -31,16 +31,34 @@ public class AccessFilterFallback implements FallbackProvider {
             HttpStatus.INTERNAL_SERVER_ERROR.value(), false, "服务器异常"
     )).getBytes();
 
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:41 2019/7/5 0005 
+     * @params: 
+     * @Desc  :   Zuul它是负责哪个route定义的熔断 【这里使用*表示所有】
+     */
     @Override
     public String getRoute() {
         //定义回退的id
         return "*";
     }
 
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:42 2019/7/5 0005 
+     * @params: 
+     * @Desc  :  Zuul 断路出现时，它会提供一个什么返回值来处理请求
+     */
     @Override
     public ClientHttpResponse fallbackResponse(String route, Throwable cause) {
         return new ClientHttpResponse() {
 
+            /**
+             * @Author: wx
+             * @Date  : 下午 4:48 2019/7/5 0005 
+             * @params: 
+             * @Desc  :服务出现异常 返回消息
+             */
             @Override
             public InputStream getBody() throws IOException {
                 JSONObject r = new JSONObject();

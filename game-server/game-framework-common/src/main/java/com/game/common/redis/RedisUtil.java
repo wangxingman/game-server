@@ -14,22 +14,20 @@ import java.util.stream.Stream;
 
 /**
  * @Author: wx
- * @Date  : 下午 5:46 2019/5/28 0028 
- * @params: 
+ * @Date  : 下午 5:46 2019/5/28 0028
+ * @params:
  * @Desc  :  redis里面的操作
  */
 @Component
 public class RedisUtil {
 
+    @Autowired
     private static StringRedisTemplate stringRedisTemplate;
 
-    private static RedisTemplate redisTemplate;
-
     @Autowired
-    public RedisUtil(StringRedisTemplate stringRedisTemplate) {
-        RedisUtil.stringRedisTemplate=stringRedisTemplate;
+    public RedisUtil(StringRedisTemplate stringRedisTemplate1) {
+        RedisUtil.stringRedisTemplate=stringRedisTemplate1;
     }
-
 
     public static void save(Map<String,String > map){
         Set<String > keys =map.keySet();

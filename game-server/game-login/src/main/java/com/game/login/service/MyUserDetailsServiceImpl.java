@@ -1,6 +1,5 @@
 package com.game.login.service;
 
-import com.game.common.encode.MD5Util;
 import com.game.login.dao.UserDao;
 import com.game.login.model.UserModel;
 import lombok.extern.slf4j.Slf4j;

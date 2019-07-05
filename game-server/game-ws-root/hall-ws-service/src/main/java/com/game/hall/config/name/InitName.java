@@ -16,7 +16,7 @@ public interface InitName<T> {
      * @params:
      * @Desc  : 服务
      */                                     
-     Set<T> initName(UserMapper userMapper);
+     Set<T> initName();
 
     /**
      * @Author: wx

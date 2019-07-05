@@ -24,16 +24,10 @@
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
 
+        <!-- 重试框架 -->
         <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.protobuf-java-format</groupId>
-            <artifactId>protobuf-java-format</artifactId>
-            <version>1.2</version>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
         </dependency>
     </dependencies>
 

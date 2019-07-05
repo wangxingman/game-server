@@ -38,8 +38,6 @@ import java.util.Objects;
 @RestController
 public class ExampleController extends BaseApi {
 
-    @Autowired
-    private UserMapper userMapper;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -81,93 +79,6 @@ public class ExampleController extends BaseApi {
     public Object exampleBus() {
         System.out.println("获取到的值："+port);
         return port;
-    }
-    
-    /**
-     * @Author: wx
-     * @Date : 下午 12:01 2019/5/31 0031
-     * @params:
-     * @Desc :   快速注册
-     */
-    @GetMapping("/fastRegister")
-    @Transactional
-    public Result fastRegister() {
-        User rep_user = User.builder()
-                .uName("张三").uAccount("凤舞九天")
-                .uEmail("wangxing@163.com").uNumber(1231231)
-                .uPass("123456").uPhone("123131")
-                .createtime(new Date()).updatetime(new Date())
-                .build();
-        log.info("用户注册成功" + rep_user.getId());
-        long l = System.nanoTime();
-        rep_user.setUToken(String.valueOf(l));
-        userMapper.save(rep_user);
-        RedisUtil.save(rep_user.getUToken(), JSONObject.toJSONString(rep_user), 5L);
-        return success(rep_user);
-    }
-
-    /**
-     * @Author: wx
-     * @Date : 下午 12:01 2019/5/31 0031
-     * @params:
-     * @Desc :快速登陆
-     */
-    @PostMapping("/fastLogin")
-    public Result fastLogin(@RequestBody User user) {
-        new RedisUtil(stringRedisTemplate);
-        if(Objects.isNull(user)) {
-             user = User.builder().uPhone("123131").uPass("123456").uEmail("wangxing@163.com").build();
-        }
-        User rep_user = userMapper.findByUEmailOrUPhoneAndUPass(user.getUEmail(), user.getUPhone(), user.getUPass());
-        NetMessage netMessage = NetMessage.builder()
-                .bytes(JSONObject.toJSONString(rep_user).getBytes())
-                .messageType(new MessageType(Const.hall.JOIN_HALL))
-                .build();
-        try {
-            RedisUtil.save(String.valueOf(rep_user.getId()),JSONObject.toJSONString(rep_user),5L);
-        } catch (Exception e) {
-            log.info("加入缓存失败！");
-            e.printStackTrace();
-        }
-        if (Objects.nonNull(rep_user)) {
-            WsSyncClient.sendMsgToGame(netMessage, addr);
-            return success(rep_user);
-        }
-        return error("用户登陆失败！");
-    }
-    
-    /**
-     * @Author: wx
-     * @Date  : 下午 3:52 2019/6/6 0006 
-     * @params: 
-     * @Desc  :  验证客户选择 名字
-     */
-    @PostMapping("/verifyName")
-    public Result verifyName(@RequestBody User user) {
-        NetMessage netMessage = NetMessage.builder()
-                .bytes(JSONObject.toJSONString(user).getBytes())
-                .messageType(new MessageType(Const.hall.NAME_HALL))
-                .build();
-        try {
-            WsSyncClient.sendMsgToGame(netMessage, addr);
-        } catch (Exception e) {
-            log.info("客户验证名字失败！");
-            e.printStackTrace();
-        }
-        return success("客户验证名字");
-    }
-
-   /**
-    * @Author: wx
-    * @Date  : 下午 2:49 2019/6/13 0013 
-    * @params: 
-    * @Desc  :  测试vue的请求
-    */
-    @PostMapping("/exampleVue")
-    public Result exampleVue(@RequestBody User user) {
-        String name = user.getUName();
-        System.out.println("----------------"+name);
-        return success("测试vue的请求","----");
     }
 
 }

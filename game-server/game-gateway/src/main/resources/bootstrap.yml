@@ -13,18 +13,33 @@ spring:
       name: ${spring.application.name}
   application:
     name: gateway-service
+  redis:
+    host: 127.0.0.1
+    database: 1
 server:
   port: 7902
+zuul:
+  ignored-services: '*'   #表示禁用默认路由，只认配置的路由
+  routes:  #配置路由
+    hall-ws-service:
+      path: /hall/**
+      service-id: hall-ws-service
+  retryable: true #开启重试功能
+  #ribbon:
+   # MaxAutoRetries: 2   #对当前服务的重试次数
+   #  MaxAutoRetriesNextServer: 0  #切换相同Server的次数
+logging:
+  file:  D:\logs       #指定输出文件
+  level:
+    root: info
+  pattern:
+    console:   "%d - %msg%n"
 hall:   #设置初始化启动参数
   host: 127.0.0.1
   port: 8083
   checkTime: 123
-#zuul:
-#  ignored-services: '*'   #表示禁用默认路由，只认配置的路由
-#  routes:  #配置路由
-#    hall-ws-service:
-#      path: /hall/**
-#      service-id: hall-ws-service
+
+
 ---
 spring:
   profiles: test
