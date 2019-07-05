@@ -3,6 +3,7 @@ package com.game.hall.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.game.common.constant.Const;
 import com.game.common.constant.Errors;
+import com.game.common.entity.user.User;
 import com.game.common.redis.RedisUtil;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.dto.NetMessage;
@@ -28,9 +29,6 @@ import java.util.Objects;
 @Component
 public class GameServiceImpl extends GameServiceImplAbrstarct implements GameService {
 
-    @Autowired
-    private UserMapper userMapper;
-    
     @Override
     public String clientJoin() {
         return null;
@@ -55,29 +53,29 @@ public class GameServiceImpl extends GameServiceImplAbrstarct implements GameSer
      */
     @Override
     public void gateWayJoin(WebSocket webSocket, JSONObject jsonObject) {
-        User s_user = null;
-        System.out.println("jsonObject:"+jsonObject);
-        Integer uId = jsonObject.getInteger("uId");
-        s_user =  JSONObject.parseObject(RedisUtil.get(String.valueOf(uId)),User.class);
-        if(Objects.isNull(s_user)) {
-            s_user = userMapper.getOne(uId);
-        }
-        if(Objects.nonNull(uId) && Objects.nonNull(s_user)) {
-            log.info("网关验证成功！");
-            //数据加载进入集合
-            Map<Integer, UserDto> concurrentHashMapUserDto = AbsServer.getConcurrentHashMapUserDto();
-            concurrentHashMapUserDto.put(s_user.getId(),UserDto.builder()
-                    .uAccount(s_user.getUAccount())
-                    .uEmail(s_user.getUEmail())
-                    .uId(s_user.getId())
-                    .uName(s_user.getUName())
-                    .uPhone(s_user.getUPhone())
-                    .build());
-            webSocket.send(NetMessage.builder().bytes(String.valueOf(s_user).getBytes()).messageType(new MessageType(Const.hall.JOIN_HALL_REP)).build());
-        } else {
-            log.info("网关验证失败！");
-            webSocket.send(NetMessage.builder().bytes(Errors.no_false_error.getMsg().getBytes()).messageType(new MessageType(Const.hall.JOIN_HALL_REP)).build());
-            return;
-        }
+//        User s_user = null;
+//        System.out.println("jsonObject:"+jsonObject);
+//        Integer uId = jsonObject.getInteger("uId");
+//        s_user =  JSONObject.parseObject(RedisUtil.get(String.valueOf(uId)),User.class);
+//        if(Objects.isNull(s_user)) {
+//            s_user = userMapper.getOne(uId);
+//        }
+//        if(Objects.nonNull(uId) && Objects.nonNull(s_user)) {
+//            log.info("网关验证成功！");
+//            //数据加载进入集合
+//            Map<Integer, UserDto> concurrentHashMapUserDto = AbsServer.getConcurrentHashMapUserDto();
+//            concurrentHashMapUserDto.put(s_user.getId(),UserDto.builder()
+//                    .uAccount(s_user.getUAccount())
+//                    .uEmail(s_user.getUEmail())
+//                    .uId(s_user.getId())
+//                    .uName(s_user.getUName())
+//                    .uPhone(s_user.getUPhone())
+//                    .build());
+//            webSocket.send(NetMessage.builder().bytes(String.valueOf(s_user).getBytes()).messageType(new MessageType(Const.hall.JOIN_HALL_REP)).build());
+//        } else {
+//            log.info("网关验证失败！");
+//            webSocket.send(NetMessage.builder().bytes(Errors.no_false_error.getMsg().getBytes()).messageType(new MessageType(Const.hall.JOIN_HALL_REP)).build());
+//            return;
+//        }
     }
 }
