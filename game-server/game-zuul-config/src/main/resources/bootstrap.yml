@@ -24,6 +24,9 @@ zuul:
     hall-ws-service:
       path: /hall/**
       service-id: hall-ws-service
+    auth-service:
+      path: /auth/**
+      service-id: auth-service
   retryable: true #开启重试功能
   #ribbon:
    # MaxAutoRetries: 2   #对当前服务的重试次数

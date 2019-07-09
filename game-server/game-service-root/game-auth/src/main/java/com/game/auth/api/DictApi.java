@@ -41,7 +41,7 @@ public class DictApi extends BaseApi {
      */
     @PostMapping("/addByDict")
     public Result addByDict(@RequestBody Dict dict) {
-        return success("新增字典",dictService.addByDitc(dict));
+        return success("新增字典",dictService.addByDict(dict));
     }
 
     /**
@@ -52,7 +52,7 @@ public class DictApi extends BaseApi {
      */
     @PostMapping("/updateByDict")
     public Result updateByDict(@RequestBody Dict dict) {
-        return success("修改字典",dictService.updateByDitc(dict));
+        return success("修改字典",dictService.updateByDict(dict));
     }
 
     /**
@@ -63,7 +63,7 @@ public class DictApi extends BaseApi {
      */
     @PostMapping("/deleteByDict")
     public Result deleteByDict(@RequestParam Long id) {
-        dictService.deleteByDitc(id);
+        dictService.deleteByDict(id);
         return success("删除字典");
     }
 

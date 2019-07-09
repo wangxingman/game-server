@@ -9,6 +9,7 @@ import com.game.auth.service.UserService;
 import com.game.common.dto.user.UserDto;
 import com.game.common.encode.MD5Util;
 import com.game.common.entity.user.User;
+import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import io.swagger.models.auth.In;
@@ -86,13 +87,13 @@ public class UserServiceImpl implements UserService {
 
     /**
      * @Author: wx
-     * @Date  : 上午 10:05 2019/6/29 0029 
-     * @params: 
-     * @Desc  :  操作的时候 有没有删除 用户的一系列的 链表信息
+     * @Date : 上午 10:05 2019/6/29 0029
+     * @params:
+     * @Desc :  操作的时候 有没有删除 用户的一系列的 链表信息
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteUser(Long id) {
+    public void deleteByUser(Long id) {
         userRepository.deleteById(id);
     }
 
@@ -100,20 +101,24 @@ public class UserServiceImpl implements UserService {
     public User findByOne(Long id) {
         Optional<User> user = userRepository.findById(id);
         User userCurrent = user.get();
-        if(Objects.isNull(userCurrent)) {
-            throw new EntityNotFoundException(User.class,"id",id);
+        if (Objects.isNull(userCurrent)) {
+            throw new EntityNotFoundException(User.class, "id", id);
         }
         return userCurrent;
     }
 
     @Override
-    public List<User> findByAll() {
-        return null;
+    public List<UserDto> findByAll() {
+        List<User> userList = userRepository.findAll();
+        if (Objects.isNull(userList)) {
+            throw new BadRequestException("查询用户为");
+        }
+        return userMapper.toDto(userList);
     }
 
     @Override
     public Object findByAllSearch(UserQueryCriteria criteria, Pageable pageable) {
-        
+
         return null;
     }
 

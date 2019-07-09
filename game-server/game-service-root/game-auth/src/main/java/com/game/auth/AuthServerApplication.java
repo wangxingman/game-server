@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -18,7 +19,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @EnableFeignClients
 @SpringBootApplication
-@EnableCaching@EntityScan("com.game.common.entity.*")          //扫描实体类
+@EnableCaching
+@EntityScan("com.game.common.entity.*")          //扫描实体类
 /**开启lcn分布式事务*/
 //@EnableDistributedTransaction
 public class AuthServerApplication {

@@ -57,7 +57,6 @@ public interface DictService {
      * @params: 
      * @Desc  :
      */
-    @CacheEvict(allEntries = true)
     void deleteByDict(Long id);
     
 }

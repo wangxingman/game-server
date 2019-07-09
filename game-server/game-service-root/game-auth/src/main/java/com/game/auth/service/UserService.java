@@ -48,7 +48,7 @@ public interface UserService {
      * @params: 
      * @Desc  :  删除一个用户
      */
-    void deleteUser(Long id);
+    void deleteByUser(Long id);
     
     /**
      * @Author: wx
@@ -64,7 +64,7 @@ public interface UserService {
      * @params: 
      * @Desc  :  查询全部的用户
      */
-    List<User> findByAll();
+    List<UserDto> findByAll();
 
     /**
      * @Author: wx

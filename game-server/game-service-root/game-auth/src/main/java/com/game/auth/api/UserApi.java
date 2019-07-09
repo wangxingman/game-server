@@ -23,7 +23,7 @@ import java.util.Set;
  * @explain :  用户的api
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/user")
 public class UserApi extends BaseApi {
 
     @Autowired
@@ -78,15 +78,31 @@ public class UserApi extends BaseApi {
      */
     @PostMapping("/findByAllSearch")
     public Result findByAllSearch(UserQueryCriteria criteria, Pageable pageable) {
-        Set<Long> deptSet = new HashSet<>();
-        Set<Long> result = new HashSet<>();
-
-        //当前不等于空 获取部门菜单
-        if (!ObjectUtils.isEmpty(criteria.getDeptId())) {
-            deptSet.add(criteria.getDeptId());
-        }
-        userService.findByAllSearch(criteria,pageable);
-
+        userService.findByAllSearch(criteria, pageable);
         return success();
     }
+
+    /**
+     * @Author: wx
+     * @Date : 下午 5:57 2019/7/9 0009
+     * @params:
+     * @Desc :  查询全部
+     */
+    @PostMapping("/findByAll")
+    public Result findByAll() {
+        return success("这是全部的数据", userService.findByAll());
+    }
+
+    /**
+     * @Author: wx
+     * @Date : 下午 6:02 2019/7/9 0009
+     * @params:
+     * @Desc :  删除
+     */
+    @GetMapping("/deleteByUser")
+    public Result deleteByUser(@RequestParam(name = "id") Long id) {
+        userService.deleteByUser(id);
+        return success("删除用户成功");
+    }
+
 }

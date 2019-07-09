@@ -77,12 +77,12 @@ public class AccessFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
-        //看后期如何处理
+        //todo 用户传入的token 和对应的比较
         String accessToken = request.getParameter("token");
         String token = request.getHeader("token");
         String url = request.getRequestURL().toString();
+
         if (url.contains("websocket") && Objects.nonNull(accessToken)) {
-            //todo 判断各种token的格式
             MessageType messageType = new MessageType(Const.number.THREE);
             NetMessage netMessage = NetMessage.builder()
                     .messageType(messageType)
