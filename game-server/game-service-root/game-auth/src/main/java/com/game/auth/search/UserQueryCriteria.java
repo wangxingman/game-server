@@ -1,6 +1,7 @@
 package com.game.auth.search;
 
 import lombok.Data;
+import org.springframework.data.jpa.repository.Query;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -14,22 +15,5 @@ import java.util.Set;
 @Data
 public class UserQueryCriteria implements Serializable {
 
-    @Query
-    private Long id;
-
-    @Query(propName = "id", type = Query.Type.IN, joinName = "dept")
-    private Set<Long> deptIds;
-
-    @Query(type = Query.Type.INNER_LIKE)
-    private String username;
-
-    @Query(type = Query.Type.INNER_LIKE)
-    private String email;
-
-    @Query
-    private Boolean enabled;
-
-    private Long deptId;
-    
 
 }

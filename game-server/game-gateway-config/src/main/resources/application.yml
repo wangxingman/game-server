@@ -1,0 +1,46 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@127.0.0.1:1111/eureka/
+  instance:
+    prefer-ip-address: true
+server:
+  port: 2009
+spring:
+  profiles:
+    active: after_route
+  application:
+    name: spring-cloud-gateway
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 2
+
+
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: spring-cloud-gateway
+          uri: http://localhost:6006     #转发地址
+          order: 0
+          predicates:
+            - Path=/example/**       #请求路径
+          filters:                  # 表示在转发时去掉example
+            - StripPrefix=1
+            - name: Hystrix           #Hystrix
+              args:
+                name: myfallbackcmd
+                fallbackUri: forward:/user/fallback
+                key-resolver: '#{@hostAddrKeyResolver}'    #gateway自己实现的限流操作
+                redis-rate-limiter.replenishRate: 1    #令牌桶每秒填充平均速率
+                redis-rate-limiter.burstCapacity: 3   #令牌桶总容量
+gateway:        # 自己定义 是否加载文件
+  config: false

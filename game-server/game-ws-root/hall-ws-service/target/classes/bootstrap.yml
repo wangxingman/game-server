@@ -39,6 +39,9 @@ spring:
     bus:
       trace:
         enabled: true
+feign:  # 开启feign的断路器配置
+  hystrix:
+    enabled: true  # enabled 一定要注意
 server:
   port: 7904
 hall:   #设置初始化启动参数

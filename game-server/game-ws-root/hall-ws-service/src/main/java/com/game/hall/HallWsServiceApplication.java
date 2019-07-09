@@ -1,5 +1,6 @@
 package com.game.hall;
 
+import com.game.common.comman.ManagerBanaderUtil;
 import com.game.core.annotation.EnableNetty;
 import com.game.hall.po.HallProperties;
 import org.springframework.boot.SpringApplication;
