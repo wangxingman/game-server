@@ -15,7 +15,5 @@ import javax.persistence.Converter;
  * @Date :  下午 3:12 2019/6/28 0028
  * @explain :
  */
-@Component
-@Mapper(componentModel = "spring",uses = {RoleMapper.class, DeptMapper.class, JobMapper.class},unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper extends EntityMapper<UserDto, User> {
 }

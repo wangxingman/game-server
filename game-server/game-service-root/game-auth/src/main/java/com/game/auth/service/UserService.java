@@ -1,10 +1,8 @@
 package com.game.auth.service;
 
-import com.game.auth.search.UserQueryCriteria;
-import com.game.common.dto.user.UserDto;
 import com.game.common.entity.user.User;
+import com.game.core.utils.jpa.UserQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -32,7 +30,7 @@ public interface UserService {
      * @params: 
      * @Desc  : 添加用户
      */
-    UserDto addUser(User user);
+    User addUser(User user);
 
     /**
      * @Author: wx
@@ -40,7 +38,7 @@ public interface UserService {
      * @params: 
      * @Desc  :  用户修改
      */
-    UserDto updateUser(User user);
+    User updateUser(User user);
     
     /**
      * @Author: wx
@@ -64,7 +62,7 @@ public interface UserService {
      * @params: 
      * @Desc  :  查询全部的用户
      */
-    List<UserDto> findByAll();
+    List<User> findByAll();
 
     /**
      * @Author: wx
@@ -72,6 +70,13 @@ public interface UserService {
      * @params: 
      * @Desc  :  模糊查询
      */
-//    @Cacheable(keyGenerator = "keyGenerator")
     Object findByAllSearch(UserQueryCriteria criteria, Pageable pageable);
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 3:45 2019/7/10 0010 
+     * @params: 
+     * @Desc  :修改密码
+     */
+    void updateByPass(User user,String newPass);
 }

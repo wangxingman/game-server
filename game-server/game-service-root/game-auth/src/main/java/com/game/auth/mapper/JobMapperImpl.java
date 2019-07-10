@@ -21,21 +21,21 @@ public class JobMapperImpl implements JobMapper {
 
     @Override
     public Job toEntity(JobDto dto) {
-        return null;
+        return this.toEntity(dto);
     }
 
     @Override
     public JobDto toDto(Job entity) {
-        return null;
+        return this.toDto(entity);
     }
 
     @Override
     public List<Job> toEntity(List<JobDto> dtoList) {
-        return null;
+        return this.toEntity(dtoList);
     }
 
     @Override
     public List<JobDto> toDto(List<Job> entityList) {
-        return null;
+        return this.toDto(entityList);
     }
 }

@@ -16,21 +16,20 @@ import java.util.List;
 public class DictDetailMapperImpl implements DictDetailMapper {
     @Override
     public DictDetail toEntity(DictDetailDto dto) {
-        return null;
+        return this.toEntity(dto);
     }
 
     @Override
     public DictDetailDto toDto(DictDetail entity) {
-        return null;
+        return this.toDto(entity);
     }
-
     @Override
     public List<DictDetail> toEntity(List<DictDetailDto> dtoList) {
-        return null;
+        return this.toEntity(dtoList);
     }
 
     @Override
     public List<DictDetailDto> toDto(List<DictDetail> entityList) {
-        return null;
+        return this.toDto(entityList);
     }
 }

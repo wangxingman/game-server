@@ -1,7 +1,7 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://10.254.1.10:1111/eureka/
+      defaultZone: http://admin:123456@127.0.0.1:1111/eureka/
   instance:
     prefer-ip-address: true
     hostname: 10.254.1.10

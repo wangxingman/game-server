@@ -1,20 +1,16 @@
 package com.game.auth.api;
 
-import com.game.auth.search.UserQueryCriteria;
 import com.game.auth.service.UserService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
-import com.game.common.dto.user.UserDto;
 import com.game.common.entity.user.User;
 import com.game.core.exception.EntityNotFoundException;
+import com.game.core.utils.jpa.UserQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @Author : wx
@@ -43,19 +39,18 @@ public class UserApi extends BaseApi {
         }
         return success("返回的用户信息", user);
     }
-
     //todo 判断用户的权限
 
     /**
      * @Author: wx
      * @Date : 下午 2:36 2019/6/28 0028
      * @params:
-     * @Desc :  新增用户
+     * @Desc :  新增用户 【初始化密码】
      */
     @PostMapping("/addUser")
     public Result addUser(@RequestBody User user) {
-        UserDto userDto = userService.addUser(user);
-        return success(" 添加用户", userDto);
+        User currentUser = userService.addUser(user);
+        return success(" 添加用户", currentUser);
     }
 
     /**
@@ -74,12 +69,11 @@ public class UserApi extends BaseApi {
      * @Author: wx
      * @Date : 下午 4:47 2019/6/29 0029
      * @params: criteria 条件  pageable分页
-     * @Desc : 模糊查询
+     * @Desc : page=0&size=1&sort=id,desc
      */
     @PostMapping("/findByAllSearch")
     public Result findByAllSearch(UserQueryCriteria criteria, Pageable pageable) {
-        userService.findByAllSearch(criteria, pageable);
-        return success();
+        return success("条件分页查询", userService.findByAllSearch(criteria, pageable));
     }
 
     /**
@@ -105,4 +99,15 @@ public class UserApi extends BaseApi {
         return success("删除用户成功");
     }
 
+    /**
+     * @Author: wx
+     * @Date : 下午 3:38 2019/7/10 0010
+     * @params:
+     * @Desc : 修改密码 【密码不应该显示的】
+     */
+    @PostMapping("/updateByPass")
+    public Result updateByPass(@RequestBody User user, @RequestParam String newPass) {
+        userService.updateByPass(user, newPass);
+        return success("修改密码");
+    }
 }

@@ -16,21 +16,21 @@ import java.util.List;
 public class PermissionMapperImpl implements  PermissionMapper {
     @Override
     public Permission toEntity(PermissionDto dto) {
-        return null;
+        return this.toEntity(dto);
     }
 
     @Override
     public PermissionDto toDto(Permission entity) {
-        return null;
+        return this.toDto(entity);
     }
 
     @Override
     public List<Permission> toEntity(List<PermissionDto> dtoList) {
-        return null;
+        return this.toEntity(dtoList);
     }
 
     @Override
     public List<PermissionDto> toDto(List<Permission> entityList) {
-        return null;
+        return this.toDto(entityList);
     }
 }

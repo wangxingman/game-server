@@ -16,21 +16,21 @@ import java.util.List;
 public class RoleMapperImpl implements RoleMapper {
     @Override
     public Role toEntity(RoleDto dto) {
-        return null;
+        return this.toEntity(dto);
     }
 
     @Override
     public RoleDto toDto(Role entity) {
-        return null;
+        return this.toDto(entity);
     }
 
     @Override
     public List<Role> toEntity(List<RoleDto> dtoList) {
-        return null;
+        return this.toEntity(dtoList);
     }
 
     @Override
     public List<RoleDto> toDto(List<Role> entityList) {
-        return null;
+        return this.toDto(entityList);
     }
 }

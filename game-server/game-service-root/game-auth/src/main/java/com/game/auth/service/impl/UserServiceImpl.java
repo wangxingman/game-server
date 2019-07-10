@@ -2,17 +2,16 @@ package com.game.auth.service.impl;
 
 import java.util.*;
 
-import com.game.auth.mapper.UserMapper;
 import com.game.auth.repository.UserRepository;
-import com.game.auth.search.UserQueryCriteria;
 import com.game.auth.service.UserService;
-import com.game.common.dto.user.UserDto;
 import com.game.common.encode.MD5Util;
 import com.game.common.entity.user.User;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
-import io.swagger.models.auth.In;
+import com.game.core.utils.jpa.JpaPageUtil;
+import com.game.core.utils.jpa.QueryHelp;
+import com.game.core.utils.jpa.UserQueryCriteria;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,11 +29,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    public static String PASSWORLD = "123456";
 
     @Autowired
-    private UserMapper userMapper;
+    private UserRepository userRepository;
 
     @Override
     public User fastLogin(String username, String password) {
@@ -47,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public UserDto addUser(User user) {
+    public User addUser(User user) {
 
         if (userRepository.findByUsername(user.getUsername()) != null) {
             throw new EntityExistException(User.class, "username", user.getUsername());
@@ -57,18 +55,19 @@ public class UserServiceImpl implements UserService {
             throw new EntityExistException(User.class, "email", user.getEmail());
         }
         user.setAvatar("https://i.loli.net/2019/04/04/5ca5b971e1548.jpeg");
-        user.setPassword(MD5Util.encode((user.getPassword())));
+        user.setPassword(MD5Util.encode((PASSWORLD)));
         User save = userRepository.save(user);
-        return userMapper.toDto(save);
+        return save;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public UserDto updateUser(User user) {
+    public User updateUser(User user) {
         Optional<User> oUser = userRepository.findById(user.getId());
-        Optional.ofNullable(oUser).ifPresent(null);
+        if (Objects.isNull(oUser)) {
+            throw new EntityNotFoundException(User.class, "用户的id", user.getId());
+        }
         User currentUser = oUser.get();
-
         User currentUserName = userRepository.findByUsername(user.getUsername());
         if (currentUser != null && !currentUserName.getId().equals(currentUser.getId())) {
             throw new EntityExistException(User.class, "username", user.getUsername());
@@ -82,7 +81,7 @@ public class UserServiceImpl implements UserService {
         currentUser.setPhone(user.getPhone());
 
         User user1 = userRepository.saveAndFlush(currentUser);
-        return userMapper.toDto(user1);
+        return user1;
     }
 
     /**
@@ -94,7 +93,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteByUser(Long id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new BadRequestException("删除用户失败！");
+        }
     }
 
     @Override
@@ -108,18 +111,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findByAll() {
+    public List<User> findByAll() {
         List<User> userList = userRepository.findAll();
         if (Objects.isNull(userList)) {
             throw new BadRequestException("查询用户为");
         }
-        return userMapper.toDto(userList);
+        return userList;
     }
 
     @Override
     public Object findByAllSearch(UserQueryCriteria criteria, Pageable pageable) {
+        Page<User> page = userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
+        return JpaPageUtil.toPage(page);
+    }
 
-        return null;
+    @Override
+    public void updateByPass(User user, String newPass) {
+        String password = MD5Util.encode(user.getPassword());
+        User currentUser = this.findByOne(user.getId());
+        String encode = MD5Util.encode(newPass);
+        if (currentUser.getPassword() != password) {
+            throw new BadRequestException("您输入的密码不正确");
+        } else if (encode == currentUser.getPassword()) {
+            throw new BadRequestException("不能修改同样的密码");
+        }
+        userRepository.updatePass(user.getUsername(), encode, new Date());
     }
 
 }

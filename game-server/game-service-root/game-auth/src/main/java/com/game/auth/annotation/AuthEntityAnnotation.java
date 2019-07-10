@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * @Author : wx
  * @Desc :
  * @Date :  上午 11:04 2019/6/20 0020
- * @explain :
+ * @explain :  各种注解扫描
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

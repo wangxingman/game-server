@@ -16,21 +16,21 @@ import java.util.List;
 public class DictMapperImpl implements DictMapper {
     @Override
     public Dict toEntity(DictDto dto) {
-        return null;
+        return this.toEntity(dto);
     }
 
     @Override
     public DictDto toDto(Dict entity) {
-        return null;
+        return this.toDto(entity);
     }
 
     @Override
     public List<Dict> toEntity(List<DictDto> dtoList) {
-        return null;
+        return this.toEntity(dtoList);
     }
 
     @Override
     public List<DictDto> toDto(List<Dict> entityList) {
-        return null;
+        return this.toDto(entityList);
     }
 }

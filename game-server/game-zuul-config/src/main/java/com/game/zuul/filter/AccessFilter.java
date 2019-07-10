@@ -79,14 +79,16 @@ public class AccessFilter extends ZuulFilter {
         log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
         //todo 用户传入的token 和对应的比较
         String accessToken = request.getParameter("token");
-        String token = request.getHeader("token");
+        if(Objects.isNull(accessToken)) {
+            accessToken =request.getHeader("token");
+        }
         String url = request.getRequestURL().toString();
 
         if (url.contains("websocket") && Objects.nonNull(accessToken)) {
             MessageType messageType = new MessageType(Const.number.THREE);
             NetMessage netMessage = NetMessage.builder()
                     .messageType(messageType)
-                    .bytes((JSONObject.toJSONString(token).getBytes()))
+                    .bytes((JSONObject.toJSONString(accessToken).getBytes()))
                     .build();
             //接收消息的时候 我去初始化的客户的数据
             String s = WsSyncClient.sendMsgToGame(netMessage, Const.Addr.GATE_WAY);

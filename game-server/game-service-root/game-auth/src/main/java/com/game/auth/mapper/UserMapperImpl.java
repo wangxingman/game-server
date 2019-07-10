@@ -16,21 +16,21 @@ import java.util.List;
 public class UserMapperImpl implements UserMapper {
     @Override
     public User toEntity(UserDto dto) {
-        return null;
+        return this.toEntity(dto);
     }
 
     @Override
     public UserDto toDto(User entity) {
-        return null;
+        return this.toDto(entity);
     }
 
     @Override
     public List<User> toEntity(List<UserDto> dtoList) {
-        return null;
+        return this.toEntity(dtoList);
     }
 
     @Override
     public List<UserDto> toDto(List<User> entityList) {
-        return null;
+        return this.toDto(entityList);
     }
 }

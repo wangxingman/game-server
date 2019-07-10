@@ -1,5 +1,6 @@
 package com.game.auth.service.impl;
 
+import cn.hutool.core.util.PageUtil;
 import com.game.auth.mapper.RoleMapper;
 import com.game.auth.repository.RoleRepository;
 import com.game.auth.service.RoleService;
@@ -8,8 +9,12 @@ import com.game.common.dto.user.RoleSmallDto;
 import com.game.common.entity.user.Role;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
+import com.game.core.utils.jpa.CommonQueryCriteria;
+import com.game.core.utils.jpa.JpaPageUtil;
+import com.game.core.utils.jpa.QueryHelp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,12 +41,12 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
 
     @Override
-    public RoleDto findById(long id) {
-        Role role = roleRepository.getOne(id);
+    public Role findById(long id) {
+        Role role = roleRepository.findById(id).get();
         if (Objects.isNull(role)) {
             throw new EntityNotFoundException(Role.class, "id", id);
         }
-        return roleMapper.toDto(role);
+        return role;
     }
 
     @Override
@@ -55,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public RoleDto updatebyRole(Role role) {
+    public Role updatebyRole(Role role) {
         Optional<Role> optionalRole = roleRepository.findById(role.getId());
         Role currentRole = optionalRole.get();
 
@@ -71,18 +76,15 @@ public class RoleServiceImpl implements RoleService {
         currentRole.setLevel(role.getLevel());
 
         Role role1 = roleRepository.saveAndFlush(currentRole);
-        RoleDto roleDto = roleMapper.toDto(role1);
-        return roleDto;
+        return role1;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public RoleDto updateByRoleMenu(Role resources, RoleDto roleDTO) {
-        Role role = roleMapper.toEntity(roleDTO);
-        role.setMenus(resources.getMenus());
-        Role currentRole = roleRepository.saveAndFlush(role);
-        RoleDto roleDto = roleMapper.toDto(currentRole);
-        return roleDto;
+    public Role updateByRoleMenu(Role resources, Role currRole) {
+        currRole.setMenus(resources.getMenus());
+        Role currentRole = roleRepository.saveAndFlush(currRole);
+        return currentRole;
     }
 
     @Override
@@ -96,20 +98,25 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public RoleDto addByRole(Role role) {
+    public Role addByRole(Role role) {
         Role currentRole = roleRepository.findByName(role.getName());
         if(Objects.nonNull(currentRole) ) {
             throw new EntityExistException(Role.class,"username",role.getName());
         }
-        return roleMapper.toDto(roleRepository.save(role));
+        return roleRepository.save(role);
     }
 
     @Override
-    public RoleDto updateByRolePermission(Role role, RoleDto roleDto) {
-        Role currentRole = roleMapper.toEntity(roleDto);
-        currentRole.setPermissions(role.getPermissions());
+    public Role updateByRolePermission(Role role, Role currRole) {
+        currRole.setPermissions(role.getPermissions());
         Role role1 = roleRepository.saveAndFlush(role);
-        return  roleMapper.toDto(role1);
+        return  role1;
+    }
+
+    @Override
+    public Object findByAllSearch(CommonQueryCriteria criteria, Pageable pageable) {
+        Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
+        return JpaPageUtil.toPage(page);
     }
 
 }
