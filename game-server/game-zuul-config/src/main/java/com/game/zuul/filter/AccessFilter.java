@@ -2,6 +2,7 @@ package com.game.zuul.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.game.common.constant.Const;
+import com.game.core.utils.LoginUtil;
 import com.game.core.ws.clientconfig.WsSyncClient;
 import com.game.core.ws.dto.MessageType;
 import com.game.core.ws.dto.NetMessage;
@@ -62,6 +63,14 @@ public class AccessFilter extends ZuulFilter {
      */
     @Override
     public boolean shouldFilter() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+        int i = LoginUtil.checkLoginFail(request);
+        if (i != 0) {
+            ctx.setSendZuulResponse(false);
+            ctx.setResponseStatusCode(i);
+            return false;
+        }
         return true;
     }
 

@@ -1,12 +1,20 @@
 package com.game.login.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.game.common.dto.Login;
+import com.game.common.entity.user.User;
 import com.game.common.redis.RedisUtil;
+import com.game.core.exception.BadRequestException;
+import com.game.core.utils.LoginUtil;
+import com.game.core.utils.web.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -42,6 +50,9 @@ public class MyAuthenticationSuccessHandler<jwtTokenServices> extends SavedReque
 
     public static final String ENCRYPT = "a3caed36f0fe5a01e5f144db8927235e";
 
+    @Autowired
+    private LoginUtil loginUtil;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -72,6 +83,8 @@ public class MyAuthenticationSuccessHandler<jwtTokenServices> extends SavedReque
         HashMap<String, Object> map = new HashMap<>();
         map.put("user", converter.convertAccessToken(token, oAuth2Authentication).get(ENCRYPT));
         map.put("token", token);
+
+        loginUtil.add(request);
 
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(map));
