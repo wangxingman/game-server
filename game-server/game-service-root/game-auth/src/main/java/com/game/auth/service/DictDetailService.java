@@ -2,6 +2,7 @@ package com.game.auth.service;
 
 import com.game.common.dto.user.DictDetailDto;
 import com.game.common.entity.user.DictDetail;
+import com.game.core.utils.jpa.criteria.DictDetailQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,7 +24,7 @@ public interface DictDetailService {
      * @Desc :
      */
     @Cacheable(key = "#p0")
-    DictDetailDto findById(Long id);
+    DictDetail findById(Long id);
 
     /**
      * @Author: wx
@@ -32,7 +33,7 @@ public interface DictDetailService {
      * @Desc :
      */
     @CacheEvict(allEntries = true)
-    DictDetailDto addByDictDetail(DictDetail dictDetail);
+    DictDetail addByDictDetail(DictDetail dictDetail);
 
     /**
      * @Author: wx
@@ -41,7 +42,7 @@ public interface DictDetailService {
      * @Desc :
      */
     @CacheEvict(allEntries = true)
-    DictDetailDto updateByDictDetail(DictDetail resources);
+    DictDetail updateByDictDetail(DictDetail resources);
 
     /**
      * @Author: wx
@@ -58,5 +59,5 @@ public interface DictDetailService {
      * @params:
      * @Desc : 全查询
      */
-    Object findByAll(Pageable pageable);
+    Object findByAll(DictDetailQueryCriteria criteria,Pageable pageable);
 }

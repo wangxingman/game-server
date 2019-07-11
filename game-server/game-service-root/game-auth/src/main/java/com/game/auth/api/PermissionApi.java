@@ -4,15 +4,16 @@ import com.game.auth.service.PermissionService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.entity.user.Permission;
+import com.game.core.utils.jpa.criteria.CommonQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author : wx
- * @Desc :   权限的操作
+ * @Desc :
  * @Date :  下午 12:32 2019/7/1 0001
- * @explain :
+ * @explain : 权限的操作
  */
 @RestController
 @RequestMapping("/permission")
@@ -25,7 +26,7 @@ public class PermissionApi extends BaseApi {
      * @Author: wx
      * @Date : 下午 7:25 2019/7/1 0001
      * @params:
-     * @Desc : 查询全部的权限
+     * @Desc : 查询全部的权限 新增修改时候 全部下拉菜单
      */
     @GetMapping("/getByAllTree")
     public Result getByAllTree() {
@@ -36,11 +37,11 @@ public class PermissionApi extends BaseApi {
      * @Author: wx
      * @Date  : 下午 7:43 2019/7/1 0001 
      * @params: 
-     * @Desc  :  查询全部的权限
+     * @Desc  :  查询全部的权限 【模糊查询】
      */
-    @GetMapping("/getByAll")
-    public Result getByAll() {
-        return success("全部的权限",permissionService.queryAll());
+    @GetMapping("/getByAllSearch")
+    public Result getByAllSearch(CommonQueryCriteria criteria) {
+        return success("全部的权限",permissionService.getByAllSearch(criteria));
     }
 
     /**
@@ -69,7 +70,7 @@ public class PermissionApi extends BaseApi {
      * @Author: wx
      * @Date  : 下午 7:57 2019/7/1 0001
      * @params:
-     * @Desc  :  删除权限
+     * @Desc  :  删除权限【还要删除西面的子菜单】
      */
     @DeleteMapping(value = "delByPermissions")
     public Result delByPermissions(@RequestParam Long id){

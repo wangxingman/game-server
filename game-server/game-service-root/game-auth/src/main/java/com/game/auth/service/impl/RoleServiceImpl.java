@@ -1,15 +1,12 @@
 package com.game.auth.service.impl;
 
-import cn.hutool.core.util.PageUtil;
 import com.game.auth.mapper.RoleMapper;
 import com.game.auth.repository.RoleRepository;
 import com.game.auth.service.RoleService;
-import com.game.common.dto.user.RoleDto;
-import com.game.common.dto.user.RoleSmallDto;
 import com.game.common.entity.user.Role;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
-import com.game.core.utils.jpa.CommonQueryCriteria;
+import com.game.core.utils.jpa.criteria.CommonQueryCriteria;
 import com.game.core.utils.jpa.JpaPageUtil;
 import com.game.core.utils.jpa.QueryHelp;
 import lombok.extern.slf4j.Slf4j;
@@ -117,6 +114,15 @@ public class RoleServiceImpl implements RoleService {
     public Object findByAllSearch(CommonQueryCriteria criteria, Pageable pageable) {
         Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
         return JpaPageUtil.toPage(page);
+    }
+
+    @Override
+    public List<Role> findByRoleToUid(Long id) {
+        List<Role> roleList = roleRepository.findByUsers_Id(id).stream().collect(Collectors.toList());
+        if(roleList.size()<0) {
+          log.info("当前用户没有角色权限！");
+        }
+        return roleList;
     }
 
 }

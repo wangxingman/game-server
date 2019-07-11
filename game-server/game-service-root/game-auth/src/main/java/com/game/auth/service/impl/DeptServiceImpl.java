@@ -9,6 +9,8 @@ import com.game.common.entity.user.Dept;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
+import com.game.core.utils.jpa.QueryHelp;
+import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -26,44 +28,34 @@ import java.util.stream.Collectors;
 public class DeptServiceImpl implements DeptService {
 
     @Autowired
-    private DeptMapper deptMapper;
-
-    @Autowired
     private DeptRepository deptRepository;
 
     @Override
-    public List<DeptDto> findByAll() {
-        List<Dept> deptList = deptRepository.findAll();
-        if (Objects.isNull(deptList)) {
-            throw new BadRequestException("deptList没有数据");
-        }
-        List<DeptDto> deptDtoList = deptMapper.toDto(deptList);
-        return deptDtoList;
+    public List<DeptDto> queryAll(DeptQueryCriteria criteria) {
+        return deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
     }
 
     @Override
-    public DeptDto findById(Long id) {
+    public Dept findById(Long id) {
         Optional<Dept> repository = deptRepository.findById(id);
         Dept dept = repository.get();
         if (Objects.isNull(dept)) {
             throw new EntityNotFoundException(Dept.class, "id", id);
         }
-        DeptDto deptDto = deptMapper.toDto(dept);
-        return deptDto;
+        return dept;
     }
 
     @Override
-    public DeptDto addByDept(Dept dept) {
+    public Dept addByDept(Dept dept) {
         Dept currentDept = deptRepository.findByName(dept.getName());
         if (Objects.nonNull(currentDept)) {
             throw new EntityExistException(Dept.class, "name", dept.getName());
         }
-        DeptDto deptDto = deptMapper.toDto(deptRepository.save(dept));
-        return deptDto;
+        return deptRepository.save(dept);
     }
 
     @Override
-    public DeptDto updateByDept(Dept dept) {
+    public Dept updateByDept(Dept dept) {
         if (dept.getId().equals(dept.getPid())) {
             throw new BadRequestException("上级不能为自己");
         }
@@ -74,12 +66,11 @@ public class DeptServiceImpl implements DeptService {
             currentDept.setName(dept.getName());
             currentDept.setRoles(dept.getRoles());
         }
-        DeptDto deptDto = deptMapper.toDto(deptRepository.saveAndFlush(currentDept));
-        return deptDto;
+        return deptRepository.saveAndFlush(currentDept);
     }
 
     @Override
-    public void deleteByDept(Long id) {
+    public void delByDept(Long id) {
         try {
             deptRepository.deleteById(id);
         } catch (EntityNotFoundException e) {

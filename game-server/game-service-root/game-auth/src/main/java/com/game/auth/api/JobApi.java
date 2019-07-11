@@ -4,7 +4,9 @@ import com.game.auth.service.JobService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.entity.user.Job;
+import com.game.core.utils.jpa.criteria.JobQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -27,7 +29,8 @@ public class JobApi extends BaseApi {
      * @Desc :   查询
      */
     @GetMapping("findByAll")
-    public Result findByAll() {
+    public Result findByAll(JobQueryCriteria criteria,
+                            Pageable pageable) {
         return success( "job数据",jobService.findByAll());
     }
 

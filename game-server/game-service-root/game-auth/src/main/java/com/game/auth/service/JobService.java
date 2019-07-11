@@ -2,6 +2,8 @@ package com.game.auth.service;
 
 import com.game.common.dto.user.JobDto;
 import com.game.common.entity.user.Job;
+import com.game.core.utils.jpa.criteria.JobQueryCriteria;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @Author : wx
@@ -17,7 +19,7 @@ public interface JobService {
      * @params:
      * @Desc :   查询 【default即是可以选择 不重写】
      */
-    default Object findByAll() {
+    default Object findByAll(JobQueryCriteria criteria, Pageable pageable) {
         return null;
     }
     
@@ -27,7 +29,7 @@ public interface JobService {
      * @params: 
      * @Desc  :  查询一个
      */
-    JobDto findById(Long id);
+    Job findById(Long id);
 
     /**
      * @Author: wx
@@ -35,7 +37,7 @@ public interface JobService {
      * @params:
      * @Desc :  添加
      */
-    JobDto addByJob(Job job);
+    Job addByJob(Job job);
 
     /**
      * @Author: wx
@@ -43,7 +45,7 @@ public interface JobService {
      * @params:
      * @Desc : 修改
      */
-    JobDto updateByJob(Job job);
+    Job updateByJob(Job job);
 
     /**
      * @Author: wx

@@ -1,6 +1,7 @@
 package com.game.auth.repository;
 
 import com.game.common.entity.user.Permission;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.game.auth.service;
 
 import com.game.common.entity.user.User;
-import com.game.core.utils.jpa.UserQueryCriteria;
+import com.game.core.utils.jpa.criteria.UserQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Pageable;
 
@@ -79,4 +79,12 @@ public interface UserService {
      * @Desc  :修改密码
      */
     void updateByPass(User user,String newPass);
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 2:12 2019/7/11 0011 
+     * @params: 
+     * @Desc  :  用户名获取用户
+     */
+    User findByName(String userName);
 }

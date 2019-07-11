@@ -3,6 +3,7 @@ package com.game.auth.service;
 import com.game.common.dto.user.DeptDto;
 import com.game.common.encode.MD5Util;
 import com.game.common.entity.user.Dept;
+import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -23,8 +24,7 @@ public interface DeptService {
       * @params:
       * @Desc  :
       */
-//    @Cacheable(keyGenerator = "keyGenerator")
-    List<DeptDto> findByAll();
+    List<Dept> queryAll(DeptQueryCriteria criteria);
     
     /**
      * @Author: wx
@@ -33,7 +33,7 @@ public interface DeptService {
      * @Desc  :
      */
     @Cacheable(key = "#p0")
-    DeptDto findById(Long id);
+    Dept findById(Long id);
 
     /**
      * @Author: wx
@@ -42,7 +42,7 @@ public interface DeptService {
      * @Desc  :
      */
     @CacheEvict(allEntries = true)
-    DeptDto addByDept(Dept dept);
+    Dept addByDept(Dept dept);
 
     /**
      * @Author: wx
@@ -51,7 +51,7 @@ public interface DeptService {
      * @Desc  :
      */
     @CacheEvict(allEntries = true)
-    DeptDto updateByDept(Dept dept);
+    Dept updateByDept(Dept dept);
 
     /**
      * @Author: wx
@@ -60,7 +60,7 @@ public interface DeptService {
      * @Desc  :
      */
     @CacheEvict(allEntries = true)
-    void deleteByDept(Long id);
+    void delByDept(Long id);
 
     /**
      * @Author: wx
@@ -68,7 +68,6 @@ public interface DeptService {
      * @params:
      * @Desc  :
      */
-//    @Cacheable(keyGenerator = "keyGenerator")
     Object findByAllTree(List<DeptDto> deptDtos);
 
     /**
@@ -77,7 +76,6 @@ public interface DeptService {
      * @params:
      * @Desc  :
      */
-//    @Cacheable(keyGenerator = "keyGenerator")
     List<Dept> findByPid(long pid);
 
     /**

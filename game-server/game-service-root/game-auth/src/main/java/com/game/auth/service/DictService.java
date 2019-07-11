@@ -2,6 +2,7 @@ package com.game.auth.service;
 
 import com.game.common.dto.user.DictDto;
 import com.game.common.entity.user.Dict;
+import com.game.core.utils.jpa.criteria.DictQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,7 +23,7 @@ public interface DictService {
     * @params: 
     * @Desc  :
     */
-    Object findByAll(DictDto dict, Pageable pageable);
+    Object findByAll(DictQueryCriteria dictQueryCriteria, Pageable pageable);
 
     /**
      * @Author: wx
@@ -31,7 +32,7 @@ public interface DictService {
      * @Desc  :
      */
     @Cacheable(key = "#p0")
-    DictDto findById(Long id);
+    Dict findById(Long id);
 
    /**
     * @Author: wx
@@ -40,7 +41,7 @@ public interface DictService {
     * @Desc  :
     */
     @CacheEvict(allEntries = true)
-    DictDto addByDict(Dict dict);
+    Dict addByDict(Dict dict);
 
     /**
      * @Author: wx
@@ -49,7 +50,7 @@ public interface DictService {
      * @Desc  :
      */
     @CacheEvict(allEntries = true)
-    DictDto updateByDict(Dict dict);
+    Dict updateByDict(Dict dict);
 
     /**
      * @Author: wx

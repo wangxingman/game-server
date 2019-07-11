@@ -5,6 +5,7 @@ import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.dto.user.DictDto;
 import com.game.common.entity.user.Dict;
+import com.game.core.utils.jpa.criteria.DictQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,8 @@ public class DictApi extends BaseApi {
      * @Desc :  查询字典
      */
     @GetMapping("/findByAll")
-    public Result findByAll(DictDto dictDto, Pageable pageable) {
-        return success("字典数据", dictService.findByAll(dictDto,pageable));
+    public Result findByAll(DictQueryCriteria dictQueryCriteria, Pageable pageable) {
+        return success("字典数据", dictService.findByAll(dictQueryCriteria,pageable));
     }
 
     /**

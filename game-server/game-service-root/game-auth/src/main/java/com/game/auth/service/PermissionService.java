@@ -1,7 +1,7 @@
 package com.game.auth.service;
 
-import com.game.common.dto.user.PermissionDto;
 import com.game.common.entity.user.Permission;
+import com.game.core.utils.jpa.criteria.CommonQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -29,7 +29,7 @@ public interface PermissionService {
      * @Author: wx
      * @Date : 下午 7:40 2019/7/1 0001
      * @params:
-     * @Desc :
+     * @Desc : 查询顶点权限菜单
      */
     @Cacheable(key = "'pid:'+#p0")
     List<Permission> findByPid(long pid);
@@ -40,8 +40,7 @@ public interface PermissionService {
      * @params:
      * @Desc : 查询全部的权限
      */
-//    @Cacheable(keyGenerator = "keyGenerator")
-    List<PermissionDto> queryAll();
+    List<Permission> getByAllSearch(CommonQueryCriteria criteria);
 
     /**
      * @Author: wx
@@ -49,7 +48,7 @@ public interface PermissionService {
      * @params:
      * @Desc :  添加权限
      */
-    PermissionDto addByPermission(Permission permission);
+    Permission addByPermission(Permission permission);
 
     /**
      * @Author: wx
@@ -58,7 +57,7 @@ public interface PermissionService {
      * @Desc  :  修改权限
      */
     @CacheEvict(allEntries = true)
-    PermissionDto updateByPermissions(Permission permission);
+    Permission updateByPermissions(Permission permission);
 
     /**
      * @Author: wx
@@ -68,4 +67,13 @@ public interface PermissionService {
      */
     @CacheEvict(allEntries = true)
     void delByPermissions(Long id);
+
+
+    /**
+     * @Author: wx
+     * @Date  : 上午 11:06 2019/7/11 0011
+     * @params:
+     * @Desc  : 集合转换菜单类型数据
+     */
+    Object buildTree(List<Permission> permissions);
 }

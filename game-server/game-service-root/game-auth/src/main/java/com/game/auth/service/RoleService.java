@@ -1,12 +1,12 @@
 package com.game.auth.service;
 
-import com.game.common.dto.user.RoleDto;
 import com.game.common.entity.user.Role;
-import com.game.core.utils.jpa.CommonQueryCriteria;
+import com.game.core.utils.jpa.criteria.CommonQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 
 /**
@@ -86,5 +86,13 @@ public interface RoleService {
      * @Desc :  模糊分页查询
      */
     Object findByAllSearch(CommonQueryCriteria criteria, Pageable pageable);
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 2:26 2019/7/11 0011 
+     * @params: 
+     * @Desc  : 用户获取所有的角色
+     */
+    List<Role> findByRoleToUid(Long id);
 
 }

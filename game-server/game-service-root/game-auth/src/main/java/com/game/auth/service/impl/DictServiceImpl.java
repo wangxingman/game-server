@@ -8,6 +8,8 @@ import com.game.common.entity.user.Dict;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
+import com.game.core.utils.jpa.QueryHelp;
+import com.game.core.utils.jpa.criteria.DictQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,40 +31,34 @@ public class DictServiceImpl implements DictService {
     @Autowired
     private DictRepository dictRepository;
 
-    @Autowired
-    private DictMapper dictMapper;
-
     @Override
-    public Object findByAll(DictDto dict, Pageable pageable) {
-        Page<Dict> repositoryAll = dictRepository.findAll(pageable);
-        List<Dict> dictList = repositoryAll.getContent();
-        if(Objects.isNull(dictList)) {
-            throw new BadRequestException("字典集合不存在");
-        }
-        return dictList;
+    public Object findByAll(DictQueryCriteria dictQueryCriteria, Pageable pageable) {
+        Page<Dict> page = dictRepository.findAll((root, query, cb) -> QueryHelp.getPredicate(root, dictQueryCriteria, cb), pageable);
+        List<Dict> content = page.getContent();
+        return content;
     }
 
     @Override
-    public DictDto findById(Long id) {
+    public Dict findById(Long id) {
         Dict dict = dictRepository.getOne(id);
         if(Objects.isNull(dict)) {
            throw new EntityNotFoundException(Dict.class,"id",id);
         }
-        return dictMapper.toDto(dict);
+        return dict;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public DictDto addByDict(Dict dict) {
+    public Dict addByDict(Dict dict) {
         Dict currentDict = dictRepository.findByName(dict.getName());
         if(Objects.nonNull(currentDict)) {
             throw new EntityExistException(Dict.class,"添加的字典",dict.getName());
         }
-        return dictMapper.toDto(dictRepository.save(dict));
+        return dictRepository.save(dict);
     }
 
     @Override
-    public DictDto updateByDict(Dict dict) {
+    public Dict updateByDict(Dict dict) {
         Dict currentDict = dictRepository.getOne(dict.getId());
         if(Objects.isNull(currentDict)) {
           throw new EntityNotFoundException(Dict.class,"字典id",dict.getId());
@@ -70,7 +66,7 @@ public class DictServiceImpl implements DictService {
             //赋值数据
             currentDict.setDictDetails(dict.getDictDetails());
         }
-        return  dictMapper.toDto(currentDict);
+        return  currentDict;
     }
 
     @Override

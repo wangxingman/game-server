@@ -15,4 +15,7 @@ import java.util.Set;
 public interface RoleRepository extends JpaRepository<Role,Long>, JpaSpecificationExecutor {
 
     Role findByName(String name);
+
+    Set<Role> findByUsers_Id(Long id);
+
 }

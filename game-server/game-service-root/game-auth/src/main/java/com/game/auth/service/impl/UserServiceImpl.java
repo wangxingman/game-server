@@ -11,7 +11,7 @@ import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import com.game.core.utils.jpa.JpaPageUtil;
 import com.game.core.utils.jpa.QueryHelp;
-import com.game.core.utils.jpa.UserQueryCriteria;
+import com.game.core.utils.jpa.criteria.UserQueryCriteria;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -136,6 +136,15 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException("不能修改同样的密码");
         }
         userRepository.updatePass(user.getUsername(), encode, new Date());
+    }
+
+    @Override
+    public User findByName(String userName) {
+        User user = userRepository.findByUsername(userName);
+        if(Objects.isNull(user)) {
+            throw new EntityNotFoundException(User.class,"用户的名字userName",userName);
+        }
+        return user;
     }
 
 }

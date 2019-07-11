@@ -9,10 +9,15 @@ import com.game.common.entity.user.Role;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
+import com.game.core.utils.jpa.QueryHelp;
+import com.game.core.utils.jpa.criteria.JobQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,43 +31,43 @@ import java.util.Objects;
 public class JobServiceImpl implements JobService {
 
     @Autowired
-    private JobMapper jobMapper;
-
-    @Autowired
     private JobRepository jobRepository;
 
     @Override
-    public Object findByAll() {
-        List<Job> jobList = jobRepository.findAll();
-        if(Objects.isNull(jobList)) {
+    public Object findByAll(JobQueryCriteria criteria, Pageable pageable) {
+        Page<Job> page = jobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
+        if(Objects.isNull(page)) {
             throw new BadRequestException("jobList为null");
         }
-        return jobList;
+        List<Job> jobs = new ArrayList<>();
+        for (Job job : page.getContent()) {
+            jobs.add(job);
+        }
+        return jobs;
     }
 
     @Override
-    public JobDto findById(Long id) {
+    public Job findById(Long id) {
         Job job = jobRepository.getOne(id);
         if (Objects.isNull(job)) {
             throw new EntityNotFoundException(Job.class, "id", id);
         }
-        return jobMapper.toDto(job);
+        return job;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public JobDto addByJob(Job job) {
+    public Job addByJob(Job job) {
         Job currentJob = jobRepository.findByName(job.getName());
         if (Objects.nonNull(currentJob)) {
             throw new EntityExistException(Job.class, "name", job.getName());
         }
-        JobDto jobDto = jobMapper.toDto(jobRepository.save(job));
-        return jobDto;
+        return jobRepository.save(job);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public JobDto updateByJob(Job job) {
+    public Job updateByJob(Job job) {
         Job currentJob = jobRepository.getOne(job.getId());
         if (Objects.isNull(currentJob)) {
            throw  new EntityNotFoundException(Job.class, "id", job.getId());
@@ -70,8 +75,7 @@ public class JobServiceImpl implements JobService {
         currentJob.setEnabled(job.getEnabled());
         currentJob.setName(job.getName());
         currentJob.setSort(job.getSort());
-        JobDto jobDto = jobMapper.toDto(currentJob);
-        return jobDto;
+        return currentJob;
     }
 
     @Override

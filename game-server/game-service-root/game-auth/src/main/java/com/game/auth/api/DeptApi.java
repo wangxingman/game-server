@@ -2,7 +2,10 @@ package com.game.auth.api;
 
 import com.game.auth.service.DeptService;
 import com.game.common.comman.api.BaseApi;
+import com.game.common.comman.api.Result;
+import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +18,53 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("dept")
 public class DeptApi extends BaseApi {
-    
+
     @Autowired
     private DeptService deptService;
+
+    /**
+     * @Author: wx
+     * @Date : 下午 4:23 2019/7/11 0011
+     * @params:
+     * @Desc :  查询部门
+     */
+    @PostMapping("/findByAllSearch")
+    public Result findByAllSearch(DeptQueryCriteria criteria) {
+        
+        return success();
+    }
+
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:23 2019/7/11 0011 
+     * @params:
+     * @Desc  : 新增部门
+     */
+    @PostMapping("/addByDept")
+    public Result addByDept() {
+        return success("新增部门");
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:23 2019/7/11 0011 
+     * @params:
+     * @Desc  : 修改部门
+     */
+    @PostMapping("/updateByDept")
+    public Result updateByDept() {
+        return success("修改部门");
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:23 2019/7/11 0011 
+     * @params:
+     * @Desc  : 删除部门
+     */
+    @PostMapping("/updateByDept")
+    public Result delByDept() {
+        return success("删除部门");
+    }
 }
