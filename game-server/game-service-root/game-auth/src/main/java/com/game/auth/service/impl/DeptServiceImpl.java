@@ -6,11 +6,13 @@ import com.game.auth.service.DeptService;
 import com.game.common.constant.Const;
 import com.game.common.dto.user.DeptDto;
 import com.game.common.entity.user.Dept;
+import com.game.common.entity.user.Menu;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import com.game.core.utils.jpa.QueryHelp;
 import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
  * @Date :  上午 10:45 2019/7/2 0002
  * @explain :
  */
+@Slf4j
 @Service
 public class DeptServiceImpl implements DeptService {
 
@@ -31,8 +34,35 @@ public class DeptServiceImpl implements DeptService {
     private DeptRepository deptRepository;
 
     @Override
-    public List<DeptDto> queryAll(DeptQueryCriteria criteria) {
+    public List<Dept> queryAll(DeptQueryCriteria criteria) {
         return deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder));
+    }
+
+    private Object buildObjTree(List<Dept> depts) {
+        List<Map<String, Object>> list = new LinkedList<>();
+        depts.forEach(dept -> {
+                    if (dept != null) {
+                        List<Dept> menuList = deptRepository.findByPid(dept.getId());
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("id", dept.getId());
+                        map.put("label", dept.getName());
+                        if (menuList != null && menuList.size() != 0) {
+                            map.put("children", buildObjTree(menuList));
+                        }
+                        list.add(map);
+                    }
+                }
+        );
+        return list;
+    }
+
+    @Override
+    public Object findByAll() {
+        List<Dept> deptList = deptRepository.findAll();
+        if(Objects.isNull(deptList)) {
+           log.info("没有部门数据");
+        }
+        return buildObjTree(deptList);
     }
 
     @Override

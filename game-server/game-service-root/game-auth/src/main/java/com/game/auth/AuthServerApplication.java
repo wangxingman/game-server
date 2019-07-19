@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableEurekaClient
 @EnableFeignClients
-@SpringBootApplication
+@SpringBootApplication()
 @EnableCaching
 @EntityScan("com.game.common.entity.*")          //扫描实体类
 /**开启lcn分布式事务*/

@@ -3,11 +3,19 @@ package com.game.auth.api;
 import com.game.auth.service.DeptService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
+import com.game.common.entity.user.Dept;
+import com.game.common.entity.user.Menu;
 import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : wx
@@ -34,6 +42,16 @@ public class DeptApi extends BaseApi {
         return success();
     }
 
+    /**
+     * @Author: wx
+     * @Date : 下午 4:23 2019/7/11 0011
+     * @params:
+     * @Desc :   查询部门
+     */
+    @GetMapping("/findByAll")
+    public Result findByAll() {
+        return success("查询部门", deptService.findByAll());
+    }
 
     /**
      * @Author: wx
@@ -63,7 +81,7 @@ public class DeptApi extends BaseApi {
      * @params:
      * @Desc  : 删除部门
      */
-    @PostMapping("/updateByDept")
+    @PostMapping("/delByDept")
     public Result delByDept() {
         return success("删除部门");
     }

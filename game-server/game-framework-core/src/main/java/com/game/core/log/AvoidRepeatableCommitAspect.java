@@ -1,7 +1,7 @@
 package com.game.core.log;
 
 import com.game.core.annotation.AvoidRepeatableCommit;
-import com.game.core.utils.UtilIp;
+import com.game.core.utils.web.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -43,7 +43,7 @@ public class AvoidRepeatableCommitAspect {
     public Object around(ProceedingJoinPoint point) throws Throwable {
 
         HttpServletRequest request  = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String ip = UtilIp.getIpAddress(request);
+        String ip = RequestUtil.getClientIp(request);
         //获取注解
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();

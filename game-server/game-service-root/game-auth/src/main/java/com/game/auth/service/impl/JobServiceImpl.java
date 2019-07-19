@@ -17,9 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @Author : wx
@@ -34,16 +32,30 @@ public class JobServiceImpl implements JobService {
     private JobRepository jobRepository;
 
     @Override
-    public Object findByAll(JobQueryCriteria criteria, Pageable pageable) {
-        Page<Job> page = jobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
-        if(Objects.isNull(page)) {
+    public Object findBySearchAll(JobQueryCriteria criteria, Pageable pageable) {
+        Page<Job> page = jobRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
+        if (Objects.isNull(page)) {
             throw new BadRequestException("jobList为null");
         }
         List<Job> jobs = new ArrayList<>();
         for (Job job : page.getContent()) {
             jobs.add(job);
         }
-        return jobs;
+        List<Job> jobList = jobRepository.findAll();
+        int count = jobList.size();
+        Map<String,Object> map = new HashMap<>();
+        map.put("count",count);
+        map.put("jobs",jobs);
+        return map;
+    }
+
+    @Override
+    public Object findByAll() {
+        List<Job> repositoryAll = jobRepository.findAll();
+        if (Objects.isNull(repositoryAll)) {
+            throw new BadRequestException("jobList为null");
+        }
+        return repositoryAll;
     }
 
     @Override
@@ -68,14 +80,16 @@ public class JobServiceImpl implements JobService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Job updateByJob(Job job) {
-        Job currentJob = jobRepository.getOne(job.getId());
+        Optional<Job> job1 = jobRepository.findById(job.getId());
+        Job currentJob = job1.get();
         if (Objects.isNull(currentJob)) {
-           throw  new EntityNotFoundException(Job.class, "id", job.getId());
+            throw new EntityNotFoundException(Job.class, "id", job.getId());
         }
-        currentJob.setEnabled(job.getEnabled());
-        currentJob.setName(job.getName());
         currentJob.setSort(job.getSort());
-        return currentJob;
+        currentJob.setName(job.getName());
+        currentJob.setDept(job.getDept());
+        currentJob.setEnabled(job.getEnabled());
+        return jobRepository.saveAndFlush(job);
     }
 
     @Override
@@ -83,7 +97,7 @@ public class JobServiceImpl implements JobService {
     public void delByJob(Long id) {
         Job currentJob = jobRepository.getOne(id);
         if (Objects.isNull(currentJob)) {
-            throw  new EntityNotFoundException(Job.class, "id", id);
+            throw new EntityNotFoundException(Job.class, "id", id);
         }
         jobRepository.deleteById(id);
     }

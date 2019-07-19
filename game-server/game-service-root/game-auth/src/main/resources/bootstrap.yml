@@ -37,3 +37,9 @@ logging:
     root: info
   pattern:
     console:   "%d - %msg%n"
+security:
+  basic:
+    enabled: false
+management:
+  security:
+    enabled: false

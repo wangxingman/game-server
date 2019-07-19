@@ -28,9 +28,20 @@ public class JobApi extends BaseApi {
      * @params:
      * @Desc :   查询
      */
-    @GetMapping("findByAll")
-    public Result findByAll(JobQueryCriteria criteria,
+    @GetMapping("findBySearchAll")
+    public Result findBySearchAll(JobQueryCriteria criteria,
                             Pageable pageable) {
+        return success( "job数据",jobService.findBySearchAll(criteria,pageable));
+    }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 3:06 2019/7/17 0017 
+     * @params: 
+     * @Desc  :  全查询
+     */
+    @GetMapping("findByAll")
+    public Result findByAll() {
         return success( "job数据",jobService.findByAll());
     }
 
@@ -40,7 +51,7 @@ public class JobApi extends BaseApi {
      * @params:
      * @Desc :  添加
      */
-    @PostMapping("addByJob")
+    @PostMapping("/addByJob")
     public Result addByJob(@RequestBody Job job) {
         return success("添加岗位",jobService.addByJob(job));
     }

@@ -25,6 +25,14 @@ public interface DeptService {
       * @Desc  :
       */
     List<Dept> queryAll(DeptQueryCriteria criteria);
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 7:41 2019/7/17 0017
+     * @params:
+     * @Desc  :
+     */
+    Object findByAll();
     
     /**
      * @Author: wx

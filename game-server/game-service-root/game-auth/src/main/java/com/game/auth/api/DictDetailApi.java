@@ -30,7 +30,7 @@ public class DictDetailApi extends BaseApi {
      */
     @GetMapping("findByAll")
     public Result findByAll(DictDetailQueryCriteria criteria, Pageable pageable) {
-        return success("字典明细All",dictDetailService.findByAll(pageable));
+        return success("字典明细All",dictDetailService.findByAll(criteria,pageable));
     }
     
     /**

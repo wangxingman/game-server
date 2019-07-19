@@ -19,9 +19,17 @@ public interface JobService {
      * @params:
      * @Desc :   查询 【default即是可以选择 不重写】
      */
-    default Object findByAll(JobQueryCriteria criteria, Pageable pageable) {
+    default Object findBySearchAll(JobQueryCriteria criteria, Pageable pageable) {
         return null;
     }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 3:08 2019/7/17 0017
+     * @params:
+     * @Desc  :
+     */
+    Object findByAll();
     
     /**
      * @Author: wx

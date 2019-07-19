@@ -31,7 +31,7 @@ public class UserApi extends BaseApi {
      * @params:
      * @Desc :  快速登录
      */
-    @PostMapping("/fastLogin")
+    @GetMapping("/fastLogin")
     public Result fastLogin(@RequestParam(name = "username") String username, @RequestParam(name = "password") String passWord) {
         User user = userService.fastLogin(username, passWord);
         if (Objects.isNull(user)) {
@@ -39,6 +39,18 @@ public class UserApi extends BaseApi {
         }
         return success("返回的用户信息", user);
     }
+
+    /**
+     * @Author: wx
+     * @Date : 下午 3:10 2019/7/16 0016
+     * @params:
+     * @Desc :快速退出
+     */
+    @GetMapping("/fastLoginOut")
+    public Result fastLoginOut() {
+        return success("快速退出");
+    } 
+
     //todo 判断用户的权限
 
     /**

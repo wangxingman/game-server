@@ -1,9 +1,7 @@
 package com.game.core.utils;
 
 import com.game.common.dto.Login;
-import com.game.common.entity.user.User;
 import com.game.core.utils.web.RequestUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -22,8 +20,7 @@ public class LoginUtil {
     /**
      * 缓存处理器
      */
-    @Autowired
-    private HashOperations<String, Object, Object> hashOperations;
+    static HashOperations<String, Object, Object> hashOperations;
 
     /**
      * 缓存key
