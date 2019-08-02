@@ -17,6 +17,7 @@
         <module>game-shop</module>
         <module>game-hall</module>
         <module>game-sleuth</module>
+        <module>game-medical-root</module>
     </modules>
 
     <dependencies>

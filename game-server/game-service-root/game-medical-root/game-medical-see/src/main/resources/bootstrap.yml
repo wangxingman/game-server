@@ -1,0 +1,42 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@127.0.0.1:1111/eureka/
+  instance:
+    prefer-ip-address: true
+    hostname: 10.254.1.10
+#  cloud:       #配置中心获取配置
+#    config:
+#      label: ${spring.application.name}
+#      profile: dev
+#      uri: http://10.254.1.10:7001
+#      name: ${spring.application.name}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  application:
+    name: hall-server
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/game-server-medical-one?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+server:
+  port: 6007
+  tomcat:
+    uri-encoding: UTF-8
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+spring:       # 配置elasticSearch
+  data:
+    elasticsearch:
+      cluster-name:    # 集群名
+      cluster-nodes:          # 连接节点,注意在集群中通信都是9300端口，否则会报错无法连接上！
+      repositories:
+        enabled: true          # 仓库中数据存储

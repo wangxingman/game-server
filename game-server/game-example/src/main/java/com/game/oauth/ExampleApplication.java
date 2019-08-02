@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Desc  :  生成jpa 只能在当前项目模块
  */
 @SpringBootApplication
-public class OauthApplication {
+public class ExampleApplication {
     public static void main(String[] args) {
-        SpringApplication.run(OauthApplication.class);
+        SpringApplication.run(ExampleApplication.class);
     }
 }

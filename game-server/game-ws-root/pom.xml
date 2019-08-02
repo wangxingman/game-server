@@ -15,6 +15,7 @@
 
     <modules>
         <module>hall-ws-service</module>
+        <module>card-ws-service</module>
     </modules>
 
     <dependencies>

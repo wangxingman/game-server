@@ -1,5 +1,6 @@
 package com.game.common.entity.user;
 
+import com.game.common.comman.SessionUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,7 +24,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name="user")
-public class User implements Serializable {
+public class User implements Serializable, SessionUtil.Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

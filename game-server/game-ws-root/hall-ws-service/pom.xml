@@ -11,18 +11,14 @@
 
     <artifactId>hall-ws-service</artifactId>
     <dependencies>
+
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>game-framework-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>game-framework-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+        
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>

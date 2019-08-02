@@ -1,6 +1,10 @@
 package com.game.common.comman.api;
 
+import com.game.common.comman.SessionUtil;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -10,7 +14,10 @@ import java.util.Date;
  * @Date : 下午 7:45 2019/5/6 0006
  */
 @Data
-public class Result {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Result implements SessionUtil.Session{
     /**
      * 自定义状态码
      */

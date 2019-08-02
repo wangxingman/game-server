@@ -9,6 +9,19 @@ public interface Const {
 
     /**
      * @Author: wx
+     * @Date  : 下午 3:17 2019/7/23 0023
+     * @params:
+     * @Desc  : 请求头
+     */
+    interface Header {
+        /**
+         * 当前用户NAME
+         */
+        String CURRENT_USER_REAL_NAME = "X-CURRENT-USER-REAL-NAME";
+    }
+
+    /**
+     * @Author: wx
      * @Desc : ws的各种常量
      * @Date : 下午 2:33 2019/5/8 0008
      * @params:
@@ -106,5 +119,6 @@ public interface Const {
         int EGIHT = 8;
         int NINGHT = 9;
     }
+    
 
 }

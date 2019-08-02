@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "params",
+      "type": "com.game.common.dto.NettyParams",
+      "sourceType": "com.game.common.dto.NettyParams"
+    }
+  ],
+  "properties": [
+    {
+      "name": "params.local-map",
+      "type": "java.util.Map<java.lang.Integer,java.lang.String>",
+      "sourceType": "com.game.common.dto.NettyParams"
+    },
+    {
+      "name": "params.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.game.common.dto.NettyParams"
+    }
+  ],
+  "hints": []
+}
