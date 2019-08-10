@@ -1,7 +1,13 @@
 package com.game.see.service;
 
 
+import com.game.core.utils.jpa.criteria.midical.RankQueryCriteria;
 import com.game.see.entity.MedicalRank;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @Author : wx
@@ -34,4 +40,20 @@ public interface MedicalRankService {
      * @Desc  :
      */
     MedicalRank findByOne(Long id);
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 3:37 2019/8/8 0008 
+     * @params: 
+     * @Desc  :
+     */
+    Object findByAllSearch(RankQueryCriteria criteria, Pageable pageable);
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:20 2019/8/8 0008 
+     * @params: 
+     * @Desc  :
+     */
+    Object findByTimeOffSearch(String OfficeName, Timestamp timestamp, Pageable pageable);
 }

@@ -1,8 +1,7 @@
 package com.game.auth.service;
 
-import com.game.common.dto.user.DictDetailDto;
 import com.game.common.entity.user.DictDetail;
-import com.game.core.utils.jpa.criteria.DictDetailQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.DictDetailQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

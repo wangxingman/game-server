@@ -11,7 +11,7 @@ import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import com.game.core.utils.jpa.JpaPageUtil;
 import com.game.core.utils.jpa.QueryHelp;
-import com.game.core.utils.jpa.criteria.UserQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.UserQueryCriteria;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

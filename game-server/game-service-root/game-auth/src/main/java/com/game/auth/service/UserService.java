@@ -1,7 +1,7 @@
 package com.game.auth.service;
 
 import com.game.common.entity.user.User;
-import com.game.core.utils.jpa.criteria.UserQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.UserQueryCriteria;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Pageable;
 

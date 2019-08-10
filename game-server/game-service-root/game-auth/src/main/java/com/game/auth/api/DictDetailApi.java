@@ -4,7 +4,7 @@ import com.game.auth.service.DictDetailService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.entity.user.DictDetail;
-import com.game.core.utils.jpa.criteria.DictDetailQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.DictDetailQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,7 @@
 package com.game.auth.service;
 
-import com.game.common.dto.user.JobDto;
 import com.game.common.entity.user.Job;
-import com.game.core.utils.jpa.criteria.JobQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.JobQueryCriteria;
 import org.springframework.data.domain.Pageable;
 
 /**

@@ -5,7 +5,7 @@ import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.entity.user.User;
 import com.game.core.exception.EntityNotFoundException;
-import com.game.core.utils.jpa.criteria.UserQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.UserQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;

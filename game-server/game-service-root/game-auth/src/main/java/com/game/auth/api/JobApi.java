@@ -4,7 +4,7 @@ import com.game.auth.service.JobService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
 import com.game.common.entity.user.Job;
-import com.game.core.utils.jpa.criteria.JobQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.JobQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;

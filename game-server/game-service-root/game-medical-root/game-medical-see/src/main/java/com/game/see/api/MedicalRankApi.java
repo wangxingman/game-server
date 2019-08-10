@@ -2,10 +2,15 @@ package com.game.see.api;
 
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
+import com.game.core.utils.jpa.criteria.midical.RankQueryCriteria;
 import com.game.see.entity.MedicalRank;
+import com.game.see.entity.MedicalRankDetail;
 import com.game.see.service.MedicalRankService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
 
 /**
  * @Author : wx
@@ -60,7 +65,20 @@ public class MedicalRankApi extends BaseApi {
      * @Desc :  模糊分页查询
      */
     @PostMapping("/findByAllSearch")
-    public Result findByAllSearch() {
-        return success();
+    public Result findByAllSearch(RankQueryCriteria criteria, Pageable pageable) {
+        return success(medicalRankService.findByAllSearch(criteria, pageable));
     }
+
+    /**
+     * @Author: wx
+     * @Date : 下午 4:13 2019/8/8 0008
+     * @params:
+     * @Desc :  时间 科室 查找对应的医生
+     * 【做了 链表 所以查询的时候 自动会把 患者信息 给他】
+     */
+    @GetMapping("/findByTimeOffSearch")
+    public Result findByTimeOffSearch(@RequestParam String OfficeName, @RequestParam Timestamp timestamp, Pageable pageable) {
+        return success("时间 科室 查找对应的医生", medicalRankService.findByTimeOffSearch(OfficeName, timestamp, pageable));
+    }
+
 }

@@ -119,6 +119,17 @@ public interface Const {
         int EGIHT = 8;
         int NINGHT = 9;
     }
+
+    /**
+     * @Author: wx
+     * @Date  : 下午 5:15 2019/8/8 0008 
+     * @params: 
+     * @Desc  :  生成编号的前缀
+     */
+    interface Prefix {
+          String MEDICAL_RANK = "RANK";
+        String MEDICAL_RANK_UPDATE = "MEDICAL_RANK_UPDATE";
+    }
     
 
 }

@@ -1,15 +1,13 @@
 package com.game.auth.service.impl;
 
-import com.game.auth.mapper.DictMapper;
 import com.game.auth.repository.DictRepository;
 import com.game.auth.service.DictService;
-import com.game.common.dto.user.DictDto;
 import com.game.common.entity.user.Dict;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import com.game.core.utils.jpa.QueryHelp;
-import com.game.core.utils.jpa.criteria.DictQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.DictQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

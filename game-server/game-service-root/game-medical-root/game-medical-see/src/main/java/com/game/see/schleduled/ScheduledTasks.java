@@ -41,6 +41,18 @@ public class ScheduledTasks {
         }
         return null;
     }
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 6:50 2019/8/8 0008 
+     * @params: 
+     * @Desc  :  每个月月底 我们结算数据
+     */
+    public void scheduledMedicalAccount() {
+        //清空所有医生的 真实排班次数
+        //将这些数据保存在 这个表 里面
+        
+    }
 
 
 }

@@ -18,6 +18,8 @@ import java.util.Set;
  * @Desc :
  * @Date :  上午 10:34 2019/7/24 0024
  * @explain : 排班 【时间预约】
+ *            某个排班 下面 预约多个医生
+ *            一个医生 对应 多个 用户 预约
  */
 @Data
 @Builder
@@ -40,11 +42,11 @@ public class MedicalRank implements Serializable {
      * 序列号
      */
     @Column(name = "orderNumber",nullable = false)
-    @NotNull
-    private Long orderNumber;
+    @NotBlank
+    private String orderNumber;
 
     /**
-     *  排班日期
+     *  创建日期
      */
     @Column(name = "createTime",nullable = false)
     @NotNull
@@ -65,38 +67,26 @@ public class MedicalRank implements Serializable {
     private Timestamp schedulingTime;
 
     /**
-     *  预约总数量
+     *  开始预约日期
      */
-    @Column(name = "all_number",nullable = false)
+    @Column(name = "startTime",nullable = false)
     @NotNull
-    private Integer allNumber;
+    private Timestamp startTime;
+    
 
     /**
-     *  以预约数量
+     *  科室名字
      */
-    @Column(name = "finish_number",nullable = false)
-    @NotNull
-    private Integer finishNumber;
+    @Column(name = "officeName",nullable = false)
+    @NotBlank
+    private String officeName;
 
     /**
-     * 诊金
+     *  科室Id
      */
-    @Column(name = "money",nullable = false)
-    @NotNull
-    private Integer money;
+    @Column(name = "officeId",nullable = false)
+    @NotBlank
+    private String officeId;
+    
 
-    /**
-     * 医生id
-     */
-    @OneToOne
-    @JoinColumn(name = "doctorId")
-    private MedicalDoctor medicalDoctor;
-
-    /**
-     *  排班下面的患者
-     */
-    @OneToMany(fetch=FetchType.LAZY)
-    @JoinTable(name="medical_rank_medical_subscribe",joinColumns={@JoinColumn(name="r_id",referencedColumnName = "id")}
-            ,inverseJoinColumns={@JoinColumn(name="s_id",referencedColumnName = "id")})
-    private List<MedicalSubscribe> medicalSubscribes;
 }

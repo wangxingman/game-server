@@ -1,17 +1,15 @@
 package com.game.auth.service.impl;
 
-import com.game.auth.mapper.DeptMapper;
 import com.game.auth.repository.DeptRepository;
 import com.game.auth.service.DeptService;
 import com.game.common.constant.Const;
 import com.game.common.dto.user.DeptDto;
 import com.game.common.entity.user.Dept;
-import com.game.common.entity.user.Menu;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import com.game.core.utils.jpa.QueryHelp;
-import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.DeptQueryCriteria;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

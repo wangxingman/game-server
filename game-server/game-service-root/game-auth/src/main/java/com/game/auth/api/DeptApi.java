@@ -3,19 +3,12 @@ package com.game.auth.api;
 import com.game.auth.service.DeptService;
 import com.game.common.comman.api.BaseApi;
 import com.game.common.comman.api.Result;
-import com.game.common.entity.user.Dept;
-import com.game.common.entity.user.Menu;
-import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.DeptQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @Author : wx

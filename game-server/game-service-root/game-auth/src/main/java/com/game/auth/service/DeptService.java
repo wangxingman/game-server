@@ -1,9 +1,8 @@
 package com.game.auth.service;
 
 import com.game.common.dto.user.DeptDto;
-import com.game.common.encode.MD5Util;
 import com.game.common.entity.user.Dept;
-import com.game.core.utils.jpa.criteria.DeptQueryCriteria;
+import com.game.core.utils.jpa.criteria.auth.DeptQueryCriteria;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 

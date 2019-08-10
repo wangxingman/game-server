@@ -1,4 +1,4 @@
-package com.game.core.utils.jpa.criteria;
+package com.game.core.utils.jpa.criteria.auth;
 
 import com.game.core.annotation.Query;
 import lombok.Data;
