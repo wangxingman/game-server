@@ -13,5 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MedicalUserRepository extends JpaRepository<MedicalUser,Long>, JpaSpecificationExecutor {
-    
+
+    MedicalUser findByUserId(String userId);
 }

@@ -43,7 +43,8 @@ public class DeptApi extends BaseApi {
      */
     @GetMapping("/findByAll")
     public Result findByAll() {
-        return success("查询部门", deptService.findByAll());
+        Object menuTree = deptService.getDeptTree(deptService.findByPid(0L));
+        return success("查询部门", menuTree);
     }
 
     /**

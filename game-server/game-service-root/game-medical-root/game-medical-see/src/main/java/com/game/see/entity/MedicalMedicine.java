@@ -34,7 +34,7 @@ public class MedicalMedicine implements Serializable {
     private Long id;
 
     /**
-     *  药平
+     *  药品
      */
     @Column(name = "name",nullable = false)
     @NotBlank
@@ -55,14 +55,7 @@ public class MedicalMedicine implements Serializable {
     private Integer needNumber;
 
     /**
-     * 甚于多少数量
-     */
-    @Column(name = "exceed_number",nullable = false)
-    @NotNull
-    private Integer exceedNumber;
-    
-    /**
-     *  数量
+     *  总数量
      */
     @Column(name = "all_number",nullable = false)
     @NotNull

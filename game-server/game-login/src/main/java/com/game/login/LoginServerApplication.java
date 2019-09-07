@@ -12,13 +12,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @Autheor: wx
  * @Desc :
  * @Date : 下午 5:29 2019/5/6 0006
- *          排除自动注入的问题
+ * 排除自动注入的问题
  */
 @EnableEurekaClient
 @EnableFeignClients
@@ -32,9 +36,11 @@ public class LoginServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(LoginServerApplication.class);
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         new RedisUtil(stringRedisTemplate);
         return new BCryptPasswordEncoder();
     }
+
 }

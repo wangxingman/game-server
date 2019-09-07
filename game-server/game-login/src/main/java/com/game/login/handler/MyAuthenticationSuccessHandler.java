@@ -50,9 +50,6 @@ public class MyAuthenticationSuccessHandler<jwtTokenServices> extends SavedReque
 
     public static final String ENCRYPT = "a3caed36f0fe5a01e5f144db8927235e";
 
-    @Autowired
-    private LoginUtil loginUtil;
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -84,7 +81,7 @@ public class MyAuthenticationSuccessHandler<jwtTokenServices> extends SavedReque
         map.put("user", converter.convertAccessToken(token, oAuth2Authentication).get(ENCRYPT));
         map.put("token", token);
 
-        loginUtil.add(request);
+        LoginUtil.add(request);
 
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(map));

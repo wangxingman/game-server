@@ -28,7 +28,7 @@ public class PermissionApi extends BaseApi {
      * @params:
      * @Desc : 查询全部的权限 新增修改时候 全部下拉菜单
      */
-    @GetMapping("/getByAllTree")
+    @GetMapping("/findByAll")
     public Result getByAllTree() {
         return success("树形菜单", permissionService.getByAllTree(permissionService.findByPid(0L)));
     }

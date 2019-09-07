@@ -46,6 +46,13 @@ public class MedicalRank implements Serializable {
     private String orderNumber;
 
     /**
+     *  排班的具体哪一天
+     */
+    @Column(name = "schedulingTime",nullable = false)
+    @NotNull
+    private Timestamp schedulingTime;
+
+    /**
      *  创建日期
      */
     @Column(name = "createTime",nullable = false)
@@ -60,21 +67,6 @@ public class MedicalRank implements Serializable {
     private Timestamp updateTime;
 
     /**
-     *  排班的具体哪一天
-     */
-    @Column(name = "schedulingTime",nullable = false)
-    @NotNull
-    private Timestamp schedulingTime;
-
-    /**
-     *  开始预约日期
-     */
-    @Column(name = "startTime",nullable = false)
-    @NotNull
-    private Timestamp startTime;
-    
-
-    /**
      *  科室名字
      */
     @Column(name = "officeName",nullable = false)
@@ -82,11 +74,17 @@ public class MedicalRank implements Serializable {
     private String officeName;
 
     /**
+     *  安排医生数量
+     */
+    @Column(name = "doctorNumber",nullable = false)
+    @NotNull
+    private Integer doctorNumber;
+
+    /**
      *  科室Id
      */
     @Column(name = "officeId",nullable = false)
     @NotBlank
-    private String officeId;
+    private Long officeId;
     
-
 }

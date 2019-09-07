@@ -1,6 +1,7 @@
 package com.game.see.service;
 
 import com.game.see.entity.MedicalSubscribe;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @Author : wx
@@ -25,4 +26,12 @@ public interface MedicalSubscribeService {
      * @Desc  : 查询一条预约数据
      */
     MedicalSubscribe findByOne(Long id);
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 3:53 2019/8/13 0013 
+     * @params: 
+     * @Desc  :  患者看诊
+     */
+    MedicalSubscribe updateByMedicalSubscribe(MedicalSubscribe medicalSubscribe);
 }

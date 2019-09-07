@@ -6,15 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
  * @Author : wx
  * @Desc :
  * @Date :  下午 3:57 2019/8/8 0008
- * @explain :
+ * @explain :预约 
  */
 @Data
 @Builder
@@ -62,11 +64,18 @@ public class MedicalRankDetail implements Serializable {
     private Integer money;
 
     /**
-     * 医生id
+     *  医生名字
      */
-    @OneToOne
-    @JoinColumn(name = "doctorId")
-    private MedicalDoctor medicalDoctor;
+    @Column(name = "doctorName",nullable = false)
+    @NotBlank
+    private String doctorName;
+
+    /**
+     *  医生名字
+     */
+    @Column(name = "doctorId",nullable = false)
+    @NotNull
+    private Long doctorId;
 
     /**
      *  排班下面的患者
@@ -76,7 +85,4 @@ public class MedicalRankDetail implements Serializable {
             ,inverseJoinColumns={@JoinColumn(name="s_id",referencedColumnName = "id")})
     private List<MedicalSubscribe> medicalSubscribes;
 
-
-
-    
 }

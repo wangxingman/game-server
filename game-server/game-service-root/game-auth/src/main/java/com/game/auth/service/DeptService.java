@@ -2,6 +2,7 @@ package com.game.auth.service;
 
 import com.game.common.dto.user.DeptDto;
 import com.game.common.entity.user.Dept;
+import com.game.common.entity.user.Menu;
 import com.game.core.utils.jpa.criteria.auth.DeptQueryCriteria;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -92,5 +93,14 @@ public interface DeptService {
      * @Desc  :
      */
     Set<Dept> findByRoleIds(Long id);
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 7:16 2019/9/6 0006 
+     * @params: 
+     * @Desc  :
+     */
+    Object getDeptTree(List<Dept> depts);
+
 
 }

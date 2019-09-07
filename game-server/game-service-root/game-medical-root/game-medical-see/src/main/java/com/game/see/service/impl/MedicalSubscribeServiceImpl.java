@@ -44,4 +44,16 @@ public class MedicalSubscribeServiceImpl implements MedicalSubscribeService {
         return medicalSubscribe;
     }
 
+    @Override
+    public MedicalSubscribe updateByMedicalSubscribe(MedicalSubscribe medicalSubscribe) {
+        MedicalSubscribe medicalSubscribeFind = medicalSubscribeRepository.findByUserIdAndOfficeId(medicalSubscribe.getUserId(), medicalSubscribe.getOfficeId());
+        if(Objects.isNull(medicalSubscribeFind)) {
+            throw new EntityNotFoundException(MedicalSubscribe.class,"uid_officeId", medicalSubscribe.getOfficeId(),medicalSubscribe.getUserId());
+        }
+        MedicalSubscribe medicalSubscribeSave = medicalSubscribeRepository.save(medicalSubscribe);
+        //todo 对于药品 器械的数量的减少
+        return medicalSubscribeSave;
+    }
+
+
 }

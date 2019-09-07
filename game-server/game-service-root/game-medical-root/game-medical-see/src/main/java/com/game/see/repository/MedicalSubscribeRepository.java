@@ -23,4 +23,13 @@ public interface MedicalSubscribeRepository  extends JpaRepository<MedicalSubscr
      * @Desc  : 查询已经支付但是没有看诊的患者
      */
      Set<MedicalSubscribe> findByIfMoneyAndIfDiagnosis(Integer ifMoney,Integer ifDiagnosis);
+     
+     /**
+      * @Author: wx
+      * @Date  : 下午 5:56 2019/8/12 0012 
+      * @params: 
+      * @Desc  : 查询 患者不应多个病单
+      */
+     MedicalSubscribe findByUserIdAndOfficeId(String userId,Long officeId);
+     
 }

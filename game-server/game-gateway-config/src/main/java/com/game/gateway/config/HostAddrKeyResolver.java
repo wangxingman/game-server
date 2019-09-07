@@ -3,6 +3,7 @@ package com.game.gateway.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -13,6 +14,7 @@ import reactor.core.publisher.Mono;
  * @explain :限流操作
  */
 @Slf4j
+@Component
 public class HostAddrKeyResolver implements KeyResolver {
 
     @Override
@@ -20,11 +22,6 @@ public class HostAddrKeyResolver implements KeyResolver {
         String hostAddress = exchange.getRequest().getRemoteAddress().getAddress().getHostAddress();
         log.info("限流操作"+hostAddress);
         return Mono.just(hostAddress);
-    }
-
-    @Bean
-    public HostAddrKeyResolver hostAddrKeyResolver() {
-        return new HostAddrKeyResolver();
     }
 
 }

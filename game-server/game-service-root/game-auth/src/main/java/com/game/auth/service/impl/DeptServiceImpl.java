@@ -5,6 +5,7 @@ import com.game.auth.service.DeptService;
 import com.game.common.constant.Const;
 import com.game.common.dto.user.DeptDto;
 import com.game.common.entity.user.Dept;
+import com.game.common.entity.user.Menu;
 import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
@@ -57,8 +58,8 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public Object findByAll() {
         List<Dept> deptList = deptRepository.findAll();
-        if(Objects.isNull(deptList)) {
-           log.info("没有部门数据");
+        if (Objects.isNull(deptList)) {
+            log.info("没有部门数据");
         }
         return buildObjTree(deptList);
     }
@@ -151,5 +152,10 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public Set<Dept> findByRoleIds(Long id) {
         return deptRepository.findByRoles_Id(id);
+    }
+
+    @Override
+    public Object getDeptTree(List<Dept> depts) {
+        return buildObjTree(depts);
     }
 }

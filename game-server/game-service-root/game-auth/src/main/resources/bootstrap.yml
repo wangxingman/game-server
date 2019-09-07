@@ -12,6 +12,9 @@ spring:
       profile: dev
       uri: http://10.254.1.10:7001
       name: ${spring.application.name}
+  redis:
+    host: 127.0.0.1
+    database: 1
   jpa:
     show-sql: true
     hibernate:

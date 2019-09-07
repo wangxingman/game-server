@@ -31,5 +31,13 @@ public interface MedicalRankRepository extends JpaRepository<MedicalRank,Long>, 
      * @Desc  :  通过编号获取当前数据
      */
     MedicalRank findByOrderNumber(String orderNumber);
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 2:43 2019/8/13 0013 
+     * @params: 
+     * @Desc  : 科室获取
+     */
+    MedicalRank findByOfficeId(Long id);
 }
 

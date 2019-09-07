@@ -3,7 +3,9 @@ package com.game.auth.service.impl;
 import com.game.auth.mapper.RoleMapper;
 import com.game.auth.repository.RoleRepository;
 import com.game.auth.service.RoleService;
+import com.game.common.entity.user.Job;
 import com.game.common.entity.user.Role;
+import com.game.core.exception.BadRequestException;
 import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import com.game.core.utils.jpa.criteria.CommonQueryCriteria;
@@ -16,9 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -61,10 +61,8 @@ public class RoleServiceImpl implements RoleService {
         Optional<Role> optionalRole = roleRepository.findById(role.getId());
         Role currentRole = optionalRole.get();
 
-        Role currentRoleName = roleRepository.findByName(role.getName());
-
-        if(Objects.nonNull(currentRole)  && currentRoleName!=currentRole )  {
-           throw new EntityExistException(Role.class,"role_id",role.getId(),"role_name",role.getName());
+        if(Objects.isNull(currentRole))  {
+           throw new EntityNotFoundException(Role.class,"role_name",role.getName());
         }
         currentRole.setName(role.getName());
         currentRole.setRemark(role.getRemark());
@@ -106,14 +104,25 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role updateByRolePermission(Role role, Role currRole) {
         currRole.setPermissions(role.getPermissions());
-        Role role1 = roleRepository.saveAndFlush(role);
+        Role role1 = roleRepository.saveAndFlush(currRole);
         return  role1;
     }
 
     @Override
     public Object findByAllSearch(CommonQueryCriteria criteria, Pageable pageable) {
         Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root,criteria,criteriaBuilder),pageable);
-        return JpaPageUtil.toPage(page);
+
+        if (Objects.isNull(page)) {
+            throw new BadRequestException("RolePage为null");
+        }
+        List<Role> jobList = page.getContent().stream().sorted(Comparator.comparingInt(job->job.getLevel())).collect(Collectors.toList());
+        //todo 这里有点尴尬查询两次 还是全查询
+        List<Role> roleList = roleRepository.findAll();
+        Map<String,Object> map = new HashMap<>();
+        map.put("count",roleList.size());
+        map.put("roles",jobList);
+
+        return map;
     }
 
     @Override

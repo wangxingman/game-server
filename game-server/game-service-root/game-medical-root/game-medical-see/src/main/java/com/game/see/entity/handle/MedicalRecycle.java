@@ -84,13 +84,6 @@ public class MedicalRecycle implements Serializable {
     private String medicalDrugName;
 
     /**
-     * 当前物品的状态
-     */
-    @Column(name = "medical_drug_state",nullable = false)
-    @NotBlank
-    private String medicalDrugState;
-
-    /**
      * 创建时间
      */
     @JSONField(serialize = false)

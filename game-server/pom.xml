@@ -14,10 +14,10 @@
         <module>game-register</module>
         <module>game-service-root</module>
         <module>game-tm-server</module>
-        <module>game-example</module>
         <module>game-gateway-config</module>   <!-- 新版本 网关-->
-        <module>game-zuul-config</module>
-        <module>game-interceptor</module>   <!-- 老版本 网关-->
+        <module>game-zuul-config</module>      <!-- 老版本 网关-->
+        <module>game-interceptor</module>
+        <module>game-example-study</module>
     </modules>
 
     <parent>

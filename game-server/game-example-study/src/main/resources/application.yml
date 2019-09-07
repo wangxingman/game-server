@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/game-server-medical?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 127.0.0.1
+    database: 2
+server:
+  port: 8084

@@ -3,15 +3,18 @@ package com.game.see.service.impl;
 import com.game.common.constant.Const;
 import com.game.common.entity.user.User;
 import com.game.core.exception.BadRequestException;
+import com.game.core.exception.EntityExistException;
 import com.game.core.exception.EntityNotFoundException;
 import com.game.core.utils.GeneratorNoUtil;
 import com.game.core.utils.jpa.JpaPageUtil;
 import com.game.core.utils.jpa.QueryHelp;
 import com.game.core.utils.jpa.criteria.midical.RankQueryCriteria;
 import com.game.see.entity.MedicalDoctor;
+import com.game.see.entity.MedicalOffice;
 import com.game.see.entity.MedicalRank;
 import com.game.see.entity.MedicalRankDetail;
 import com.game.see.repository.MedicalDoctorRepository;
+import com.game.see.repository.MedicalOfficeRepository;
 import com.game.see.repository.MedicalRankDetailRepository;
 import com.game.see.repository.MedicalRankRepository;
 import com.game.see.service.MedicalRankService;
@@ -38,6 +41,9 @@ import java.util.*;
 public class MedicalRankServiceImpl implements MedicalRankService {
 
     @Autowired
+    private MedicalOfficeRepository medicalOfficeRepository;
+    
+    @Autowired
     private MedicalRankRepository medicalRankRepository;
 
     @Autowired
@@ -48,14 +54,29 @@ public class MedicalRankServiceImpl implements MedicalRankService {
 
     @Override
     public MedicalRank addByMedicalRank(MedicalRank medicalRank) {
-        //todo  排班到某一天的 时间 什么时间可预约
-        @NotBlank Timestamp schedulingTime = medicalRank.getSchedulingTime();
-        System.out.println("这是排班某一天的时间:" + schedulingTime);
-        medicalRank.setOrderNumber(GeneratorNoUtil.GeneratorNo(Const.Prefix.MEDICAL_RANK));
-        medicalRank.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        medicalRank.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-
-        return medicalRankRepository.save(medicalRank);
+        @NotBlank Long officeId = medicalRank.getOfficeId();
+        MedicalOffice medicalOffice = medicalOfficeRepository.findById(officeId).get();
+        if(Objects.isNull(medicalOffice) || medicalRank.getOfficeName()!=medicalOffice.getName()) {
+             throw new EntityNotFoundException(MedicalOffice.class,medicalRank.getOfficeName(),officeId,"officeId____officeName");
+        }
+        MedicalRank medicalRankFind = medicalRankRepository.findById(medicalRank.getId()).get();
+        if(Objects.nonNull(medicalRankFind)) {
+            throw new EntityExistException(MedicalRank.class,"medicalRank.getId()",medicalRank.getId());
+        }
+        MedicalRank medicalRankFindS = medicalRankRepository.findBySchedulingTimeAndOfficeName(medicalRank.getSchedulingTime(), medicalOffice.getName());
+        if(Objects.nonNull(medicalRankFindS)) {
+            throw new EntityExistException(MedicalRank.class,"SchedulingTime+ medicalOffice.getName()",medicalRank.getSchedulingTime(), medicalOffice.getName());
+        }
+        MedicalRank medicalRankSave = MedicalRank.builder()
+                .doctorNumber(medicalRank.getDoctorNumber())
+                .orderNumber(GeneratorNoUtil.GeneratorNo(Const.Prefix.MEDICAL_RANK))
+                .createTime(new Timestamp(System.currentTimeMillis()))
+                .updateTime(new Timestamp(System.currentTimeMillis()))
+                .schedulingTime(medicalRank.getSchedulingTime())
+                .officeId(officeId)
+                .officeName(medicalOffice.getName())
+                .build();
+        return medicalRankRepository.save(medicalRankSave);
     }
 
     @Override

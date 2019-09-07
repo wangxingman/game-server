@@ -45,27 +45,34 @@ public class MedicalSubscribe implements Serializable{
     @Column(name = "user_id",nullable = false)
     @NotBlank
     private String userId;
+
+    /**
+     *  科室的id
+     */
+    @Column(name = "office_id",nullable = false)
+    @NotNull
+    private Long officeId;
     
     /**
      *  用户的姓名
      */
-    @Column(name = "name",nullable = false)
+    @Column(name = "userName",nullable = false)
     @NotBlank
-    private String name;
+    private String userName;
 
     /**
      * 是否支付
      */
     @Column(name = "if_money",nullable = false)
     @NotNull
-    private Long ifMoney;
+    private Integer ifMoney;
 
     /**
      * 是否看诊
      */
     @Column(name = "if_diagnosis",nullable = false)
     @NotNull
-    private Long ifDiagnosis;
+    private Integer ifDiagnosis;
 
     /**
      * 看诊之后形成病单

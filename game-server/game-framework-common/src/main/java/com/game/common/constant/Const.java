@@ -127,8 +127,12 @@ public interface Const {
      * @Desc  :  生成编号的前缀
      */
     interface Prefix {
-          String MEDICAL_RANK = "RANK";
+
+        String MEDICAL_RANK = "RANK";
+          
         String MEDICAL_RANK_UPDATE = "MEDICAL_RANK_UPDATE";
+
+        String MEDICAL_SUBSCRIBE = "MEDICAL_SUBSCRIBE";
     }
     
 

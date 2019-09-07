@@ -48,6 +48,9 @@ public class Dept implements Serializable {
     @NotNull
     private Long pid;
 
+    /**
+     * 角色 《-》部门
+     */
     @JsonIgnore
     @ManyToMany(mappedBy = "depts")
     private Set<Role> roles;

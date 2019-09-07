@@ -2,6 +2,7 @@ package com.game.core.utils;
 
 import com.game.common.dto.Login;
 import com.game.core.utils.web.RequestUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,8 @@ import javax.servlet.http.HttpServletRequest;
  * @Author : wx
  * @Desc :
  * @Date :  下午 7:46 2019/7/11 0011
- * @explain :
+ * @explain : 单点登陆
  */
-@Component
 public class LoginUtil {
 
     /**
@@ -33,7 +33,7 @@ public class LoginUtil {
      * @params: 
      * @Desc  : 添加用户缓存信息
      */
-    public void add(HttpServletRequest request) {
+    public static void add(HttpServletRequest request) {
         String sessionId = request.getSession().getId();
         String clientIp = RequestUtil.getClientIp(request);
         hashOperations.put(SINGLE_LOGIN, SecurityUtils.getUserId(), new Login(sessionId, clientIp));
