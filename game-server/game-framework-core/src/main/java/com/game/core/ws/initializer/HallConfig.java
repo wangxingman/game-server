@@ -1,6 +1,5 @@
 package com.game.core.ws.initializer;
 
-import com.game.core.ws.initializer.WsApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 

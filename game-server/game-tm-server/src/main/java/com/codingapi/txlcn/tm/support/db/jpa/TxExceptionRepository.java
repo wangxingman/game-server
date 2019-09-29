@@ -35,7 +35,7 @@ public interface TxExceptionRepository extends JpaRepository<TxException, Long> 
     
     /**
      * find status
-     * @param page page need one
+     * @param page page need friendone
      * @param groupId groupId
      * @return list get(0)
      */

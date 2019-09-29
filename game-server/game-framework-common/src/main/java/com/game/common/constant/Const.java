@@ -18,6 +18,11 @@ public interface Const {
          * 当前用户NAME
          */
         String CURRENT_USER_REAL_NAME = "X-CURRENT-USER-REAL-NAME";
+
+        /**
+         * token 
+         */
+        String TOKEN = "GAME-SERVER-TOKEN";
     }
 
     /**

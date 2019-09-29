@@ -1,5 +1,6 @@
 package com.game.example.example;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -48,7 +49,39 @@ public class RedisExample {
         }
     }
 
+    /**
+     * @Author: wx
+     * @Date  : 下午 2:58 2019/9/18 0018 
+     * @params: 
+     * @Desc  :  测试点
+     */
+    void dian(Object... obj) {
+        Integer o = null;
+            for (int i = 0; i < obj.length; i++) {
+                o  = (Integer)obj[2];
+            }
+        System.out.println(o);
+    }
+    
+    /**
+     * @Author: wx
+     * @Date  : 下午 4:08 2019/9/20 0020 
+     * @params: 
+     * @Desc  :
+     */
+    void exampleFor() {
+        for (int i = 0; i <3; i++) {
+            System.out.println("--------");
+               i = -1;
+        }
+    }
+
+
     public static void main(String[] args) {
-       new RedisExample().foo();
+
+        JSONObject json = new JSONObject();
+        String data = "123123";
+        json.put("data",data);
+        JSONObject jsonObject = json.getJSONObject(data);
     }
 }

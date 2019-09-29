@@ -15,12 +15,15 @@ import javax.servlet.http.HttpServletRequest;
  * @Date :  下午 7:46 2019/7/11 0011
  * @explain : 单点登陆
  */
+@Component
 public class LoginUtil {
 
     /**
      * 缓存处理器
      */
     static HashOperations<String, Object, Object> hashOperations;
+    @Autowired
+    private static HashOperations<String, Object, Object> hashOperations;
 
     /**
      * 缓存key

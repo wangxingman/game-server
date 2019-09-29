@@ -2,7 +2,6 @@ package com.game.hall.ws;
 
 import com.game.core.ws.initializer.WsInitializer;
 import com.game.core.ws.server.WebSocketServerInitializer;
-import com.game.hall.config.name.NameServer;
 import com.game.hall.po.HallProperties;
 import com.game.hall.state.NettyRunnable;
 import io.netty.bootstrap.ServerBootstrap;

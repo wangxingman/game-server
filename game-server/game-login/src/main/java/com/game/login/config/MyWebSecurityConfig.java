@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -89,6 +90,8 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
         smsCodeFilter.afterPropertiesSet();
 
         http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                // 不创建会话
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 //表单登录,loginPage为登录请求的url,loginProcessingUrl为表单登录处理的URL
                 .formLogin().loginPage(FromLoginConstant.LOGIN_PAGE).loginProcessingUrl(FromLoginConstant.LOGIN_PROCESSING_URL)
                 //登录成功之后的处理

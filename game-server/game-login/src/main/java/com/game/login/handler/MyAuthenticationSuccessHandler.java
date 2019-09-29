@@ -75,7 +75,6 @@ public class MyAuthenticationSuccessHandler<jwtTokenServices> extends SavedReque
         RedisUtil.save("token",token.getValue(),5L);
 
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        RedisUtil.save("token",token.getValue(),5L);
         //storeAccessToken redis保存token
         HashMap<String, Object> map = new HashMap<>();
         map.put("user", converter.convertAccessToken(token, oAuth2Authentication).get(ENCRYPT));

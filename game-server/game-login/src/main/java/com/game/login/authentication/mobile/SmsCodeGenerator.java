@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author: wx
  * @Date  : 下午 8:45 2019/7/3 0003 
  * @params: 
- * @Desc  :
+ * @Desc  :  手机验证码
  */
 @Data
 @Component("smsCodeGenerator")

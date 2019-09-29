@@ -11,17 +11,57 @@
 
     <artifactId>game-example-study</artifactId>
 
+
     <dependencies>
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>game-framework-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!--storm-->
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-core</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-redis</artifactId>
+            <version>1.2.2</version>
+            <type>jar</type>
+        </dependency>
+
+        <!--spring boot的批量操作-->
         <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-core</artifactId>
         </dependency>
 
+        <!--phoenix core 是hBase的插件-->
+        <dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-core</artifactId>
+            <version>4.14.0-cdh5.14.2</version>
+        </dependency>
+
+        <!--hadoop的依赖-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>2.6.0-cdh5.14.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.6.0-cdh5.14.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>2.8.5</version>
+        </dependency>
     </dependencies>
 
 </project>
