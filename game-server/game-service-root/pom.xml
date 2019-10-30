@@ -18,6 +18,7 @@
         <module>game-hall</module>
         <module>game-sleuth</module>
         <module>game-medical-root</module>
+        <module>game-log</module>
     </modules>
 
     <dependencies>

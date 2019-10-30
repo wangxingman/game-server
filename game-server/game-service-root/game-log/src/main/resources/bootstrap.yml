@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/game-server?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+  security:
+    user:
+      password:  123456
+      name: game-server
+#  security:     #设置注册中心安全验证
+#    user:
+#      password: 123456
+#      name: root
+server:
+  port: 1111
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    register-with-eureka: false    #是否将自己注册到eureka服务注册中心，默认为true
+    fetch-registry: false   #是否从服务注册中心获取可用的服务清单，默认为true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+logging:
+  file: D:/logs/registry-server.log
+  level:
+    root: info
+
+---
+server:
+  port: 8081
+spring:
+  profiles: test

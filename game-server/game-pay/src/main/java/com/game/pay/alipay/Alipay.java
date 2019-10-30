@@ -1,11 +1,11 @@
-package com.game.see.alipay;
+package com.game.pay.alipay;
 
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.game.see.model.AlipayPropertiesModel;
+import com.game.pay.alipay.model.AlipayPropertiesModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

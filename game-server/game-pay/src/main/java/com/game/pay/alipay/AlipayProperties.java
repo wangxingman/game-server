@@ -1,16 +1,10 @@
-package com.game.see.alipay;
+package com.game.pay.alipay;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.config.PropertiesFactoryBean;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * @Author : wx

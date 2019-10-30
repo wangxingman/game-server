@@ -31,7 +31,6 @@ public class DeptApi extends BaseApi {
      */
     @PostMapping("/findByAllSearch")
     public Result findByAllSearch(DeptQueryCriteria criteria) {
-        
         return success();
     }
 

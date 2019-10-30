@@ -1,4 +1,4 @@
-package com.game.see.alipay;
+package com.game.pay.alipay;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

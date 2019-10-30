@@ -1,7 +1,7 @@
-package com.game.see.alipay.api;
+package com.game.pay.alipay.api;
 
-import com.game.see.alipay.AlipayBean;
-import com.game.see.alipay.service.PayService;
+import com.game.pay.alipay.AlipayBean;
+import com.game.pay.alipay.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

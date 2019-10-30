@@ -1,6 +1,6 @@
-package com.game.see.alipay.service;
+package com.game.pay.alipay.service;
 
-import com.game.see.alipay.AlipayBean;
+import com.game.pay.alipay.AlipayBean;
 
 /**
  * @Author : wx

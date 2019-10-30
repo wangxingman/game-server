@@ -1,4 +1,4 @@
-package com.game.see.model;
+package com.game.pay.alipay.model;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

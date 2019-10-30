@@ -1,6 +1,6 @@
 package com.game.see.config;
 
-import com.game.see.alipay.AlipayProperties;
+import com.game.pay.alipay.AlipayProperties;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;

@@ -1,8 +1,8 @@
-package com.game.see.alipay.service.impl;
+package com.game.pay.alipay.service.impl;
 
-import com.game.see.alipay.Alipay;
-import com.game.see.alipay.AlipayBean;
-import com.game.see.alipay.service.PayService;
+import com.game.pay.alipay.Alipay;
+import com.game.pay.alipay.AlipayBean;
+import com.game.pay.alipay.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
